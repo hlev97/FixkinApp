@@ -1,0 +1,60 @@
+import dependencies.Compose
+import dependencies.DaggerHilt
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-parcelize'
+
+android {
+    compileSdk ProjectConfig.compileSdk
+
+    defaultConfig {
+        minSdk ProjectConfig.minSdk
+        targetSdk ProjectConfig.targetSdk
+        versionCode ProjectConfig.versionCode
+        versionName ProjectConfig.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion Compose.composeCompilerVersion
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        coreLibraryDesugaringEnabled true
+
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    implementation Compose.compiler
+    implementation Compose.ui
+    implementation Compose.uiToolingPreview
+    implementation Compose.hiltNavigation
+    implementation Compose.material3
+    implementation Compose.navigation
+    implementation Compose.viewModel
+    implementation Compose.activity
+    implementation Compose.uiToolingPreview
+    implementation Compose.materialIconsExt
+    implementation Compose.composeConstraintLayout
+    debugImplementation Compose.uiTooling
+
+    kapt DaggerHilt.hiltCompiler
+    implementation DaggerHilt.hiltAndroid
+}
