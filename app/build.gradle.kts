@@ -2,6 +2,7 @@ import dependencies.Compose
 import dependencies.Lifecycle
 import dependencies.Core
 import dependencies.DaggerHilt
+import dependencies.Retrofit
 
 plugins {
     id("com.android.application")
@@ -72,7 +73,15 @@ dependencies {
     debugImplementation(Compose.uiTooling)
     debugImplementation(Compose.uiTestManifest)
 
+    implementation(Retrofit.retrofit)
+    implementation(Retrofit.moshiConverter)
+    implementation(Retrofit.moshiKotlin)
+    implementation(Retrofit.okHttp)
+    implementation(Retrofit.okHttpLoggingInterceptor)
+
     implementation(project(Modules.coreUi))
     implementation(project(Modules.coreModel))
+    implementation(project(Modules.coreNetwork))
+
 
 }
