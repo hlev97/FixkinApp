@@ -71,4 +71,6 @@ dependencies {
     androidTestImplementation(Compose.uiTestJunit4)
     debugImplementation(Compose.uiTooling)
     debugImplementation(Compose.uiTestManifest)
+
+    implementation(project(Modules.coreUi))
 }
