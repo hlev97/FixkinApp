@@ -1,4 +1,4 @@
-package hu.bme.aut.it9p0z.fixkin.ui.theme
+package hu.bme.aut.it9p0z.ui.theme
 
 import android.app.Activity
 import android.os.Build
