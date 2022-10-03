@@ -73,4 +73,6 @@ dependencies {
     debugImplementation(Compose.uiTestManifest)
 
     implementation(project(Modules.coreUi))
+    implementation(project(Modules.coreModel))
+
 }

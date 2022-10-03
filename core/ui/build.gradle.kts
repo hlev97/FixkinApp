@@ -6,4 +6,5 @@ apply {
 
 dependencies {
     "implementation"(Accompanist.flowLayout)
+    "implementation"(project(Modules.coreModel))
 }
