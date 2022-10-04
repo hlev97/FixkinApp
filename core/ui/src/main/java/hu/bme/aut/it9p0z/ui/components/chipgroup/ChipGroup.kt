@@ -42,7 +42,8 @@ fun ColumnScope.ChipGroup(
     }
     FlowRow(
         modifier = modifier.fillMaxWidth(0.95f),
-        mainAxisAlignment = FlowMainAxisAlignment.SpaceBetween
+        mainAxisAlignment = FlowMainAxisAlignment.SpaceAround,
+        lastLineMainAxisAlignment = FlowMainAxisAlignment.Start
     ) {
        chips.forEach { chip ->
            var selected by remember { mutableStateOf(false) }
