@@ -6,9 +6,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import hu.bme.aut.it9p0z.network.NetworkDatasourceImpl
 import hu.bme.aut.it9p0z.network.api.FixkinApi
-import hu.bme.aut.it9p0z.network.datasource.NetworkDatasource
 import hu.bme.aut.it9p0z.network.util.MoshiAdapters
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -46,10 +44,4 @@ object NetworkModule {
     fun provideFixkinApi(
         retrofit: Retrofit
     ): FixkinApi = retrofit.create(FixkinApi::class.java)
-
-    @Provides
-    @Singleton
-    fun provideNetworkDatasource(
-        api: FixkinApi
-    ): NetworkDatasource = NetworkDatasourceImpl(api)
 }
