@@ -21,6 +21,7 @@
             <option value="$PROJECT_DIR$/feature/authentication" />
             <option value="$PROJECT_DIR$/feature/authentication/authentication_data" />
             <option value="$PROJECT_DIR$/feature/authentication/authentication_domain" />
+            <option value="$PROJECT_DIR$/feature/authentication/authentication_ui" />
           </set>
         </option>
       </GradleProjectSettings>
