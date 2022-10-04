@@ -36,7 +36,7 @@ object NetworkModule {
         client: OkHttpClient,
         moshi: Moshi
     ): Retrofit = Retrofit.Builder()
-        .baseUrl("http://10.0.2.2/")
+        .baseUrl("http://10.0.2.2:8102")
         .client(client)
         .addConverterFactory(MoshiConverterFactory.create(moshi))
         .build()

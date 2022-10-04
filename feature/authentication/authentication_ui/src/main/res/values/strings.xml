@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_invalid_username">Invalid username</string>
+    <string name="error_invalid_password">Invalid password</string>
+    <string name="label_username">username</string>
+    <string name="label_password">password</string>
+    <string name="button_login">Log in</string>
+    <string name="button_no_account_yet">I don\'t have an account yet</string>
+</resources>

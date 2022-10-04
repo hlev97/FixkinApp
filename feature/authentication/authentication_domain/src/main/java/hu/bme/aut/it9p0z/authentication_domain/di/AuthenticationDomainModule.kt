@@ -3,13 +3,15 @@ package hu.bme.aut.it9p0z.authentication_domain.di
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped
 import dagger.hilt.components.SingletonComponent
 import hu.bme.aut.it9p0z.authentication_data.repository.AuthenticationRepository
 import hu.bme.aut.it9p0z.authentication_domain.usecases.*
+import javax.inject.Singleton
 
 @Module
-@InstallIn(SingletonComponent::class)
+@InstallIn(ViewModelComponent::class)
 class AuthenticationDomainModule {
 
     @Provides
@@ -35,6 +37,12 @@ class AuthenticationDomainModule {
     fun provideSaveFullNameCase(
         authRepository: AuthenticationRepository
     ): SaveFullNameUseCase = SaveFullNameUseCase(authRepository)
+
+    @Provides
+    @ViewModelScoped
+    fun provideSavePasswordCase(
+        authRepository: AuthenticationRepository
+    ): SavePasswordUseCase = SavePasswordUseCase(authRepository)
 
     @Provides
     @ViewModelScoped
@@ -70,13 +78,15 @@ class AuthenticationDomainModule {
     @ViewModelScoped
     fun provideCheckPasswordHasLowerCaseLetterUseCase(
         authRepository: AuthenticationRepository
-    ): CheckPasswordHasLowerCaseLetterUseCase = CheckPasswordHasLowerCaseLetterUseCase(authRepository)
+    ): CheckPasswordHasLowerCaseLetterUseCase =
+        CheckPasswordHasLowerCaseLetterUseCase(authRepository)
 
     @Provides
     @ViewModelScoped
     fun provideCheckPasswordHasUpperCaseLetterUseCase(
         authRepository: AuthenticationRepository
-    ): CheckPasswordHasUpperCaseLetterUseCase = CheckPasswordHasUpperCaseLetterUseCase(authRepository)
+    ): CheckPasswordHasUpperCaseLetterUseCase =
+        CheckPasswordHasUpperCaseLetterUseCase(authRepository)
 
     @Provides
     @ViewModelScoped
@@ -103,8 +113,20 @@ class AuthenticationDomainModule {
         hasUpperCaseLetter: CheckPasswordHasUpperCaseLetterUseCase,
         hasDigit: CheckPasswordHasDigitUseCase,
         hasSpecialChar: CheckPasswordHasSpecialCharUseCase,
-        hasCorrectLength: CheckPasswordHasCorrectLengthUseCase
+        hasCorrectLength: CheckPasswordHasCorrectLengthUseCase,
+        isPasswordAndConfirmPasswordSame: CheckPasswordAndConfirmPasswordIsSameUseCase
     ): CheckPasswordRequirementsUseCase = CheckPasswordRequirementsUseCase(
-        hasLowerCaseLetter, hasUpperCaseLetter, hasDigit, hasSpecialChar, hasCorrectLength
+        hasLowerCaseLetter,
+        hasUpperCaseLetter,
+        hasDigit,
+        hasSpecialChar,
+        hasCorrectLength,
+        isPasswordAndConfirmPasswordSame
     )
+
+    @Provides
+    @ViewModelScoped
+    fun provideLoginUserUseCase(
+        authRepository: AuthenticationRepository
+    ): LoginUserUseCase = LoginUserUseCase(authRepository)
 }

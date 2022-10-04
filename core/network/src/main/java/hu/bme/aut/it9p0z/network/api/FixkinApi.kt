@@ -12,7 +12,7 @@ interface FixkinApi {
     suspend fun createUser(user: UserDto): Response<UserDto>
 
     @GET("user/me")
-    suspend fun getUser(@Header("Authentication") credentials: String): Response<UserDto>
+    suspend fun getUser(@Header("Authorization") credentials: String): Response<UserDto>
 
     @GET("user/all/usernames")
     suspend fun getAllUsernames(): Response<List<String>>

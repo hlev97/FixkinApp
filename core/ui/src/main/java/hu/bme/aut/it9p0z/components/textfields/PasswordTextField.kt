@@ -62,9 +62,7 @@ fun PasswordTextField(
             }
         } else {
             {
-                if (trailingIcon != null) {
-                    SmallIconButton(icon = visibilityIcon, onClick = onVisibilityChanged)
-                }
+                SmallIconButton(icon = visibilityIcon, onClick = onVisibilityChanged)
             }
         },
         modifier = modifier,

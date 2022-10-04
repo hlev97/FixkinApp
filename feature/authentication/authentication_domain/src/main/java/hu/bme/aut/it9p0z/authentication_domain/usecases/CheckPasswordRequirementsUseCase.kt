@@ -8,7 +8,8 @@ class CheckPasswordRequirementsUseCase @Inject constructor(
     private val hasUpperCaseLetter: CheckPasswordHasUpperCaseLetterUseCase,
     private val hasDigit: CheckPasswordHasDigitUseCase,
     private val hasSpecialChar: CheckPasswordHasSpecialCharUseCase,
-    private val hasCorrectLength: CheckPasswordHasCorrectLengthUseCase
+    private val hasCorrectLength: CheckPasswordHasCorrectLengthUseCase,
+    private val isPasswordAndConfirmPasswordSame: CheckPasswordAndConfirmPasswordIsSameUseCase
 )
 
 class CheckPasswordHasLowerCaseLetterUseCase @Inject constructor(
@@ -48,5 +49,13 @@ class CheckPasswordHasCorrectLengthUseCase @Inject constructor(
 ) {
     operator fun invoke(password: String): Boolean {
         return password.length in 8..15
+    }
+}
+
+class CheckPasswordAndConfirmPasswordIsSameUseCase @Inject constructor(
+    private val authRepository: AuthenticationRepository
+) {
+    operator fun invoke(password: String, confirmPassword: String): Boolean {
+        return password == confirmPassword
     }
 }

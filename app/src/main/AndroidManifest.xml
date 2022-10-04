@@ -4,6 +4,7 @@
     package="hu.bme.aut.it9p0z.fixkin">
 
     <application
+        android:name=".FixkinApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"

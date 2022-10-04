@@ -20,6 +20,10 @@ class AuthenticationRepository @Inject constructor(
         preferencesDatasource.saveFullName(fullName)
     }
 
+    suspend fun savePassword(password: String) {
+        preferencesDatasource.savePassword(password)
+    }
+
     suspend fun saveWeight(weight: Double) {
         preferencesDatasource.saveWeight(weight)
     }
