@@ -1,5 +1,8 @@
 package hu.bme.aut.it9p0z.ui.theme
 
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.ColorScheme
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 val md_theme_light_primary = Color(0xFF835400)
@@ -62,3 +65,11 @@ val md_theme_dark_surfaceTint = Color(0xFFFFB956)
 
 
 val seed = Color(0xFF8F6528)
+
+val ColorScheme.satisfiedColor
+    @Composable get() = if (isSystemInDarkTheme()) Color(0xFF6BBB6E)
+                        else Color(0xFF267A2E)
+
+val ColorScheme.idleColor
+    @Composable get() = if (isSystemInDarkTheme()) Color(0xFFA4A5A4)
+    else Color(0xFF7C7E7C)
