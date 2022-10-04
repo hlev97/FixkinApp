@@ -1,6 +1,7 @@
 package hu.bme.aut.it9p0z.preferences
 
 import android.content.Context
+import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
@@ -51,7 +52,7 @@ class PreferencesDatasource @Inject constructor(
     }
 
      suspend fun saveWeight(weight: Double) {
-        dataStore.edit { preferences ->
+         dataStore.edit { preferences ->
             preferences[weightPrefKey] = weight
         }
     }

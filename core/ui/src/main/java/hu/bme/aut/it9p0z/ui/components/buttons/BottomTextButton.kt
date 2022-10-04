@@ -1,4 +1,4 @@
-package hu.bme.aut.it9p0z.components.buttons
+package hu.bme.aut.it9p0z.ui.components.buttons
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,7 +13,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import hu.bme.aut.it9p0z.model.UiText
+import hu.bme.aut.it9p0z.ui.model.UiText
 import hu.bme.aut.it9p0z.ui.theme.dp_l
 import hu.bme.aut.it9p0z.ui.theme.dp_m
 

@@ -6,7 +6,7 @@ import javax.inject.Inject
 class SaveHeightUseCase @Inject constructor(
     private val authRepository: AuthenticationRepository
 ) {
-    suspend operator fun invoke(height: String) {
-        authRepository.saveHeight(height.toDouble())
+    suspend operator fun invoke(height: Double) {
+        authRepository.saveHeight(height)
     }
 }

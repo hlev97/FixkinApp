@@ -8,8 +8,8 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import hu.bme.aut.it9p0z.authentication_domain.usecases.*
 import hu.bme.aut.it9p0z.authentication_ui.R
-import hu.bme.aut.it9p0z.model.UiEvent
-import hu.bme.aut.it9p0z.model.UiText
+import hu.bme.aut.it9p0z.ui.model.UiEvent
+import hu.bme.aut.it9p0z.ui.model.UiText
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch

@@ -19,11 +19,11 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.hilt.navigation.compose.hiltViewModel
 import hu.bme.aut.it9p0z.authentication_ui.R
-import hu.bme.aut.it9p0z.components.buttons.TextButton
-import hu.bme.aut.it9p0z.components.textfields.NumberTextField
-import hu.bme.aut.it9p0z.model.UiEvent
-import hu.bme.aut.it9p0z.model.UiIcon
-import hu.bme.aut.it9p0z.model.UiText
+import hu.bme.aut.it9p0z.ui.components.buttons.TextButton
+import hu.bme.aut.it9p0z.ui.components.textfields.NumberTextField
+import hu.bme.aut.it9p0z.ui.model.UiEvent
+import hu.bme.aut.it9p0z.ui.model.UiIcon
+import hu.bme.aut.it9p0z.ui.model.UiText
 import hu.bme.aut.it9p0z.ui.theme.corner_radius_s
 import hu.bme.aut.it9p0z.ui.theme.dp_m
 

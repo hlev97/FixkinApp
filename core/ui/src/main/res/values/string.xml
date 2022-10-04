@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="diseases_name_psoriasis_plaque">plaque psoriasis</string>
+    <string name="diseases_name_psoriasis_nail">nail psoriasis</string>
+    <string name="diseases_name_psoriasis_guttate">guttate psoriasis</string>
+    <string name="diseases_name_psoriasis_inverse">inverse psoriasis</string>
+    <string name="diseases_name_psoriasis_pustular">pustular psoriasis</string>
+    <string name="diseases_name_psoriasis_erythrodermic">erythrodermic psoriasis</string>
+    <string name="diseases_name_eczema_atopic_dermatitis">atopic dermatitis</string>
+    <string name="diseases_name_eczema_contact_dermatitis">contact dermatitis</string>
+    <string name="diseases_name_eczema_dyshidrotic">dyshidrotic eczema</string>
+    <string name="diseases_name_eczema_hand">hand eczema</string>
+    <string name="diseases_name_eczema_neurodermatitis">neurodermatitis eczema</string>
+    <string name="diseases_name_eczema_nummular">nummular neurodermatitis</string>
+    <string name="diseases_name_eczema_stasis_dermatitis">stasis dermatitis</string>
+</resources>

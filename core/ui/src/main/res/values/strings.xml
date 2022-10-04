@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="medicines_name_corticosteroids">corticosteroids</string>
+    <string name="medicines_name_vitamin_d_analogues">vitamin D analogues</string>
+    <string name="medicines_name_retinoids">retinoids</string>
+    <string name="medicines_name_calcineurin_inhibitors">calcineurin inhibitors</string>
+    <string name="medicines_name_salicylic_acid">salicylic acid</string>
+    <string name="coal_tar">coal tar</string>
+    <string name="medicines_name_anthralin">anthralin</string>
+    <string name="medicines_name_sunlight">sunlight</string>
+    <string name="medicines_name_uvb_broadband">UVB broadband</string>
+    <string name="medicines_name_uvb_narrowband">UVB narrowband</string>
+    <string name="medicines_name_steroids">steroids</string>
+    <string name="medicines_name_retinoid_pills">retinoid pills</string>
+    <string name="medicines_name_biologics">biologics</string>
+    <string name="medicines_name_methotrexate">methotrexate</string>
+    <string name="medicines_name_cyclosporine">cyclosporine</string>
+    <string name="medicines_name_supliments">supliments</string>
+</resources>

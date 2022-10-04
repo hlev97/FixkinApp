@@ -21,4 +21,10 @@
     <string name="text_password_requirement_has_correct_length">Contains at least 8 and at most 15 characters</string>
     <string name="label_weight">weight</string>
     <string name="label_height">height</string>
+    <string name="chip_group_label_psoriasis">Psoriasis</string>
+    <string name="chip_group_label_eczema">Eczema</string>
+    <string name="chip_group_label_topical">Topical treatments</string>
+    <string name="chip_group_label_oral_or_injected">Oral or injected treatments</string>
+    <string name="chip_group_label_other_treatments">Other treatments</string>
+    <string name="button_register">Register</string>
 </resources>

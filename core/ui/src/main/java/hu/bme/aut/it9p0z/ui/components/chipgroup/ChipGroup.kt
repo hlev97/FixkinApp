@@ -1,4 +1,4 @@
-package hu.bme.aut.it9p0z.components.chipgroup
+package hu.bme.aut.it9p0z.ui.components.chipgroup
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -13,10 +13,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.google.accompanist.flowlayout.FlowMainAxisAlignment
 import com.google.accompanist.flowlayout.FlowRow
-import hu.bme.aut.it9p0z.components.chipgroup.ChipGroupDefaults.CHIP_GROUP_TITLE_MAX_LINES
-import hu.bme.aut.it9p0z.model.UiChip
-import hu.bme.aut.it9p0z.model.UiIcon
-import hu.bme.aut.it9p0z.model.UiText
+import hu.bme.aut.it9p0z.ui.components.chipgroup.ChipGroupDefaults.CHIP_GROUP_TITLE_MAX_LINES
+import hu.bme.aut.it9p0z.ui.model.UiChip
+import hu.bme.aut.it9p0z.ui.model.UiIcon
+import hu.bme.aut.it9p0z.ui.model.UiText
 import hu.bme.aut.it9p0z.ui.theme.FixkinTheme
 import hu.bme.aut.it9p0z.ui.theme.dp_m
 import hu.bme.aut.it9p0z.ui.theme.dp_s
