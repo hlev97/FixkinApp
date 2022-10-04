@@ -1,8 +1,4 @@
-import dependencies.Compose
-import dependencies.Lifecycle
-import dependencies.Core
-import dependencies.DaggerHilt
-import dependencies.Retrofit
+import dependencies.*
 
 plugins {
     id("com.android.application")
@@ -79,9 +75,10 @@ dependencies {
     implementation(Retrofit.okHttp)
     implementation(Retrofit.okHttpLoggingInterceptor)
 
+    implementation(DataStore.dataStorePreferences)
+
     implementation(project(Modules.coreUi))
     implementation(project(Modules.coreModel))
     implementation(project(Modules.coreNetwork))
-
-
+    implementation(project(Modules.corePreferences))
 }
