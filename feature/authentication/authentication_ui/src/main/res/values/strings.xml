@@ -19,4 +19,6 @@
     <string name="text_password_requirement_has_digit">Contains digit</string>
     <string name="text_password_requirement_has_special_char">Contains special char</string>
     <string name="text_password_requirement_has_correct_length">Contains at least 8 and at most 15 characters</string>
+    <string name="label_weight">weight</string>
+    <string name="label_height">height</string>
 </resources>
