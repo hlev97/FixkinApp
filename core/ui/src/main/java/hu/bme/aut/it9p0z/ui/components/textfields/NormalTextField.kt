@@ -1,10 +1,11 @@
-package hu.bme.aut.it9p0z.components.textfields
+package hu.bme.aut.it9p0z.ui.components.textfields
 
 import androidx.compose.foundation.text.KeyboardActionScope
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.*
+import androidx.compose.material.icons.rounded.Close
+import androidx.compose.material.icons.rounded.ErrorOutline
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -16,13 +17,13 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
-import hu.bme.aut.it9p0z.components.buttons.SmallIconButton
-import hu.bme.aut.it9p0z.model.UiIcon
-import hu.bme.aut.it9p0z.model.UiText
+import hu.bme.aut.it9p0z.ui.components.buttons.SmallIconButton
+import hu.bme.aut.it9p0z.ui.model.UiIcon
+import hu.bme.aut.it9p0z.ui.model.UiText
 
 @ExperimentalMaterial3Api
 @Composable
-fun NumberTextField(
+fun NormalTextField(
     value: String,
     label: UiText,
     onValueChange: (String) -> Unit,
@@ -64,7 +65,7 @@ fun NumberTextField(
         isError = isError,
         enabled = enabled,
         keyboardOptions = KeyboardOptions(
-            keyboardType = KeyboardType.Decimal,
+            keyboardType = KeyboardType.Text,
             imeAction = ImeAction.Done
         ),
         keyboardActions = KeyboardActions(
@@ -77,16 +78,16 @@ fun NumberTextField(
 @ExperimentalMaterial3Api
 @Preview
 @Composable
-fun NumberTextField_Preview() {
+fun NormalTextField_Preview() {
     var value by remember { mutableStateOf("") }
     val keyboardController = LocalSoftwareKeyboardController.current
-    NumberTextField(
+    NormalTextField(
         value = value,
-        label = UiText.DynamicString("height"),
+        label = UiText.DynamicString("label"),
         onValueChange = { newValue -> value = newValue },
-        leadingIcon = UiIcon.Image(Icons.Rounded.Height),
+        leadingIcon = null,
         onTrailingIconClick = { /*TODO*/ },
-        trailingIcon = null,
+        trailingIcon = UiIcon.Image(Icons.Rounded.Close),
         onErrorStateChange = { /*TODO*/ },
         onDone = {
             keyboardController?.hide()

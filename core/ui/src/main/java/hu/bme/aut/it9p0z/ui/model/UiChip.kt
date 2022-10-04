@@ -1,7 +1,7 @@
-package hu.bme.aut.it9p0z.model
+package hu.bme.aut.it9p0z.ui.model
 
 data class UiChip(
-    val icon: UiIcon?,
+    val icon: UiIcon? = null,
     val label: UiText,
     var state: UiChipState = UiChipState.UNSELECTED,
     var enabled: Boolean = true,

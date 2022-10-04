@@ -1,11 +1,11 @@
-package hu.bme.aut.it9p0z.components.buttons
+package hu.bme.aut.it9p0z.ui.components.buttons
 
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonColors
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import hu.bme.aut.it9p0z.model.UiIcon
+import hu.bme.aut.it9p0z.ui.model.UiIcon
 
 @Composable
 fun SmallIconButton(

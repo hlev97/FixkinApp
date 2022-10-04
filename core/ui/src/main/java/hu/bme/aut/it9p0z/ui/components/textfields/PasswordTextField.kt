@@ -1,4 +1,4 @@
-package hu.bme.aut.it9p0z.components.textfields
+package hu.bme.aut.it9p0z.ui.components.textfields
 
 import androidx.compose.foundation.text.KeyboardActionScope
 import androidx.compose.foundation.text.KeyboardActions
@@ -18,9 +18,9 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
-import hu.bme.aut.it9p0z.components.buttons.SmallIconButton
-import hu.bme.aut.it9p0z.model.UiIcon
-import hu.bme.aut.it9p0z.model.UiText
+import hu.bme.aut.it9p0z.ui.components.buttons.SmallIconButton
+import hu.bme.aut.it9p0z.ui.model.UiIcon
+import hu.bme.aut.it9p0z.ui.model.UiText
 
 @ExperimentalMaterial3Api
 @Composable

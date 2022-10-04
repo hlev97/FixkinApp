@@ -1,4 +1,4 @@
-package hu.bme.aut.it9p0z.model
+package hu.bme.aut.it9p0z.ui.model
 
 import android.content.Context
 
