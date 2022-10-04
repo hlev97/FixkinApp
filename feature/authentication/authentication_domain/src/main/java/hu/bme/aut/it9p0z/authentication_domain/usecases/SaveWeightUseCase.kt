@@ -6,7 +6,7 @@ import javax.inject.Inject
 class SaveWeightUseCase @Inject constructor(
     private val authRepository: AuthenticationRepository
 ) {
-    suspend operator fun invoke(weight: Double) {
-        authRepository.saveWeight(weight)
+    suspend operator fun invoke(weight: String) {
+        authRepository.saveWeight(weight.toDouble())
     }
 }
