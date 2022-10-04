@@ -47,4 +47,12 @@ class AuthenticationRepository @Inject constructor(
     suspend fun registerUser(user: UserDto): ResponseWrapper<UserDto> {
         return networkDatasource.createUser(user)
     }
+
+    suspend fun getUser(userName: String, password: String): ResponseWrapper<UserDto> {
+        return networkDatasource.getUser(userName, password)
+    }
+
+    suspend fun getUsernames(): ResponseWrapper<List<String>> {
+        return networkDatasource.getUsernames()
+    }
 }

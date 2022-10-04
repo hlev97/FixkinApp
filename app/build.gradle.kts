@@ -83,5 +83,5 @@ dependencies {
     implementation(project(Modules.corePreferences))
 
     implementation(project(Modules.featureAuthenticationData))
-
+    implementation(project(Modules.featureAuthenticationDomain))
 }
