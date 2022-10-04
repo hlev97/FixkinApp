@@ -77,10 +77,15 @@ dependencies {
 
     implementation(DataStore.dataStorePreferences)
 
+    implementation(Room.roomKtx)
+    kapt(Room.roomCompiler)
+    implementation(Room.roomRuntime)
+
     implementation(project(Modules.coreUi))
     implementation(project(Modules.coreModel))
     implementation(project(Modules.coreNetwork))
     implementation(project(Modules.corePreferences))
+    implementation(project(Modules.coreDatabase))
 
     implementation(project(Modules.featureAuthenticationData))
     implementation(project(Modules.featureAuthenticationDomain))

@@ -2,8 +2,8 @@ import dependencies.DaggerHilt
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-parcelize'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdk ProjectConfig.compileSdk
