@@ -4,12 +4,12 @@ import hu.bme.aut.it9p0z.authentication_data.repository.AuthenticationRepository
 import javax.inject.Inject
 
 class CheckPasswordRequirementsUseCase @Inject constructor(
-    private val hasLowerCaseLetter: CheckPasswordHasLowerCaseLetterUseCase,
-    private val hasUpperCaseLetter: CheckPasswordHasUpperCaseLetterUseCase,
-    private val hasDigit: CheckPasswordHasDigitUseCase,
-    private val hasSpecialChar: CheckPasswordHasSpecialCharUseCase,
-    private val hasCorrectLength: CheckPasswordHasCorrectLengthUseCase,
-    private val isPasswordAndConfirmPasswordSame: CheckPasswordAndConfirmPasswordIsSameUseCase
+    val hasLowerCaseLetter: CheckPasswordHasLowerCaseLetterUseCase,
+    val hasUpperCaseLetter: CheckPasswordHasUpperCaseLetterUseCase,
+    val hasDigit: CheckPasswordHasDigitUseCase,
+    val hasSpecialChar: CheckPasswordHasSpecialCharUseCase,
+    val hasCorrectLength: CheckPasswordHasCorrectLengthUseCase,
+    val isPasswordAndConfirmPasswordSame: CheckPasswordAndConfirmPasswordIsSameUseCase
 )
 
 class CheckPasswordHasLowerCaseLetterUseCase @Inject constructor(
