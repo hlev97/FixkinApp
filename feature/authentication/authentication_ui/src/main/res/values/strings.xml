@@ -6,4 +6,17 @@
     <string name="label_password">password</string>
     <string name="button_login">Log in</string>
     <string name="button_no_account_yet">I don\'t have an account yet</string>
+    <string name="error_username_is_already_in_use">Username is already in use</string>
+    <string name="error_empty_fields">You haven\'t filled every text field</string>
+    <string name="error_password_requirements">Password does not meet with requirements</string>
+    <string name="error_password_does_not_match">The password does not match with confirm password</string>
+    <string name="label_fullName">full name</string>
+    <string name="label_confirm_password">confirm password</string>
+    <string name="button_next">Next</string>
+    <string name="button_already_have_account">I already have an account</string>
+    <string name="text_password_requirement_has_lowercase">Contains lowercase letter</string>
+    <string name="text_password_requirement_has_uppercase">Contains uppercase letter</string>
+    <string name="text_password_requirement_has_digit">Contains digit</string>
+    <string name="text_password_requirement_has_special_char">Contains special char</string>
+    <string name="text_password_requirement_has_correct_length">Contains at least 8 and at most 15 characters</string>
 </resources>
