@@ -91,4 +91,8 @@ dependencies {
     implementation(project(Modules.featureAuthenticationDomain))
     implementation(project(Modules.featureAuthenticationUi))
 
+    implementation(project(Modules.featureConditionLogData))
+    implementation(project(Modules.featureConditionLogDomain))
+//    implementation(project(Modules.featureAuthenticationUi))
+
 }

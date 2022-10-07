@@ -25,6 +25,7 @@
             <option value="$PROJECT_DIR$/feature/authentication/authentication_ui" />
             <option value="$PROJECT_DIR$/feature/conditionlog" />
             <option value="$PROJECT_DIR$/feature/conditionlog/conditionlog_data" />
+            <option value="$PROJECT_DIR$/feature/conditionlog/conditionlog_domain" />
           </set>
         </option>
       </GradleProjectSettings>

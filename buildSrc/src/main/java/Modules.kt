@@ -15,8 +15,16 @@ object Modules {
     const val customUiGraph = ":customui:graph"
 
     const val feature = ":feature"
+
     const val featureAuthentication = ":feature:authentication"
     const val featureAuthenticationData = ":feature:authentication:authentication_data"
     const val featureAuthenticationDomain = ":feature:authentication:authentication_domain"
     const val featureAuthenticationUi = ":feature:authentication:authentication_ui"
+
+    const val featureConditionLog = ":feature:conditionlog"
+    const val featureConditionLogData = ":feature:conditionlog:conditionlog_data"
+    const val featureConditionLogDomain = ":feature:conditionlog:conditionlog_domain"
+    const val featureConditionLogUi = ":feature:conditionlog:conditionlog_ui"
+
+
 }
