@@ -26,6 +26,7 @@
             <option value="$PROJECT_DIR$/feature/conditionlog" />
             <option value="$PROJECT_DIR$/feature/conditionlog/conditionlog_data" />
             <option value="$PROJECT_DIR$/feature/conditionlog/conditionlog_domain" />
+            <option value="$PROJECT_DIR$/feature/conditionlog/conditionlog_ui" />
           </set>
         </option>
       </GradleProjectSettings>
