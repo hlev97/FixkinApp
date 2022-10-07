@@ -1,6 +1,7 @@
 package hu.bme.aut.it9p0z.network.dtos
 
 import hu.bme.aut.it9p0z.model.conditionlog.ConditionLogModel
+import hu.bme.aut.it9p0z.model.feeling.Feeling.Companion.asFeeling
 import java.time.LocalDate
 
 data class ConditionLogDto(
@@ -14,6 +15,6 @@ data class ConditionLogDto(
 fun ConditionLogDto.asConditionLogModel(): ConditionLogModel = ConditionLogModel(
     id = scLogId,
     creationDate = creationDate,
-    feeling = feeling,
+    feeling = feeling.asFeeling(),
     triggers = triggers
 )
