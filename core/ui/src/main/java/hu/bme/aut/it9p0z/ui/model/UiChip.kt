@@ -16,4 +16,10 @@ data class UiChip(
             else -> this.state = UiChipState.SELECTED
         }
     }
+
+    companion object {
+        fun Boolean.toUiChipState(): UiChipState = if (this) {
+            UiChipState.UNSELECTED
+        } else UiChipState.SELECTED
+    }
 }
