@@ -16,13 +16,13 @@
     <string name="medicines_name_methotrexate">methotrexate</string>
     <string name="medicines_name_cyclosporine">cyclosporine</string>
     <string name="medicines_name_supliments">supliments</string>
-    <string name="trigger_name_gluten">gluten</string>
+    <string name="trigger_name_wheat">wheat</string>
     <string name="trigger_name_lactose">lactose</string>
     <string name="trigger_name_milk">milk</string>
+    <string name="trigger_name_seafood">sea food</string>
     <string name="trigger_name_egg">egg</string>
-    <string name="trigger_name_soy">soy</string>
     <string name="trigger_name_nightshade">nightshade</string>
-    <string name="trigger_name_citrus">citrus fruit</string>
+    <string name="trigger_name_citrus">citrus</string>
     <string name="trigger_name_fastfood">fast food</string>
     <string name="trigger_name_fattyfood">fatty food</string>
     <string name="trigger_name_alcohol">alcohol</string>
@@ -41,4 +41,33 @@
     <string name="trigger_name_infection">infection</string>
     <string name="trigger_name_sweat">sweat</string>
     <string name="trigger_name_smoking">smoking</string>
+    <string name="feeling_name_sad">sad</string>
+    <string name="feeling_name_unhappy">Unhappy</string>
+    <string name="feeling_name_neutral">Neutral</string>
+    <string name="feeling_name_happy">Happy</string>
+    <string name="feeling_name_joyful">joyful</string>
+    <string name="feeling_slider_label">Feeling</string>
+    <string name="trigger_name_soy">soy</string>
+
+    <string name="survey_question_1">Over the last week, how itchy, sore, painful or stinging has your skin been?</string>
+    <string name="survey_question_2">Over the last week, how embarrassed or self conscious have you been because of your skin?</string>
+    <string name="survey_question_3">Over the last week, how much has your skin interfered with you going shopping or looking after your home or garden?</string>
+    <string name="survey_question_4">Over the last week, how much has your skin influenced the clothes you wear?</string>
+    <string name="survey_question_5">Over the last week, how much has your skin affected any social or leisure activities?</string>
+    <string name="survey_question_6">Over the last week, how much has your skin made it difficult for you to do any sport?</string>
+    <string name="survey_question_7a">Over the last week, has your skin prevented you from working or studying?</string>
+    <string name="survey_question_7b">If \"No\", over the last week how much has your skin been a problem at work or studying?</string>
+    <string name="survey_question_8">Over the last week, how much has your skin created problems with your partner or any of your close friends or relatives?</string>
+    <string name="survey_question_9">Over the last week, how much has your skin caused any sexual difficulties?</string>
+    <string name="survey_question_10">Over the last week, how much of a problem has the treatment for your skin been, for example by making your home messy, or by taking up time?</string>
+    <string name="survey_answer_very_much">very much</string>
+    <string name="survey_answer_lot">a lot</string>
+    <string name="survey_answer_little">a little</string>
+    <string name="survey_answer_not">not at all</string>
+    <string name="survey_answer_not_relevant">not relevant</string>
+    <string name="survey_answer_yes">yes</string>
+    <string name="survey_answer_no">no</string>
+    <string name="button_prev">Prev</string>
+    <string name="button_next">Next</string>
+
 </resources>
