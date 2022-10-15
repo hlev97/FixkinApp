@@ -16,6 +16,10 @@ class ConditionLogRepository @Inject constructor(
     private val databaseDatasource: DatabaseDatasource
 ) {
 
+    fun getLogFromLocalDatabase(id: Int): Flow<ConditionLogEntity> {
+        return databaseDatasource.getConditionLog(id)
+    }
+
     suspend fun saveLogToLocalDatabase(log: ConditionLogEntity) {
         databaseDatasource.insertConditionLog(log)
     }

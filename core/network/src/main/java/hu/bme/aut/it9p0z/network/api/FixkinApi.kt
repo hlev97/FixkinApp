@@ -24,13 +24,13 @@ interface FixkinApi {
     @GET("user/all/usernames")
     suspend fun getAllUsernames(): Response<List<String>>
 
-    @POST("skin_condition_logs/create")
+    @POST("skin_condition_logs")
     suspend fun createConditionLog(
         @Header("Authorization") credentials: String,
         @Body log: ConditionLogDto
     ): Response<ConditionLogDto>
 
-    @PUT("skin_condition_logs/{scLogId}/update")
+    @PUT("skin_condition_logs/{scLogId}")
     suspend fun updateConditionLog(
         @Header("Authorization") credentials: String,
         @Path("scLogId") scLogId: Int,
@@ -42,7 +42,7 @@ interface FixkinApi {
         @Header("Authorization") credentials: String,
     ): Response<List<ConditionLogDto>>
 
-    @DELETE("skin_condition_logs/{scLogId}/update")
+    @DELETE("skin_condition_logs/{scLogId}")
     suspend fun deleteConditionLog(
         @Header("Authorization") credentials: String,
         @Path("scLogId") scLogId: Int,

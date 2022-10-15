@@ -9,22 +9,31 @@ import java.time.LocalDate
 
 @Entity(tableName = "condition_logs")
 data class ConditionLogEntity(
-    @PrimaryKey val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int? = null,
     val creationDate: LocalDate,
-    var feeling: String,
-    var triggers: HashMap<String,Boolean>,
+    val feeling: String,
+    val foodTriggers: HashMap<String,Boolean>,
+    val weatherTriggers: HashMap<String,Boolean>,
+    val mentalHealthTriggers: HashMap<String,Boolean>,
+    val otherTriggers: HashMap<String,Boolean>
 )
 
 fun ConditionLogEntity.asConditionLogModel(): ConditionLogModel = ConditionLogModel(
     id = id,
     creationDate = creationDate,
     feeling = feeling.asFeeling(),
-    triggers = triggers
+    foodTriggers = foodTriggers,
+    weatherTriggers = weatherTriggers,
+    mentalHealthTriggers = mentalHealthTriggers,
+    otherTriggers = otherTriggers
 )
 
 fun ConditionLogModel.asConditionLogEntity(): ConditionLogEntity = ConditionLogEntity(
     id = id,
     creationDate = creationDate,
     feeling = feeling.asString(),
-    triggers = triggers
+    foodTriggers = foodTriggers,
+    weatherTriggers = weatherTriggers,
+    mentalHealthTriggers = mentalHealthTriggers,
+    otherTriggers = otherTriggers
 )

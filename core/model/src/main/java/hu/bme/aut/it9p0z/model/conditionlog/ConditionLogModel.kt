@@ -4,8 +4,11 @@ import hu.bme.aut.it9p0z.model.feeling.Feeling
 import java.time.LocalDate
 
 data class ConditionLogModel(
-    val id: Int,
+    val id: Int? = null,
     val creationDate: LocalDate,
-    var feeling: Feeling,
-    var triggers: HashMap<String,Boolean>,
+    val feeling: Feeling,
+    val foodTriggers: HashMap<String,Boolean>,
+    val weatherTriggers: HashMap<String,Boolean>,
+    val mentalHealthTriggers: HashMap<String,Boolean>,
+    val otherTriggers: HashMap<String,Boolean>
 )
