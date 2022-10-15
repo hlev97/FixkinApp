@@ -16,3 +16,5 @@ val corner_radius_s = 5.dp
 val corner_radius_m = 15.dp
 val corner_radius_l = 25.dp
 
+val largeFabHeight = 96.dp
+val surveyAnswerRowHeight = 56.dp
