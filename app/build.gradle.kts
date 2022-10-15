@@ -93,6 +93,6 @@ dependencies {
 
     implementation(project(Modules.featureConditionLogData))
     implementation(project(Modules.featureConditionLogDomain))
-//    implementation(project(Modules.featureAuthenticationUi))
+    implementation(project(Modules.featureConditionLogUi))
 
 }
