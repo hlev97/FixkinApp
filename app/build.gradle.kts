@@ -58,6 +58,10 @@ dependencies {
     implementation(Compose.material3)
     implementation(Compose.navigation)
 
+    implementation(Accompanist.pager)
+
+    implementation(Joda.joda)
+
     implementation(DaggerHilt.hiltAndroid)
     kapt(DaggerHilt.hiltCompiler)
 
@@ -94,5 +98,10 @@ dependencies {
     implementation(project(Modules.featureConditionLogData))
     implementation(project(Modules.featureConditionLogDomain))
     implementation(project(Modules.featureConditionLogUi))
+
+    implementation(project((Modules.customUiFabMenu)))
+    implementation(project((Modules.customUiCheckLogCalendar)))
+
+
 
 }

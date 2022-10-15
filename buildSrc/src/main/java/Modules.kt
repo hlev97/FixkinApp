@@ -11,7 +11,7 @@ object Modules {
 
     const val customUi = ":customui"
     const val customUiFabMenu = ":customui:fabmenu"
-    const val customUiCheckLogCalendar = ":customui:checklogcalendar"
+    const val customUiCheckLogCalendar = ":customui:checkdailylogcalendar"
 
     const val feature = ":feature"
 
