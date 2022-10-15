@@ -73,3 +73,23 @@ val ColorScheme.satisfiedColor
 val ColorScheme.idleColor
     @Composable get() = if (isSystemInDarkTheme()) Color(0xFFA4A5A4)
     else Color(0xFF7C7E7C)
+
+val ColorScheme.swipeToEdit
+    @Composable get() = if (isSystemInDarkTheme()) Color(0xFFCF8402)
+                        else Color(0xFFFFC700)
+
+val ColorScheme.onSwipeToEdit
+    @Composable get() = if (isSystemInDarkTheme()) Color(0xFFFFE4B5)
+                        else Color(0xFFFFEECF)
+
+val ColorScheme.swipeToDelete
+    @Composable get() = if (isSystemInDarkTheme()) Color(0xFF690005)
+                        else Color(0xFF93000A)
+
+val ColorScheme.onSwipeToDelete
+    @Composable get() = if (isSystemInDarkTheme()) Color(0xFFFFDDDF)
+                        else Color(0xFFE6CACC)
+
+val ColorScheme.listItemBackgroundThreshold
+    @Composable get() = if (isSystemInDarkTheme()) Color(0xFFB8B7B7)
+                        else Color(0xFF3D3D3D)
