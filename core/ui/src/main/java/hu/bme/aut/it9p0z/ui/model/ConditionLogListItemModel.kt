@@ -1,0 +1,9 @@
+package hu.bme.aut.it9p0z.ui.model
+
+import hu.bme.aut.it9p0z.ui.data.FeelingUi
+
+data class ConditionLogListItemModel(
+    val date: UiText,
+    val feeling: FeelingUi,
+    val triggers: List<UiChip>
+)
