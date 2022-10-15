@@ -12,7 +12,6 @@ object Modules {
     const val customUi = ":customui"
     const val customUiFabMenu = ":customui:fabmenu"
     const val customUiCheckLogCalendar = ":customui:checklogcalendar"
-    const val customUiGraph = ":customui:graph"
 
     const val feature = ":feature"
 
@@ -25,6 +24,5 @@ object Modules {
     const val featureConditionLogData = ":feature:conditionlog:conditionlog_data"
     const val featureConditionLogDomain = ":feature:conditionlog:conditionlog_domain"
     const val featureConditionLogUi = ":feature:conditionlog:conditionlog_ui"
-
 
 }
