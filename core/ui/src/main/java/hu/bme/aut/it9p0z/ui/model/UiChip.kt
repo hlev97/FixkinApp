@@ -1,5 +1,8 @@
 package hu.bme.aut.it9p0z.ui.model
 
+import android.content.Context
+import hu.bme.aut.it9p0z.ui.model.UiChip.Companion.toBoolean
+
 data class UiChip(
     val icon: UiIcon? = null,
     val label: UiText,
@@ -21,5 +24,15 @@ data class UiChip(
         fun Boolean.toUiChipState(): UiChipState = if (this) {
             UiChipState.UNSELECTED
         } else UiChipState.SELECTED
+
+        fun UiChipState.toBoolean(): Boolean = this == UiChipState.SELECTED
     }
+}
+
+fun List<UiChip>.toHashMap(context: Context): HashMap<String,Boolean> {
+    val hashMap = hashMapOf<String,Boolean>()
+    this.map { chip ->
+        hashMap[chip.label.asString(context)] = chip.state.toBoolean()
+    }
+    return hashMap
 }
