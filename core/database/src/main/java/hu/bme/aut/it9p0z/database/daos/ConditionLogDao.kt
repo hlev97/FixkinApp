@@ -23,4 +23,7 @@ interface ConditionLogDao {
 
     @Update
     suspend fun updateLog(log: ConditionLogEntity)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertLogs(logs: List<ConditionLogEntity>)
 }
