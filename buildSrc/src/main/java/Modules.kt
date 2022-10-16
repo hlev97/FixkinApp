@@ -25,4 +25,9 @@ object Modules {
     const val featureConditionLogDomain = ":feature:conditionlog:conditionlog_domain"
     const val featureConditionLogUi = ":feature:conditionlog:conditionlog_ui"
 
+    const val featureHome = ":feature:home"
+    const val featureHomeData = ":feature:home:home_data"
+    const val featureHomeDomain = ":feature:home:home_domain"
+    const val featureHomeUi = ":feature:home:home_ui"
+
 }
