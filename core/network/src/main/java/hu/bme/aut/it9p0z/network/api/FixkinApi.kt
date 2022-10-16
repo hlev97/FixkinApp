@@ -1,6 +1,7 @@
 package hu.bme.aut.it9p0z.network.api
 
 import hu.bme.aut.it9p0z.network.dtos.ConditionLogDto
+import hu.bme.aut.it9p0z.network.dtos.ConditionLogStatisticsDto
 import hu.bme.aut.it9p0z.network.dtos.UserDto
 import retrofit2.Response
 import retrofit2.http.Body
@@ -47,4 +48,9 @@ interface FixkinApi {
         @Header("Authorization") credentials: String,
         @Path("scLogId") scLogId: Int,
     )
+
+    @GET("skin_condition_logs/statistics/me")
+    suspend fun getStatistics(
+        @Header("Authorization") credentials: String
+    ): Response<ConditionLogStatisticsDto>
 }
