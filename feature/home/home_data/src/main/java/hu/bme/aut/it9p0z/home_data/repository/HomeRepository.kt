@@ -4,6 +4,7 @@ import hu.bme.aut.it9p0z.database.datasource.DatabaseDatasource
 import hu.bme.aut.it9p0z.database.entities.ConditionLogEntity
 import hu.bme.aut.it9p0z.network.datasource.NetworkDatasource
 import hu.bme.aut.it9p0z.network.dtos.ConditionLogDto
+import hu.bme.aut.it9p0z.network.dtos.ConditionLogStatisticsDto
 import hu.bme.aut.it9p0z.network.dtos.wrapper.ResponseWrapper
 import hu.bme.aut.it9p0z.preferences.PreferencesDatasource
 import kotlinx.coroutines.flow.Flow
@@ -30,12 +31,12 @@ class HomeRepository @Inject constructor(
 
     suspend fun getLogsFromRemoteDatabase(): ResponseWrapper<List<ConditionLogDto>> {
         val userInfo = preferencesDatasource.loadUserInfo().first()
-        return networkDatasource.getAllConditionLog(userInfo.userName,userInfo.password)
+        return networkDatasource.getAllConditionLog("hlev97","password")
     }
 
-    suspend fun deleteConditionLogFromRemoteDatabase(id: Int): ResponseWrapper<ConditionLogDto> {
+    suspend fun getStatistics(): ResponseWrapper<ConditionLogStatisticsDto> {
         val userInfo = preferencesDatasource.loadUserInfo().first()
-        return networkDatasource.deleteConditionLog(userInfo.userName,userInfo.password,id)
+        return networkDatasource.getConditionLogStatistics("hlev97","password")
     }
 
 }

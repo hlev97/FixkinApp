@@ -10,6 +10,7 @@ dependencies {
     "implementation"(Retrofit.moshiKotlin)
     "implementation"(Retrofit.okHttp)
     "implementation"(Retrofit.okHttpLoggingInterceptor)
+    "kapt"(Retrofit.moshiCodeGen)
 
     "implementation"(project(Modules.coreModel))
 }

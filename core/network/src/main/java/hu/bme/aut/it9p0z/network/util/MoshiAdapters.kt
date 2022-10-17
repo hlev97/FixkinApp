@@ -13,4 +13,5 @@ object MoshiAdapters {
 
     @FromJson
     fun String.asLocalDate(): LocalDate = LocalDate.parse(this, formatter)
+
 }

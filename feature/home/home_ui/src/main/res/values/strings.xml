@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="text_weekly_survey_not_filled_out">You have not filled out the weekly DLQI survey</string>
+    <string name="weekly_survey_filled_out">You filled out the weekly DLQI survey</string>
+    <string name="text_daily_log_added">You have already added a log today</string>
+    <string name="text_daily_log_not_added">You have not added a daily log yet</string>
+</resources>

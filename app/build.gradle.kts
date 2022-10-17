@@ -78,6 +78,7 @@ dependencies {
     implementation(Retrofit.moshiKotlin)
     implementation(Retrofit.okHttp)
     implementation(Retrofit.okHttpLoggingInterceptor)
+    kapt(Retrofit.moshiCodeGen)
 
     implementation(DataStore.dataStorePreferences)
 
@@ -98,6 +99,10 @@ dependencies {
     implementation(project(Modules.featureConditionLogData))
     implementation(project(Modules.featureConditionLogDomain))
     implementation(project(Modules.featureConditionLogUi))
+
+    implementation(project(Modules.featureHomeData))
+    implementation(project(Modules.featureHomeDomain))
+    implementation(project(Modules.featureHomeUi))
 
     implementation(project((Modules.customUiFabMenu)))
     implementation(project((Modules.customUiCheckLogCalendar)))

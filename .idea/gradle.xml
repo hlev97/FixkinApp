@@ -7,6 +7,7 @@
         <option name="testRunner" value="GRADLE" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleJvm" value="openjdk-19" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
@@ -33,6 +34,7 @@
             <option value="$PROJECT_DIR$/feature/home" />
             <option value="$PROJECT_DIR$/feature/home/home_data" />
             <option value="$PROJECT_DIR$/feature/home/home_domain" />
+            <option value="$PROJECT_DIR$/feature/home/home_ui" />
           </set>
         </option>
       </GradleProjectSettings>

@@ -1,5 +1,6 @@
 package hu.bme.aut.it9p0z.network
 
+import android.util.Log
 import hu.bme.aut.it9p0z.network.api.FixkinApi
 import hu.bme.aut.it9p0z.network.datasource.NetworkDatasource
 import hu.bme.aut.it9p0z.network.dtos.ConditionLogDto
@@ -148,6 +149,7 @@ class NetworkDatasourceImpl @Inject constructor(
                 } else throw Exception("Empty body")
             } else throw Exception(response.errorBody()?.string())
         } catch (e: Exception) {
+            Log.i("request", e.message!!)
             ResponseWrapper(
                 data = null,
                 message = "Unsuccessful request"
@@ -193,6 +195,7 @@ class NetworkDatasourceImpl @Inject constructor(
                 } else throw Exception("Empty body")
             } else throw Exception(response.errorBody()?.string())
         } catch (e: Exception) {
+            Log.i("request", e.message!!)
             ResponseWrapper(
                 data = null,
                 message = "Unsuccessful request"

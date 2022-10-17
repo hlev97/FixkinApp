@@ -27,11 +27,12 @@ import java.util.*
 @ExperimentalFoundationApi
 @Composable
 fun CheckDailyConditionWeeklyCalendar(
-    creationDates: List<LocalDate>
+    creationDates: List<LocalDate>,
+    modifier: Modifier = Modifier
 ) {
     val calendarState = remember { CalendarState(Calendar.getInstance()) }
     WeeklyCalendar(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         calendarState = calendarState,
         creationDates = creationDates
     )

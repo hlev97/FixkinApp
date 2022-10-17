@@ -93,3 +93,7 @@ val ColorScheme.onSwipeToDelete
 val ColorScheme.listItemBackgroundThreshold
     @Composable get() = if (isSystemInDarkTheme()) Color(0xFFB8B7B7)
                         else Color(0xFF3D3D3D)
+
+val ColorScheme.warning
+    @Composable get() = if (isSystemInDarkTheme()) Color(0xFFCF8402)
+                        else Color(0xFFFFC700)

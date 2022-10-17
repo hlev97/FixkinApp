@@ -12,4 +12,6 @@ object Retrofit {
 
     private const val moshiKotlinVersion = "1.14.0"
     const val moshiKotlin = "com.squareup.moshi:moshi-kotlin:$moshiKotlinVersion"
+    const val moshiCodeGen = "com.squareup.moshi:moshi-kotlin-codegen:$moshiKotlinVersion"
+
 }

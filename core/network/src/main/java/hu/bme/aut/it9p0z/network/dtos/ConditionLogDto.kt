@@ -1,29 +1,31 @@
 package hu.bme.aut.it9p0z.network.dtos
 
+import com.squareup.moshi.JsonClass
 import hu.bme.aut.it9p0z.model.conditionlog.ConditionLogModel
 import hu.bme.aut.it9p0z.model.feeling.Feeling.Companion.asFeeling
 import hu.bme.aut.it9p0z.model.feeling.Feeling.Companion.asString
 import java.time.LocalDate
 
+@JsonClass(generateAdapter = true)
 data class ConditionLogDto(
     val scLogId: Int?,
     val userName: String? = null,
     val creationDate: LocalDate,
     val feeling: String,
-    val foodTriggers: HashMap<String,Boolean>,
-    val weatherTriggers: HashMap<String,Boolean>,
-    val mentalHealthTriggers: HashMap<String,Boolean>,
-    val otherTriggers: HashMap<String,Boolean>
+    val foodTriggers: Map<String,Boolean>,
+    val weatherTriggers: Map<String,Boolean>,
+    val mentalHealthTriggers: Map<String,Boolean>,
+    val otherTriggers: Map<String,Boolean>
 )
 
 fun ConditionLogDto.asConditionLogModel(): ConditionLogModel = ConditionLogModel(
     id = scLogId,
     creationDate = creationDate,
     feeling = feeling.asFeeling(),
-    foodTriggers = foodTriggers,
-    weatherTriggers = weatherTriggers,
-    mentalHealthTriggers = mentalHealthTriggers,
-    otherTriggers = otherTriggers
+    foodTriggers = HashMap(foodTriggers),
+    weatherTriggers = HashMap(weatherTriggers),
+    mentalHealthTriggers = HashMap(mentalHealthTriggers),
+    otherTriggers = HashMap(otherTriggers)
 )
 
 fun ConditionLogModel.asConditionLogDto(): ConditionLogDto = ConditionLogDto(

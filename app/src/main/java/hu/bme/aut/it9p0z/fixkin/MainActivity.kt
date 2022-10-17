@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -16,16 +16,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import com.google.accompanist.pager.ExperimentalPagerApi
 import dagger.hilt.android.AndroidEntryPoint
-import hu.bme.aut.conditionlog_ui.create.CreateConditionLogScreen
-import hu.bme.aut.conditionlog_ui.edit.EditConditionLogScreen
 import hu.bme.aut.it9p0z.fabmenu.model.FabMenuItemModel
 import hu.bme.aut.it9p0z.fabmenu.ui.FabMenu
+import hu.bme.aut.it9p0z.home_ui.home.HomeScreen
 import hu.bme.aut.it9p0z.ui.theme.FixkinTheme
 
 @ExperimentalAnimationApi
 @ExperimentalMaterial3Api
 @ExperimentalComposeUiApi
+@ExperimentalFoundationApi
+@ExperimentalPagerApi
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,10 +70,8 @@ class MainActivity : ComponentActivity() {
                             onItemClick = { text = it }
                         )
                     }
-                ) { 
-                    Column(Modifier.padding(it)) {
-                        Text(text = text)
-                    }
+                ) {
+                    HomeScreen(modifier = Modifier.padding(it))
 //                    EditConditionLogScreen(
 //                        onFabClick = { /*TODO*/ },
 //                        modifier = Modifier.padding(it)
