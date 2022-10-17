@@ -19,4 +19,6 @@ interface DatabaseDatasource {
 
     suspend fun insertConditionLogs(logs: List<ConditionLogEntity>)
 
+    suspend fun deleteAllLogs()
+
 }

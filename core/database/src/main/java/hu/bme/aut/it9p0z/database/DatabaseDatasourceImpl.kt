@@ -28,6 +28,10 @@ class DatabaseDatasourceImpl @Inject constructor(
         conditionLogDao.insertLogs(logs)
     }
 
+    override suspend fun deleteAllLogs() {
+        conditionLogDao.deleteAllLogs()
+    }
+
     override fun getConditionLog(id: Int): Flow<ConditionLogEntity> = conditionLogDao.getLog(id)
 
     override fun getLastConditionLog(): Flow<ConditionLogEntity> = conditionLogDao.getLastLog()

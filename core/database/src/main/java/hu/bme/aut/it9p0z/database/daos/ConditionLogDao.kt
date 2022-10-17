@@ -21,6 +21,9 @@ interface ConditionLogDao {
     @Delete
     suspend fun deleteLog(log: ConditionLogEntity)
 
+    @Delete
+    suspend fun deleteAllLogs()
+
     @Update
     suspend fun updateLog(log: ConditionLogEntity)
 

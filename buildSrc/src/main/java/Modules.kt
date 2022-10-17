@@ -2,7 +2,6 @@ object Modules {
     const val app = ":app"
 
     const val core = ":core"
-    const val coreData = ":core:data"
     const val coreModel = ":core:model"
     const val coreUi = ":core:ui"
     const val coreNetwork = ":core:network"
@@ -29,5 +28,10 @@ object Modules {
     const val featureHomeData = ":feature:home:home_data"
     const val featureHomeDomain = ":feature:home:home_domain"
     const val featureHomeUi = ":feature:home:home_ui"
+
+    const val featureHistory = ":feature:history"
+    const val featureHistoryData = ":feature:history:history_data"
+    const val featureHistoryDomain = ":feature:history:history_domain"
+    const val featureHistoryUi = ":feature:history:history_ui"
 
 }

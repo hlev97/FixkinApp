@@ -7,7 +7,7 @@
         <option name="testRunner" value="GRADLE" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleJvm" value="openjdk-19" />
+        <option name="gradleJvm" value="11" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
@@ -31,6 +31,9 @@
             <option value="$PROJECT_DIR$/feature/conditionlog/conditionlog_data" />
             <option value="$PROJECT_DIR$/feature/conditionlog/conditionlog_domain" />
             <option value="$PROJECT_DIR$/feature/conditionlog/conditionlog_ui" />
+            <option value="$PROJECT_DIR$/feature/history" />
+            <option value="$PROJECT_DIR$/feature/history/history_data" />
+            <option value="$PROJECT_DIR$/feature/history/history_domain" />
             <option value="$PROJECT_DIR$/feature/home" />
             <option value="$PROJECT_DIR$/feature/home/home_data" />
             <option value="$PROJECT_DIR$/feature/home/home_domain" />
