@@ -41,4 +41,9 @@ class HistoryRepository @Inject constructor(
         databaseDatasource.deleteAllLogs()
     }
 
+    fun getLogById(id: Int): Flow<ConditionLogEntity> {
+        return databaseDatasource.getConditionLog(id)
+    }
+
+    fun getNumberOfConditionLogsInDatabase(): Int = databaseDatasource.getNumberOfConditionLogs()
 }

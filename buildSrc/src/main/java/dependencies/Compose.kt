@@ -1,8 +1,8 @@
 package dependencies
 
 object Compose {
-    private const val composeVersion = "1.2.1"
-    const val composeCompilerVersion = "1.3.1"
+    private const val composeVersion = "1.3.0-rc01"
+    const val composeCompilerVersion = "1.3.2"
 
     private const val material3Version = "1.0.0-beta02"
     const val material3 = "androidx.compose.material3:material3:$material3Version"
@@ -31,4 +31,7 @@ object Compose {
 
     private const val composeConstraintLayoutVersion = "1.0.1"
     const val composeConstraintLayout = "androidx.constraintlayout:constraintlayout-compose:$composeConstraintLayoutVersion"
+
+    private const val runtimeVersion = "1.2.1"
+    const val runtimeLiveData = "androidx.compose.runtime:runtime-livedata:$runtimeVersion"
 }

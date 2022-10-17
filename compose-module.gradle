@@ -53,6 +53,7 @@ dependencies {
     implementation Compose.uiToolingPreview
     implementation Compose.materialIconsExt
     implementation Compose.composeConstraintLayout
+    implementation Compose.runtimeLiveData
     debugImplementation Compose.uiTooling
 
     kapt DaggerHilt.hiltCompiler

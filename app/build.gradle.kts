@@ -59,6 +59,7 @@ dependencies {
     implementation(Compose.navigation)
 
     implementation(Accompanist.pager)
+    implementation(Accompanist.flowLayout)
 
     implementation(Joda.joda)
 
@@ -104,9 +105,11 @@ dependencies {
     implementation(project(Modules.featureHomeDomain))
     implementation(project(Modules.featureHomeUi))
 
+    implementation(project(Modules.featureHistoryData))
+    implementation(project(Modules.featureHistoryDomain))
+    implementation(project(Modules.featureHistoryUi))
+
     implementation(project((Modules.customUiFabMenu)))
     implementation(project((Modules.customUiCheckLogCalendar)))
-
-
 
 }

@@ -21,7 +21,7 @@ interface ConditionLogDao {
     @Delete
     suspend fun deleteLog(log: ConditionLogEntity)
 
-    @Delete
+    @Query("DELETE FROM condition_logs")
     suspend fun deleteAllLogs()
 
     @Update
@@ -29,4 +29,8 @@ interface ConditionLogDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertLogs(logs: List<ConditionLogEntity>)
+
+    @Query("SELECT COUNT(id) FROM condition_logs")
+    fun countLogs(): Int
+
 }

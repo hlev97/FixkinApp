@@ -20,6 +20,7 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import dagger.hilt.android.AndroidEntryPoint
 import hu.bme.aut.it9p0z.fabmenu.model.FabMenuItemModel
 import hu.bme.aut.it9p0z.fabmenu.ui.FabMenu
+import hu.bme.aut.it9p0z.history_ui.HistoryScreen
 import hu.bme.aut.it9p0z.home_ui.home.HomeScreen
 import hu.bme.aut.it9p0z.ui.theme.FixkinTheme
 
@@ -71,7 +72,8 @@ class MainActivity : ComponentActivity() {
                         )
                     }
                 ) {
-                    HomeScreen(modifier = Modifier.padding(it))
+//                    HomeScreen(modifier = Modifier.padding(it))
+                    HistoryScreen(modifier = Modifier.padding(it))
 //                    EditConditionLogScreen(
 //                        onFabClick = { /*TODO*/ },
 //                        modifier = Modifier.padding(it)

@@ -21,4 +21,5 @@ interface DatabaseDatasource {
 
     suspend fun deleteAllLogs()
 
+    fun getNumberOfConditionLogs(): Int
 }

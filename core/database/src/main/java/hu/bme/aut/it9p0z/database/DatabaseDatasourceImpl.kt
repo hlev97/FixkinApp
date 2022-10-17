@@ -32,6 +32,8 @@ class DatabaseDatasourceImpl @Inject constructor(
         conditionLogDao.deleteAllLogs()
     }
 
+    override fun getNumberOfConditionLogs(): Int = conditionLogDao.countLogs()
+
     override fun getConditionLog(id: Int): Flow<ConditionLogEntity> = conditionLogDao.getLog(id)
 
     override fun getLastConditionLog(): Flow<ConditionLogEntity> = conditionLogDao.getLastLog()

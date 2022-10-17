@@ -1,28 +1,33 @@
 package hu.bme.aut.it9p0z.history_domain.usecases
 
-import android.app.Application
+import android.content.Context
+import dagger.hilt.android.qualifiers.ApplicationContext
+import hu.bme.aut.it9p0z.database.entities.asConditionLogEntity
 import hu.bme.aut.it9p0z.database.entities.asConditionLogModel
 import hu.bme.aut.it9p0z.history_data.repository.HistoryRepository
 import hu.bme.aut.it9p0z.model.conditionlog.ConditionLogModel
 import hu.bme.aut.it9p0z.network.dtos.asConditionLogModel
 import hu.bme.aut.it9p0z.network.util.NetworkState.isOnline
-import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 class LoadConditionLogsUseCase @Inject constructor(
     private val repository: HistoryRepository,
-    private val app: Application
+    @ApplicationContext private val context: Context
 ) {
-    private val context = app.baseContext
 
     suspend operator fun invoke(): List<ConditionLogModel> {
         return if (isOnline(context)) {
-            val localData = repository.getLogsFromLocalDatabase().first()
-            if (localData.isNotEmpty()) {
+            val size = repository.getNumberOfConditionLogsInDatabase()
+            if (size > 0) {
                 repository.deleteAllLogsFromLocalDatabase()
             }
-            val logs = repository.getLogsFromRemoteDatabase().data ?: emptyList()
-            logs.map { it.asConditionLogModel() }
+            val logsInResponse = repository.getLogsFromRemoteDatabase().data ?: emptyList()
+            repository.saveLogsToLocalDatabase(logsInResponse.map {
+                it.asConditionLogModel().asConditionLogEntity()
+            })
+            repository.getLogsFromLocalDatabase().first().map { it.asConditionLogModel() }
         } else {
             repository.getLogsFromLocalDatabase().first().map { it.asConditionLogModel() }
         }

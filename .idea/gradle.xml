@@ -34,6 +34,7 @@
             <option value="$PROJECT_DIR$/feature/history" />
             <option value="$PROJECT_DIR$/feature/history/history_data" />
             <option value="$PROJECT_DIR$/feature/history/history_domain" />
+            <option value="$PROJECT_DIR$/feature/history/history_ui" />
             <option value="$PROJECT_DIR$/feature/home" />
             <option value="$PROJECT_DIR$/feature/home/home_data" />
             <option value="$PROJECT_DIR$/feature/home/home_domain" />

@@ -173,6 +173,7 @@ fun ConditionLogListItem_Preview() {
             for (i in 0..8) {
                 ConditionLogListItem(
                     listItem = ConditionLogListItemModel(
+                        id = 0,
                         date = UiText.DynamicString("2022/10/07"),
                         feeling = FeelingUi.Sad,
                         triggers = uiChips
@@ -204,6 +205,7 @@ fun ConditionLogListItem_PreviewDark() {
             for (i in 0..8) {
                 ConditionLogListItem(
                     listItem = ConditionLogListItemModel(
+                        id = 0,
                         date = UiText.DynamicString("2022/10/07"),
                         feeling = FeelingUi.Sad,
                         triggers = uiChips

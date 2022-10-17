@@ -1,10 +1,12 @@
 package hu.bme.aut.it9p0z.history_domain.usecases
 
 import android.app.Application
+import android.util.Log
 import hu.bme.aut.it9p0z.database.entities.asConditionLogEntity
 import hu.bme.aut.it9p0z.history_data.repository.HistoryRepository
 import hu.bme.aut.it9p0z.model.conditionlog.ConditionLogModel
 import hu.bme.aut.it9p0z.network.util.NetworkState.isOnline
+import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
 class DeleteConditionLogUseCase @Inject constructor(
@@ -13,10 +15,11 @@ class DeleteConditionLogUseCase @Inject constructor(
 ){
     private val context = app.baseContext
 
-    suspend operator fun invoke(log: ConditionLogModel) {
-        repository.deleteLogFromLocalDatabase(log.asConditionLogEntity())
+    suspend operator fun invoke(id: Int) {
+        val logToDelete = repository.getLogById(id).first()
+        repository.deleteLogFromLocalDatabase(logToDelete)
         if (isOnline(context)) {
-            repository.deleteLogFromRemoteDatabase(log.id!!)
+            repository.deleteLogFromRemoteDatabase(id)
         } else {
             // TODO: work manager
         }
