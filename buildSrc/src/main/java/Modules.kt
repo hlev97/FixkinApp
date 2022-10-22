@@ -39,4 +39,9 @@ object Modules {
     const val featureSurveyDomain = ":feature:survey:survey_domain"
     const val featureSurveyUi = ":feature:survey:survey_ui"
 
+    const val featureStatistics = ":feature:statistics"
+    const val featureStatisticsData = ":feature:statistics:statistics_data"
+    const val featureStatisticsDomain = ":feature:statistics:statistics_domain"
+    const val featureStatisticsUi = ":feature:statistics:statistics_ui"
+
 }
