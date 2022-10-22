@@ -2,6 +2,7 @@ package hu.bme.aut.it9p0z.network.datasource
 
 import hu.bme.aut.it9p0z.network.dtos.ConditionLogDto
 import hu.bme.aut.it9p0z.network.dtos.ConditionLogStatisticsDto
+import hu.bme.aut.it9p0z.network.dtos.SurveyLogDto
 import hu.bme.aut.it9p0z.network.dtos.UserDto
 import hu.bme.aut.it9p0z.network.dtos.wrapper.ResponseWrapper
 
@@ -26,7 +27,7 @@ interface NetworkDatasource {
         log: ConditionLogDto
     ): ResponseWrapper<ConditionLogDto>
 
-    suspend fun getAllConditionLog(
+    suspend fun getAllConditionLogs(
         userName: String,
         password: String
     ): ResponseWrapper<List<ConditionLogDto>>
@@ -41,4 +42,15 @@ interface NetworkDatasource {
         userName: String,
         password: String,
     ): ResponseWrapper<ConditionLogStatisticsDto>
+
+    suspend fun createSurveyLog(
+        userName: String,
+        password: String,
+        log: SurveyLogDto
+    ): ResponseWrapper<SurveyLogDto>
+
+    suspend fun getAllSurveyLogs(
+        userName: String,
+        password: String,
+    ): ResponseWrapper<List<SurveyLogDto>>
 }

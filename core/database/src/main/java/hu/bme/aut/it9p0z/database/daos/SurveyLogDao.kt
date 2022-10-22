@@ -4,6 +4,7 @@ import androidx.room.*
 import hu.bme.aut.it9p0z.database.entities.SurveyLogEntity
 import kotlinx.coroutines.flow.Flow
 
+@Dao
 interface SurveyLogDao {
     @Query("SELECT * FROM survey_logs")
     fun getLogs(): Flow<List<SurveyLogEntity>>

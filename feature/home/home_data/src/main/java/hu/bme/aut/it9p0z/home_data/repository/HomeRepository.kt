@@ -31,7 +31,7 @@ class HomeRepository @Inject constructor(
 
     suspend fun getLogsFromRemoteDatabase(): ResponseWrapper<List<ConditionLogDto>> {
         val userInfo = preferencesDatasource.loadUserInfo().first()
-        return networkDatasource.getAllConditionLog(userInfo.userName,userInfo.password)
+        return networkDatasource.getAllConditionLogs(userInfo.userName,userInfo.password)
     }
 
     suspend fun getStatistics(): ResponseWrapper<ConditionLogStatisticsDto> {

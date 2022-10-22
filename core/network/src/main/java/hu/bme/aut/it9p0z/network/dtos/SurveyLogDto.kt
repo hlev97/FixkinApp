@@ -6,7 +6,7 @@ import java.time.LocalDate
 
 @JsonClass(generateAdapter = true)
 data class SurveyLogDto(
-    val surveyLogId: Int,
+    val surveyLogId: Int?,
     val userName: String?,
     val creationDate: LocalDate,
     val result: Double,

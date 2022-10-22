@@ -9,6 +9,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import hu.bme.aut.it9p0z.database.FixkinDatabase
 import hu.bme.aut.it9p0z.database.daos.ConditionLogDao
+import hu.bme.aut.it9p0z.database.daos.SurveyLogDao
 import javax.inject.Singleton
 
 @Module
@@ -27,7 +28,13 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideArticleDao(
+    fun provideConditionLogDao(
         db: FixkinDatabase
     ): ConditionLogDao = db.conditionLogDao()
+
+    @Provides
+    @Singleton
+    fun provideSurveyLogDao(
+        db: FixkinDatabase
+    ): SurveyLogDao = db.surveyLogDao()
 }

@@ -65,4 +65,5 @@ interface FixkinApi {
     suspend fun getAllSurveyLogs(
         @Header("Authorization") credentials: String,
     ): Response<List<SurveyLogDto>>
+
 }
