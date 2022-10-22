@@ -19,8 +19,8 @@ fun SurveyLogModel.asSurveyLogDto(): SurveyLogDto = SurveyLogDto(
     result = result
 )
 
-fun SurveyLogModel.asSurveyLogModel(): SurveyLogModel = SurveyLogModel(
-    id = id,
+fun SurveyLogDto.asSurveyLogModel(): SurveyLogModel = SurveyLogModel(
+    id = surveyLogId,
     creationDate = creationDate,
     result = result
 )

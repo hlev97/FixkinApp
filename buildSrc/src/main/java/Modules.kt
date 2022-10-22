@@ -34,4 +34,9 @@ object Modules {
     const val featureHistoryDomain = ":feature:history:history_domain"
     const val featureHistoryUi = ":feature:history:history_ui"
 
+    const val featureSurvey = ":feature:survey"
+    const val featureSurveyData = ":feature:survey:survey_data"
+    const val featureSurveyDomain = ":feature:survey:survey_domain"
+    const val featureSurveyUi = ":feature:survey:survey_ui"
+
 }
