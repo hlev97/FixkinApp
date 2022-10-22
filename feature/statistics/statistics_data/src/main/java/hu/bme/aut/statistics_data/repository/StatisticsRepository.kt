@@ -31,6 +31,14 @@ class StatisticsRepository @Inject constructor(
         return databaseDatasource.getAllSurveyLogs()
     }
 
+    fun getNumberOfSurveyLogsInLocalDatabase(): Int {
+        return databaseDatasource.getNumberOfSurveyLogs()
+    }
+
+    suspend fun deleteAllSurveyLogs() {
+        databaseDatasource.deleteAllSurveyLogs()
+    }
+
     suspend fun getConditionLogsFromRemoteDatabase(): ResponseWrapper<List<ConditionLogDto>> {
         val userInfo = preferencesDatasource.loadUserInfo().first()
         return networkDatasource.getAllConditionLogs(userInfo.userName,userInfo.password)
@@ -42,5 +50,13 @@ class StatisticsRepository @Inject constructor(
 
     fun loadConditionLogsFromLocalDatabase(): Flow<List<ConditionLogEntity>> {
         return databaseDatasource.getAllConditionLogs()
+    }
+
+    fun getNumberOfConditionLogsInLocalDatabase(): Int {
+        return databaseDatasource.getNumberOfConditionLogs()
+    }
+
+    suspend fun deleteAllConditionLogs() {
+        databaseDatasource.deleteAllConditionLogs()
     }
 }
