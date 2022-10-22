@@ -1,4 +1,4 @@
-package hu.bme.aut.it9p0z.ui.components.surveyanswerradiogroup
+package hu.bme.aut.survey_ui.components.surveyanswerradiogroup
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,10 +13,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.Role
-import hu.bme.aut.it9p0z.ui.data.SurveyAnswer
 import hu.bme.aut.it9p0z.ui.theme.dp_l
 import hu.bme.aut.it9p0z.ui.theme.dp_s
 import hu.bme.aut.it9p0z.ui.theme.surveyAnswerRowHeight
+import hu.bme.aut.survey_ui.model.SurveyAnswer
 
 @Composable
 fun SurveyAnswerRadioGroup(
@@ -42,7 +42,7 @@ fun SurveyAnswerRadioGroup(
             onClick = null
         )
         Text(
-            text = answer.answer.asString(context),
+            text = answer.text.asString(context),
             style = MaterialTheme.typography.bodyLarge,
             modifier = Modifier.padding(start = dp_s)
         )

@@ -45,6 +45,19 @@ object SurveyDomainModule {
         @ApplicationContext context: Context
     ): SaveSurveyLogUseCase = SaveSurveyLogUseCase(repository, context)
 
+
+    @Provides
+    @Singleton
+    fun provideResetSurveyUseCase(
+        repository: SurveyRepository
+    ): ResetSurveyUseCase = ResetSurveyUseCase(repository)
+
+    @Provides
+    @Singleton
+    fun providePrevQuestionUseCase(
+        repository: SurveyRepository
+    ): PrevQuestionUseCase = PrevQuestionUseCase(repository)
+
     @Provides
     @Singleton
     fun provideSurveyUseCases(
@@ -52,7 +65,17 @@ object SurveyDomainModule {
         countResult: CountSurveyResultUseCase,
         loadLastAnswer: LoadLastAnswerUseCase,
         saveLastAnswer: SaveLastAnswerUseCase,
-        saveSurveyLog: SaveSurveyLogUseCase
+        saveSurveyLog: SaveSurveyLogUseCase,
+        resetSurvey: ResetSurveyUseCase,
+        prevQuestion: PrevQuestionUseCase
     ): SurveyUseCases =
-        SurveyUseCases(addPoint, countResult, loadLastAnswer, saveLastAnswer, saveSurveyLog)
+        SurveyUseCases(
+            addPoint,
+            countResult,
+            loadLastAnswer,
+            saveLastAnswer,
+            saveSurveyLog,
+            resetSurvey,
+            prevQuestion
+        )
 }

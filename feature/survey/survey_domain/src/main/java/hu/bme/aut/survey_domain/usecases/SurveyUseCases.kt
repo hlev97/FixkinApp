@@ -5,5 +5,7 @@ data class SurveyUseCases(
     val countResult: CountSurveyResultUseCase,
     val loadLastAnswer: LoadLastAnswerUseCase,
     val saveLastAnswer: SaveLastAnswerUseCase,
-    val saveSurveyLog: SaveSurveyLogUseCase
+    val saveSurveyLog: SaveSurveyLogUseCase,
+    val resetSurvey: ResetSurveyUseCase,
+    val previousQuestion: PrevQuestionUseCase
 )

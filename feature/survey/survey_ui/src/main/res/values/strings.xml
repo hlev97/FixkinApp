@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="survey_answer_very_much">Very much</string>
+    <string name="survey_answer_a_lot">A lot</string>
+    <string name="survey_answer_a_little">A little</string>
+    <string name="survey_answer_not_at_all">Not at all</string>
+    <string name="survey_answer_not_relevant">Not relevant</string>
+    <string name="survey_answer_yes">Yes</string>
+    <string name="survey_answer_no">No</string>
+
+    <string name="survey_question_1">Over the last week, how itchy, sore, painful or stinging has your skin been?</string>
+    <string name="survey_question_2">Over the last week, how embarrassed or self conscious have you been because of your skin?</string>
+    <string name="survey_question_3">Over the last week, how much has your skin interfered with you going shopping or looking after your home or garden?</string>
+    <string name="survey_question_4">Over the last week, how much has your skin influenced the clothes you wear?</string>
+    <string name="survey_question_5">Over the last week, how much has your skin affected any social or leisure activities?</string>
+    <string name="survey_question_6">Over the last week, how much has your skin made it difficult for you to do any sport?</string>
+    <string name="survey_question_7a">Over the last week, has your skin prevented you from working or studying?</string>
+    <string name="survey_question_7b">If \"No\", over the last week how much has your skin been a problem at work or studying?</string>
+    <string name="survey_question_8">Over the last week, how much has your skin created problems with your partner or any of your close friends or relatives?</string>
+    <string name="survey_question_9">Over the last week, how much has your skin caused any sexual difficulties?</string>
+    <string name="survey_question_10">Over the last week, how much of a problem has the treatment for your skin been, for example by making your home messy, or by taking up time?</string>
+    <string name="survey_result_no_effect">Psoriasis ha no effect at all on your life.</string>
+    <string name="survey_result_small_effect">Psoriasis has small effect on your life. You might consider visiting a dermatologist,</string>
+    <string name="survey_result_moderate_effect">Psoriasis has moderate effect on your life. You should consider visiting a dermatologist.</string>
+    <string name="survey_result_large_effect">Psoriasis has a very large effect on your life. You should consider visiting a dermatologist and asking for help to strengthen your mental health.</string>
+    <string name="survey_result_extreme_effect">Psoriasis has extremely large effect on your life. You should consider visiting a dermatologist and asking for help to strengthen your mental health.</string>
+    
+    <string name="survey_result_score">Your DLQI index: %1$d</string>
+    <string name="button_prev">Previous</string>
+    <string name="button_next">Next</string>
+    <string name="button_ok">Ok</string>
+</resources>

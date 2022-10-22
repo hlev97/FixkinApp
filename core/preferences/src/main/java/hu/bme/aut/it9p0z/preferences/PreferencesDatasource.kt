@@ -189,4 +189,11 @@ class PreferencesDatasource @Inject constructor(
             }
     }
 
+    suspend fun resetSurvey() {
+        dataStore.edit { preferences ->
+            preferences[lastAnswerPrefKey] = 0
+            preferences[surveyResultPrefKey] = 0
+        }
+    }
+
 }

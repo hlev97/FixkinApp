@@ -52,4 +52,8 @@ class SurveyRepository @Inject constructor(
         )
         return networkDatasource.createSurveyLog("hlev97", "password", log)
     }
+
+    suspend fun resetSurvey() {
+        preferencesDatasource.resetSurvey()
+    }
 }

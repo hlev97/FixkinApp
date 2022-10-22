@@ -10,7 +10,7 @@ class SaveSurveyLogUseCase @Inject constructor(
     private val repository: SurveyRepository,
     @ApplicationContext private val context: Context
 ) {
-    suspend fun invoke() {
+    suspend operator fun invoke() {
         if (isOnline(context)) {
             repository.saveSurveyResultToRemoteDatabase()
         } else {

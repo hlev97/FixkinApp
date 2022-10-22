@@ -109,6 +109,10 @@ dependencies {
     implementation(project(Modules.featureHistoryDomain))
     implementation(project(Modules.featureHistoryUi))
 
+    implementation(project(Modules.featureSurveyData))
+    implementation(project(Modules.featureSurveyDomain))
+    implementation(project(Modules.featureSurveyUi))
+
     implementation(project((Modules.customUiFabMenu)))
     implementation(project((Modules.customUiCheckLogCalendar)))
 
