@@ -1,5 +1,6 @@
 package hu.bme.aut.survey_ui.screen
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -28,9 +29,12 @@ import hu.bme.aut.survey_ui.model.*
 @Composable
 fun SurveyScreen(
     onOkButtonClick: () -> Unit,
+    onBack: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: SurveyViewModel = hiltViewModel()
 ) {
+    BackHandler(onBack = onBack)
+
     val state by viewModel.state.collectAsState()
 
     val context = LocalContext.current

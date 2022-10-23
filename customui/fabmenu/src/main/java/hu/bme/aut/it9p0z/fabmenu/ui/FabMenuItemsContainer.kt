@@ -24,7 +24,7 @@ fun ColumnScope.FabMenuItemsContainer(
 
         FabMenuItem(
             menuItem = menuItem,
-            onClick = onClick
+            onClick = { onClick(menuItem.route) }
         )
 
         Spacer(modifier = Modifier.height(10.dp))

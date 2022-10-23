@@ -43,14 +43,14 @@ class SurveyRepository @Inject constructor(
     }
 
     suspend fun saveSurveyResultToRemoteDatabase(): ResponseWrapper<SurveyLogDto> {
-        val userInfo = preferencesDatasource.loadUserInfo()
+        val userInfo = preferencesDatasource.loadUserInfo().first()
         val log = SurveyLogDto(
             surveyLogId = null,
             userName = null,
             creationDate = LocalDate.now(),
             result = preferencesDatasource.loadSurveyResult().first().toDouble()
         )
-        return networkDatasource.createSurveyLog("hlev97", "password", log)
+        return networkDatasource.createSurveyLog(userInfo.userName,userInfo.password, log)
     }
 
     suspend fun resetSurvey() {

@@ -37,7 +37,6 @@ class HistoryViewModel @Inject constructor(
     var isRefreshing by mutableStateOf(false)
         private set
 
-
     init {
         viewModelScope.launch(Dispatchers.IO) {
             load(delayed = false)
@@ -56,7 +55,6 @@ class HistoryViewModel @Inject constructor(
         _state.value = Loading
         _state.value = try {
             val formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd")
-
             val logs = loadConditionLogs().map { log ->
                 val foodTriggers = log.getFoodTriggerUiChips(app.baseContext)
                     .filter { it.state == UiChip.UiChipState.SELECTED }

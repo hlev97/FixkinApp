@@ -29,12 +29,12 @@ class HistoryRepository @Inject constructor(
 
     suspend fun getLogsFromRemoteDatabase(): ResponseWrapper<List<ConditionLogDto>> {
         val userInfo = preferencesDatasource.loadUserInfo().first()
-        return networkDatasource.getAllConditionLogs("hlev97","password")
+        return networkDatasource.getAllConditionLogs(userInfo.userName,userInfo.password)
     }
 
     suspend fun deleteLogFromRemoteDatabase(id: Int) {
         val userInfo = preferencesDatasource.loadUserInfo().first()
-        networkDatasource.deleteConditionLog("hlev97","password",id)
+        networkDatasource.deleteConditionLog(userInfo.userName,userInfo.password,id)
     }
 
     suspend fun deleteAllLogsFromLocalDatabase() {
@@ -43,6 +43,10 @@ class HistoryRepository @Inject constructor(
 
     fun getLogById(id: Int): Flow<ConditionLogEntity> {
         return databaseDatasource.getConditionLog(id)
+    }
+
+    suspend fun deleteLogById(id: Int) {
+        databaseDatasource.deleteConditionLogById(id)
     }
 
     fun getNumberOfConditionLogsInDatabase(): Int = databaseDatasource.getNumberOfConditionLogs()

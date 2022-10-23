@@ -77,7 +77,7 @@ fun ConditionLogListItem(
         onSwipe = onEdit
     )
     SwipeableActionsBox(
-        swipeThreshold = 200.dp,
+        swipeThreshold = 100.dp,
         backgroundUntilSwipeThreshold = MaterialTheme.colorScheme.listItemBackgroundThreshold,
         state = state,
         startActions = listOf(delete),

@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Fixkin</string>
+    <string name="nav_item_label_home">Home</string>
+    <string name="nav_item_lavel_history">History</string>
+    <string name="nav_item_label_stats">Statistics</string>
+    <string name="fab_menu_item_label_create_condition_log">Create condition log</string>
+    <string name="fab_menu_item_label_fill_out_survey">Fill out DLQI survey</string>
 </resources>

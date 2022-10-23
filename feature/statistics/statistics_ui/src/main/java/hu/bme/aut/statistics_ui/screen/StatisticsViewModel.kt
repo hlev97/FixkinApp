@@ -1,12 +1,20 @@
 package hu.bme.aut.statistics_ui.screen
 
+import android.app.Application
+import android.content.Context
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import hu.bme.aut.it9p0z.model.statistics.ConditionLogStatisticsModel
 import hu.bme.aut.statistics_domain.usecases.LoadConditionLogStatisticsUseCase
 import hu.bme.aut.statistics_domain.usecases.LoadSurveyLogsUseCase
+import hu.bme.aut.statistics_ui.R
+import hu.bme.aut.statistics_ui.model.TabItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -18,10 +26,26 @@ import javax.inject.Inject
 class StatisticsViewModel @Inject constructor(
     private val loadSurveyLogs: LoadSurveyLogsUseCase,
     private val loadConditionLogs: LoadConditionLogStatisticsUseCase,
-    private val savedStateHandle: SavedStateHandle
+    private val savedStateHandle: SavedStateHandle,
+    private val app: Application
 ) : ViewModel() {
 
-    val graphType = checkNotNull<String>(savedStateHandle["graphType"])
+    val graphType = checkNotNull(savedStateHandle.get<String>("graphType"))
+
+    val tabs = listOf(
+        TabItem.FoodTrigger,
+        TabItem.WeatherTrigger,
+        TabItem.MentalTrigger,
+        TabItem.OtherTrigger,
+        TabItem.SurveyResults
+    )
+
+    var selectedItem by mutableStateOf(tabs.filter { it.route == graphType }[0])
+        private set
+
+    fun onSelect(item: TabItem) {
+        selectedItem = item
+    }
 
     private val _state: MutableStateFlow<StatisticsState> = MutableStateFlow(Loading)
     val state: StateFlow<StatisticsState> = _state.asStateFlow()
@@ -35,18 +59,21 @@ class StatisticsViewModel @Inject constructor(
             _state.value = Loading
             _state.value = try {
                 val conditionLogStats = loadConditionLogs()
+                if (conditionLogStats.foodTriggers.values.any { it == 0f }) throw Exception("You haven't added enough logs for statistics.")
+
+                val surveyLogs = loadSurveyLogs()
+                if (surveyLogs.isEmpty()) throw Exception("You haven't added enough logs for statistics.")
                 DataReady(
                     feelings = conditionLogStats.feelings,
                     foodTriggers = conditionLogStats.foodTriggers,
                     weatherTriggers = conditionLogStats.weatherTriggers,
                     mentalHealthTriggers = conditionLogStats.mentalHealthTriggers,
                     otherTriggers = conditionLogStats.otherTriggers,
-                    surveyLogs = loadSurveyLogs()
+                    surveyLogs = surveyLogs
                 )
             } catch (e: Exception) {
                 Error(e.message!!)
             }
-
         }
     }
 }

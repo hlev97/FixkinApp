@@ -16,7 +16,9 @@ import retrofit2.http.Path
 interface FixkinApi {
 
     @POST("user/create")
-    suspend fun createUser(user: UserDto): Response<UserDto>
+    suspend fun createUser(
+        @Body user: UserDto
+    ): Response<UserDto>
 
     @GET("user/me")
     suspend fun getUser(

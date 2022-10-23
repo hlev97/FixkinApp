@@ -8,10 +8,12 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.composed
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
@@ -89,7 +91,8 @@ fun RowScope.WeekDay(
             Icon(
                 imageVector = Icons.Default.Check,
                 contentDescription = null,
-                modifier = Modifier.align(Alignment.Center)
+                modifier = Modifier.align(Alignment.Center),
+                tint = MaterialTheme.colorScheme.primary
             )
         } else {
             Text(
@@ -97,22 +100,21 @@ fun RowScope.WeekDay(
                 text = date.get(Calendar.DAY_OF_MONTH).toString(),
                 fontSize = 12.sp,
                 textAlign = TextAlign.Center,
-                color = if (isToday) Color.White else Color.Black
+                color = if (isToday) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onBackground
             )
         }
     }
     
 }
-
 fun Modifier.dateBackground(
     isToday: Boolean
-): Modifier {
-    return if (isToday) {
+): Modifier = composed {
+    if (isToday) {
         this
             .padding(4.dp)
             .background(
-                color = Color.Blue,
-                shape = RoundedCornerShape(5.dp)
+                color = MaterialTheme.colorScheme.primaryContainer,
+                shape = RoundedCornerShape(100.dp)
             )
             .padding(4.dp)
     } else {

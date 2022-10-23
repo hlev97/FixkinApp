@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import hu.bme.aut.it9p0z.home_domain.usecases.LoadConditionLogStatisticsUseCase
 import hu.bme.aut.it9p0z.home_domain.usecases.LoadConditionLogsUseCase
+import hu.bme.aut.it9p0z.home_ui.R
 import hu.bme.aut.it9p0z.ui.data.UiTrigger.Companion.foodTriggerChips
 import hu.bme.aut.it9p0z.ui.data.UiTrigger.Companion.mentalTriggerChips
 import hu.bme.aut.it9p0z.ui.data.UiTrigger.Companion.otherTriggerChips
@@ -39,9 +40,9 @@ class HomeViewModel @Inject constructor(
             _state.value = HomeState.Loading
             _state.value = try {
                 val dates = loadLogs().map { it.creationDate }
-                Log.i("lefutott", "loadLogs")
                 val statistics = loadStatistics()
-                Log.i("lefutott", "loadStatistics")
+
+                if (statistics.foodTriggers.values.any { it == 0f }) throw Exception("You haven't added enough logs for statistics.")
 
                 foodTriggerUiChips.addAll(getChips(statistics.foodTriggers, foodTriggerChips))
                 weatherTriggerUiChips.addAll(getChips(statistics.weatherTriggers, weatherTriggerChips))
@@ -57,7 +58,7 @@ class HomeViewModel @Inject constructor(
                 )
 
             } catch (e: Exception) {
-                HomeState.Error(UiText.DynamicString(""))
+                HomeState.Error(UiText.DynamicString("You haven't added enough logs for statistics."))
             }
         }
     }

@@ -1,0 +1,120 @@
+package hu.bme.aut.it9p0z.fixkin.navigation.graphs
+
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.border
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import androidx.navigation.*
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import com.google.accompanist.pager.ExperimentalPagerApi
+import hu.bme.aut.conditionlog_ui.create.CreateConditionLogScreen
+import hu.bme.aut.conditionlog_ui.edit.EditConditionLogScreen
+import hu.bme.aut.it9p0z.history_ui.HistoryScreen
+import hu.bme.aut.it9p0z.home_ui.home.HomeScreen
+import hu.bme.aut.statistics_ui.screen.StatisticsScreen
+import hu.bme.aut.survey_ui.screen.SurveyScreen
+
+@ExperimentalAnimationApi
+@ExperimentalPagerApi
+@ExperimentalFoundationApi
+@ExperimentalMaterial3Api
+@Composable
+fun MainNavGraph(
+    visibilityChanged: (Boolean) -> Unit,
+    navController: NavHostController,
+    modifier: Modifier = Modifier
+) {
+    NavHost(
+        navController = navController,
+        route = Graph.HOME,
+        startDestination = Screen.Home.route
+    ) {
+        composable(Screen.Home.route) {
+            HomeScreen(
+                modifier = modifier
+            )
+        }
+        composable(Screen.History.route) {
+            HistoryScreen(
+                modifier = modifier,
+                onEdit = {
+                    visibilityChanged(true)
+                    navController.navigate(Screen.EditLog.passId(it))
+                }
+            )
+        }
+        composable(
+            route = Screen.Statistics.route,
+            arguments = listOf(
+                navArgument("graphType") { type = NavType.StringType }
+            )
+        ) {
+            StatisticsScreen(
+                modifier = modifier,
+                onTabItemClick = {
+                    navController.navigate(Screen.Statistics.passGraphType(it))
+                }
+            )
+        }
+        composable(
+            route = Screen.CreateLog.route,
+        ) {
+            CreateConditionLogScreen(
+                onFabClick = {
+                    visibilityChanged(false)
+                    navController.popBackStack(route = Screen.Home.route, inclusive = false)
+                },
+                onBack = {
+                    visibilityChanged(false)
+                    navController.popBackStack(route = Screen.Home.route, inclusive = false)
+                }
+            )
+        }
+        composable(
+            route = Screen.EditLog.route,
+            arguments = listOf(navArgument("id") { type = NavType.IntType} )
+        ) {
+            EditConditionLogScreen(
+                onFabClick = {
+                    visibilityChanged(false)
+                    navController.popBackStack(route = Screen.Home.route, inclusive = false)
+                },
+                onBack = {
+                    visibilityChanged(false)
+                    navController.popBackStack(route = Screen.Home.route, inclusive = false)
+                }
+            )
+        }
+        composable(Screen.Survey.route) {
+            SurveyScreen(
+                onOkButtonClick = {
+                    visibilityChanged(false)
+                    navController.popBackStack(route = Screen.Home.route, inclusive = false)
+                },
+                onBack = {
+                    visibilityChanged(false)
+                    navController.popBackStack(route = Screen.Home.route, inclusive = false)
+                }
+            )
+        }
+    }
+}
+
+sealed class Screen(val route: String) {
+    object Home : Screen(route = "home")
+    object History : Screen(route = "history")
+    object Statistics : Screen(route = "statistics/{graphType}") {
+        fun passGraphType(graphType: String): String = "statistics/$graphType"
+    }
+    object CreateLog: Screen(route = "create_log")
+    object EditLog: Screen(route = "edit_log/{id}") {
+        fun passId(id: Int): String = "edit_log/$id"
+    }
+    object Survey: Screen(route = "survey")
+}

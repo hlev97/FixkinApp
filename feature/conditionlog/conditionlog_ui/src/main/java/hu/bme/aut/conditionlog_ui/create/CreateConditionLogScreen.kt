@@ -1,5 +1,6 @@
 package hu.bme.aut.conditionlog_ui.create
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Save
@@ -17,19 +18,24 @@ import hu.bme.aut.it9p0z.ui.model.UiText
 fun CreateConditionLogScreen(
     modifier: Modifier = Modifier,
     onFabClick: () -> Unit,
+    onBack: () -> Unit,
     viewModel: CreateConditionLogViewModel = hiltViewModel()
 ) {
+    BackHandler(onBack = onBack)
     val snackbarHostState = remember { SnackbarHostState() }
     Scaffold(
         topBar = {
             NormalTopAppBar(
                 title = UiText.StringResource(R.string.app_bar_title_create_log),
-                onNavigation = { /*TODO*/ },
+                onNavigation = onBack,
             )
         },
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
         floatingActionButton = {
-            LargeFloatingActionButton(onClick = { viewModel.saveClick() } ) {
+            LargeFloatingActionButton(onClick = {
+                viewModel.saveClick()
+                onFabClick()
+            }) {
                 Icon(
                     imageVector = Icons.Outlined.Save,
                     contentDescription = null,

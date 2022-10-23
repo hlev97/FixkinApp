@@ -21,7 +21,7 @@ class StatisticsRepository @Inject constructor(
 
     suspend fun getSurveyLogsFromRemoteDatabase(): ResponseWrapper<List<SurveyLogDto>> {
         val userInfo = preferencesDatasource.loadUserInfo().first()
-        return networkDatasource.getAllSurveyLogs("hlev97","password")
+        return networkDatasource.getAllSurveyLogs(userInfo.userName,userInfo.password)
     }
 
     suspend fun saveSurveyLogsToLocalDatabase(logs: List<SurveyLogEntity>) {
@@ -42,6 +42,6 @@ class StatisticsRepository @Inject constructor(
 
     suspend fun getStatistics(): ResponseWrapper<ConditionLogStatisticsDto> {
         val userInfo = preferencesDatasource.loadUserInfo().first()
-        return networkDatasource.getConditionLogStatistics("hlev97","password")
+        return networkDatasource.getConditionLogStatistics(userInfo.userName,userInfo.password)
     }
 }

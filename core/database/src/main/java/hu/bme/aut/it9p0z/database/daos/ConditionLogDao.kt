@@ -18,6 +18,9 @@ interface ConditionLogDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertLog(log: ConditionLogEntity)
 
+    @Query("DELETE FROM condition_logs WHERE id=:id")
+    suspend fun deleteLogById(id: Int)
+
     @Delete
     suspend fun deleteLog(log: ConditionLogEntity)
 

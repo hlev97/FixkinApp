@@ -26,7 +26,8 @@ import hu.bme.aut.it9p0z.ui.components.conditionloglistitem.ConditionLogListItem
 @Composable
 fun HistoryScreen(
     modifier: Modifier = Modifier,
-    viewModel: HistoryViewModel = hiltViewModel()
+    viewModel: HistoryViewModel = hiltViewModel(),
+    onEdit: (Int) -> Unit
 ) {
 
     val state by viewModel.state.collectAsState()
@@ -54,17 +55,19 @@ fun HistoryScreen(
                         ConditionLogListItem(
                             listItem = log,
                             onDelete = { viewModel.deleteLog(log.id) },
-                            onEdit = { }
+                            onEdit = { onEdit(log.id) }
                         )
                     }
                 }
             }
             is Error -> {
-                Column(modifier = Modifier.fillMaxSize()) {
+                Box(
+                    modifier = modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
                     Text(text = (state as Error).message.asString(context))
                 }
             }
-            else -> { }
         }
     }
 }

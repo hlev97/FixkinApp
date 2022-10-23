@@ -10,11 +10,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import hu.bme.aut.it9p0z.ui.data.FeelingUi.Companion.feelings
 import hu.bme.aut.it9p0z.ui.model.UiText
 import hu.bme.aut.it9p0z.ui.theme.dp_m
 import hu.bme.aut.it9p0z.ui.R
 import hu.bme.aut.it9p0z.ui.components.chipgroup.ChipGroupDefaults
+import hu.bme.aut.it9p0z.ui.data.FeelingUi
 
 @Composable
 fun FeelingSlider(
@@ -24,6 +24,13 @@ fun FeelingSlider(
     onValueChange: (Float) -> Unit,
 ) {
     val context = LocalContext.current
+    val feelings = listOf(
+        FeelingUi.Sad,
+        FeelingUi.Unhappy,
+        FeelingUi.Neutral,
+        FeelingUi.Happy,
+        FeelingUi.Joyful
+    )
     Text(
         text = UiText.StringResource(id = R.string.feeling_slider_label).asString(context),
         maxLines = ChipGroupDefaults.CHIP_GROUP_TITLE_MAX_LINES,
@@ -46,7 +53,7 @@ fun FeelingSlider(
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         feelings.forEach { feeling ->
-            feeling.icon?.AsImage()
+            feeling.icon.AsImage()
         }
     }
 }

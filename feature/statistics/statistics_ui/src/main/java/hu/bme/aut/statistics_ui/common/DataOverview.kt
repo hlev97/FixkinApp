@@ -15,6 +15,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import hu.bme.aut.it9p0z.ui.model.UiText
+import hu.bme.aut.it9p0z.ui.theme.dp_l
 
 @Composable
 fun DataOverview(
@@ -30,7 +31,7 @@ fun DataOverview(
             .fillMaxSize()
             .onSizeChanged {
                 size = it
-            },
+            }.padding(top = dp_l),
         contentAlignment = Alignment.Center
     ) {
         Column(

@@ -5,7 +5,7 @@ import hu.bme.aut.it9p0z.ui.R
 import hu.bme.aut.it9p0z.ui.model.UiIcon
 import hu.bme.aut.it9p0z.ui.model.UiText
 
-sealed class FeelingUi(val name: UiText, val icon: UiIcon?) {
+sealed class FeelingUi(val name: UiText, val icon: UiIcon) {
     object Sad: FeelingUi(
         name = UiText.StringResource(id = R.string.feeling_name_sad),
         icon = UiIcon.ImageResource(id = R.drawable.ic_sad_24)

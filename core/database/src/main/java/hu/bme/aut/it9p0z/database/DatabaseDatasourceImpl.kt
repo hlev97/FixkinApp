@@ -35,6 +35,10 @@ class DatabaseDatasourceImpl @Inject constructor(
         surveyLogDao.deleteAllLogs()
     }
 
+    override suspend fun deleteConditionLogById(id: Int) {
+        conditionLogDao.deleteLogById(id)
+    }
+
     override fun getNumberOfSurveyLogs(): Int = surveyLogDao.countLogs()
 
     override fun getSurveyLog(id: Int): Flow<SurveyLogEntity> = surveyLogDao.getLog(id)

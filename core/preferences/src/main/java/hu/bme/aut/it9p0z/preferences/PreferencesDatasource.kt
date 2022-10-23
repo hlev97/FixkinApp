@@ -97,12 +97,12 @@ class PreferencesDatasource @Inject constructor(
                 UserInfo(
                     userName = preferences[userNamePrefKey] ?: "",
                     fullName = preferences[fullNamePrefKey] ?: "",
-                    height = preferences[heightPrefKey] ?: Double.NaN,
-                    weight = preferences[weightPrefKey] ?: Double.NaN,
+                    height = preferences[heightPrefKey] ?: 0.0,
+                    weight = preferences[weightPrefKey] ?: 0.0,
                     diseases = preferences[diseasesPrefKey]?.toList() ?: emptyList(),
                     medicines = preferences[medicinesPrefKey]?.toList() ?: emptyList(),
                     averageLifeQualityIndex = preferences[averageLifeQualityIndexPrefKey]
-                        ?: Double.NaN,
+                        ?: 0.0,
                     password = preferences[passwordPrefKey] ?: ""
                 )
             }

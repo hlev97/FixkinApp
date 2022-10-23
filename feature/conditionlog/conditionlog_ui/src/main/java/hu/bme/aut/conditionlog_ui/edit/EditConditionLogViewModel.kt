@@ -3,6 +3,7 @@ package hu.bme.aut.conditionlog_ui.edit
 import android.app.Application
 import androidx.compose.runtime.*
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import hu.bme.aut.conditionlog_domain.usecases.LoadConditionLogUseCase
@@ -30,11 +31,14 @@ import javax.inject.Inject
 class EditConditionLogViewModel @Inject constructor(
     private val loadConditionLog: LoadConditionLogUseCase,
     private val updateConditionLog: UpdateConditionLogUseCase,
+    private val savedStateHandle: SavedStateHandle,
     private val app: Application
 ) : AndroidViewModel(app) {
 
     private val _state: MutableStateFlow<EditConditionLogState> = MutableStateFlow(EditConditionLogState.Loading)
     val state: StateFlow<EditConditionLogState?> = _state
+
+    val id = checkNotNull(savedStateHandle.get<Int>("id"))
 
     var sliderValue by mutableStateOf(0f)
         private set
@@ -55,7 +59,7 @@ class EditConditionLogViewModel @Inject constructor(
         viewModelScope.launch {
             _state.value = EditConditionLogState.Loading
             _state.value = try {
-                val log = loadConditionLog(1)
+                val log = loadConditionLog(id)
 
                 foodTriggerUiChips.addAll(log.getFoodTriggerUiChips(app.baseContext))
                 weatherTriggerUiChips.addAll(log.getWeatherTriggerUiChips(app.baseContext))

@@ -7,6 +7,7 @@ import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -98,7 +99,8 @@ fun Header(
         IconButton(onClick = { previousWeek() }) {
             Icon(
                 imageVector = Icons.Default.KeyboardArrowLeft,
-                contentDescription = "null"
+                contentDescription = "null",
+                tint = MaterialTheme.colorScheme.primary
             )
         }
         Text(
@@ -106,14 +108,16 @@ fun Header(
             modifier = Modifier
                 .weight(1f),
             textAlign = TextAlign.Center,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.primary
         )
         IconButton(
             onClick = { nextWeek() }
         ) {
             Icon(
                 imageVector = Icons.Default.KeyboardArrowRight,
-                contentDescription = "null"
+                contentDescription = "null",
+                tint = MaterialTheme.colorScheme.primary
             )
         }
 

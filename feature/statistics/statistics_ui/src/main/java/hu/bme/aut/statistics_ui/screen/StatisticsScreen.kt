@@ -1,17 +1,13 @@
 package hu.bme.aut.statistics_ui.screen
 
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -27,36 +23,77 @@ import hu.bme.aut.statistics_ui.model.getColors
 import hu.bme.aut.statistics_ui.R
 import hu.bme.aut.statistics_ui.common.DataOverview
 
+@ExperimentalMaterial3Api
 @Composable
 fun StatisticsScreen(
     modifier: Modifier = Modifier,
-    viewModel: StatisticsViewModel = hiltViewModel()
+    viewModel: StatisticsViewModel = hiltViewModel(),
+    onTabItemClick: (String) -> Unit
 ) {
     val graphType = viewModel.graphType
     val state by viewModel.state.collectAsState()
 
-    Column(
-        modifier = modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        when (state) {
-            Loading -> {
+    val context = LocalContext.current
 
+    Scaffold(
+        topBar = {
+            val selectedItem = viewModel.selectedItem
+            TabRow(
+                selectedTabIndex = viewModel.tabs.indexOf(selectedItem),
+            ) {
+                viewModel.tabs.forEachIndexed { index, item ->
+                    Tab(
+                        selected = item == selectedItem,
+                        onClick = {
+                            viewModel.onSelect(item)
+                            onTabItemClick(item.route)
+                        },
+                        text = {
+                            Text(
+                                text = item.title.asString(context),
+                            )
+                        }
+                    )
+                }
             }
-            is DataReady -> {
-                DataReadyScreen(
-                    graphType = graphType,
-                    data = (state as DataReady)
-                )
-            }
-            is Error -> {
-                Box(modifier = Modifier.fillMaxSize()) {
-                    Text(text = (state as Error).message)
+        }
+    ) {
+        Column(
+            modifier = modifier
+                .fillMaxSize()
+                .padding(it),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            when (state) {
+                Loading -> {
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
+                    }
+                }
+                is DataReady -> {
+                    val data = (state as DataReady)
+                    DataReadyScreen(
+                        graphType = graphType,
+                        data = data
+                    )
+                }
+                is Error -> {
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(text = (state as Error).message)
+                    }
                 }
             }
         }
     }
+
+
 }
 
 @Composable

@@ -4,4 +4,5 @@
     <string name="weekly_survey_filled_out">You filled out the weekly DLQI survey</string>
     <string name="text_daily_log_added">You have already added a log today</string>
     <string name="text_daily_log_not_added">You have not added a daily log yet</string>
+    <string name="too_few_data">You haven\'t added enough data for statistics</string>
 </resources>

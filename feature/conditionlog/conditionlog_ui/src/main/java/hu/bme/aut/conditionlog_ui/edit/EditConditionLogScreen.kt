@@ -1,5 +1,6 @@
 package hu.bme.aut.conditionlog_ui.edit
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Save
@@ -7,6 +8,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import hu.bme.aut.conditionlog_ui.R
@@ -19,16 +21,20 @@ import hu.bme.aut.it9p0z.ui.model.UiText
 fun EditConditionLogScreen(
     modifier: Modifier = Modifier,
     onFabClick: () -> Unit,
+    onBack: () -> Unit,
     viewModel: EditConditionLogViewModel = hiltViewModel()
 ) {
+    BackHandler(onBack = onBack)
     val snackbarHostState = remember { SnackbarHostState() }
     val state by viewModel.state.collectAsState()
+
+    val context = LocalContext.current
     Scaffold(
         topBar = {
             Column {
                 NormalTopAppBar(
                     title = UiText.StringResource(R.string.app_bar_title_create_log),
-                    onNavigation = { /*TODO*/ },
+                    onNavigation = onBack,
                 )
                 if (state is EditConditionLogState.Loading) {
                     LinearProgressIndicator(modifier = modifier.fillMaxWidth())
@@ -39,7 +45,10 @@ fun EditConditionLogScreen(
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
         floatingActionButton = {
             if (state !is EditConditionLogState.Loading) {
-                LargeFloatingActionButton(onClick = { viewModel.updateClick(state) }) {
+                LargeFloatingActionButton(onClick = {
+                    viewModel.updateClick(state)
+                    onFabClick()
+                }) {
                     Icon(
                         imageVector = Icons.Outlined.Save,
                         contentDescription = null,
@@ -78,11 +87,15 @@ fun EditConditionLogScreen(
                 )
             }
             is EditConditionLogState.Error -> {
-
+                val message = (state as EditConditionLogState.Error).message
+                Box(
+                    modifier = modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(text = message.asString(context))
+                }
             }
-            else -> {
-
-            }
+            else -> { }
         }
     }
 }

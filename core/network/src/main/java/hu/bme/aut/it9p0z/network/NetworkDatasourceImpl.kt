@@ -29,6 +29,7 @@ class NetworkDatasourceImpl @Inject constructor(
                 } else throw Exception("Empty body")
             } else throw Exception(response.errorBody()?.string())
         } catch (e: Exception) {
+            Log.e("error",e.message!!)
             ResponseWrapper(
                 data = null,
                 message = "Unsuccessful request"
@@ -171,6 +172,7 @@ class NetworkDatasourceImpl @Inject constructor(
                 message = "Successful request"
             )
         } catch (e: Exception) {
+            Log.e("error", e.message!!)
             ResponseWrapper(
                 data = null,
                 message = "Unsuccessful request"
