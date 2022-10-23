@@ -62,7 +62,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun getChips(triggers: HashMap<String,Int>, chips: List<UiChip>): List<UiChip> {
+    private fun getChips(triggers: HashMap<String,Float>, chips: List<UiChip>): List<UiChip> {
         return chips.filter { triggers.containsKey(it.label.asString(app.baseContext)) }
     }
 }

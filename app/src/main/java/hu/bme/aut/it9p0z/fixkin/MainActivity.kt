@@ -23,6 +23,7 @@ import hu.bme.aut.it9p0z.fabmenu.ui.FabMenu
 import hu.bme.aut.it9p0z.history_ui.HistoryScreen
 import hu.bme.aut.it9p0z.home_ui.home.HomeScreen
 import hu.bme.aut.it9p0z.ui.theme.FixkinTheme
+import hu.bme.aut.statistics_ui.screen.StatisticsScreen
 import hu.bme.aut.survey_ui.screen.SurveyScreen
 
 @ExperimentalAnimationApi
@@ -73,7 +74,8 @@ class MainActivity : ComponentActivity() {
                         )
                     }
                 ) {
-                    SurveyScreen(modifier = Modifier.padding(it), onOkButtonClick = {})
+                    StatisticsScreen(modifier = Modifier.padding(it))
+//                    SurveyScreen(modifier = Modifier.padding(it), onOkButtonClick = {})
 //                    HomeScreen(modifier = Modifier.padding(it))
 //                    HistoryScreen(modifier = Modifier.padding(it))
 //                    EditConditionLogScreen(

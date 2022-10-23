@@ -113,6 +113,10 @@ dependencies {
     implementation(project(Modules.featureSurveyDomain))
     implementation(project(Modules.featureSurveyUi))
 
+    implementation(project(Modules.featureStatisticsData))
+    implementation(project(Modules.featureStatisticsDomain))
+    implementation(project(Modules.featureStatisticsUi))
+
     implementation(project((Modules.customUiFabMenu)))
     implementation(project((Modules.customUiCheckLogCalendar)))
 

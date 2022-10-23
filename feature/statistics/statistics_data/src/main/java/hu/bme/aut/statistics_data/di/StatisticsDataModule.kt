@@ -1,6 +1,7 @@
 package hu.bme.aut.statistics_data.di
 
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import hu.bme.aut.it9p0z.database.datasource.DatabaseDatasource
@@ -14,7 +15,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object StatisticsDataModule {
 
-    @Inject
+    @Provides
     @Singleton
     fun provideStatisticsRepository(
         preferencesDatasource: PreferencesDatasource,

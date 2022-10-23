@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="statistics_title_foodtriggers">Your top 5 food trigger</string>
+    <string name="statistics_title_weathertrigger">Your top 4 weather trigger</string>
+    <string name="statistics_title_mentaltriggers">Your top 5 mental health trigger</string>
+    <string name="statistics_title_othertriggers">Yout top 5 other trigger</string>
+    <string name="statistics_survey_results">Survey results</string>
+    <string name="statistics_survey_result">%1$s</string>
+</resources>

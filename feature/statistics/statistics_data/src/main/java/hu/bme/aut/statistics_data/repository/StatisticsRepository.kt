@@ -5,6 +5,7 @@ import hu.bme.aut.it9p0z.database.entities.ConditionLogEntity
 import hu.bme.aut.it9p0z.database.entities.SurveyLogEntity
 import hu.bme.aut.it9p0z.network.datasource.NetworkDatasource
 import hu.bme.aut.it9p0z.network.dtos.ConditionLogDto
+import hu.bme.aut.it9p0z.network.dtos.ConditionLogStatisticsDto
 import hu.bme.aut.it9p0z.network.dtos.SurveyLogDto
 import hu.bme.aut.it9p0z.network.dtos.wrapper.ResponseWrapper
 import hu.bme.aut.it9p0z.preferences.PreferencesDatasource
@@ -20,7 +21,7 @@ class StatisticsRepository @Inject constructor(
 
     suspend fun getSurveyLogsFromRemoteDatabase(): ResponseWrapper<List<SurveyLogDto>> {
         val userInfo = preferencesDatasource.loadUserInfo().first()
-        return networkDatasource.getAllSurveyLogs(userInfo.userName,userInfo.password)
+        return networkDatasource.getAllSurveyLogs("hlev97","password")
     }
 
     suspend fun saveSurveyLogsToLocalDatabase(logs: List<SurveyLogEntity>) {
@@ -39,24 +40,8 @@ class StatisticsRepository @Inject constructor(
         databaseDatasource.deleteAllSurveyLogs()
     }
 
-    suspend fun getConditionLogsFromRemoteDatabase(): ResponseWrapper<List<ConditionLogDto>> {
+    suspend fun getStatistics(): ResponseWrapper<ConditionLogStatisticsDto> {
         val userInfo = preferencesDatasource.loadUserInfo().first()
-        return networkDatasource.getAllConditionLogs(userInfo.userName,userInfo.password)
-    }
-
-    suspend fun saveConditionLogsToLocalDatabase(logs: List<ConditionLogEntity>) {
-        databaseDatasource.insertConditionLogs(logs)
-    }
-
-    fun loadConditionLogsFromLocalDatabase(): Flow<List<ConditionLogEntity>> {
-        return databaseDatasource.getAllConditionLogs()
-    }
-
-    fun getNumberOfConditionLogsInLocalDatabase(): Int {
-        return databaseDatasource.getNumberOfConditionLogs()
-    }
-
-    suspend fun deleteAllConditionLogs() {
-        databaseDatasource.deleteAllConditionLogs()
+        return networkDatasource.getConditionLogStatistics("hlev97","password")
     }
 }

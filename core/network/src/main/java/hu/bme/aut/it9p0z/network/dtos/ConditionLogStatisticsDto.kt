@@ -3,14 +3,14 @@ package hu.bme.aut.it9p0z.network.dtos
 import hu.bme.aut.it9p0z.model.statistics.ConditionLogStatisticsModel
 
 data class ConditionLogStatisticsDto(
-    val feelings: Map<String,Int>,
-    val foodTriggers: Map<String,Int>,
-    val weatherTriggers: Map<String,Int>,
-    val mentalHealthTriggers: Map<String,Int>,
-    val otherTriggers: Map<String,Int>
+    val feelings: Map<String,Float>,
+    val foodTriggers: Map<String,Float>,
+    val weatherTriggers: Map<String,Float>,
+    val mentalHealthTriggers: Map<String,Float>,
+    val otherTriggers: Map<String,Float>
 )
 
-fun ConditionLogStatisticsDto.asConditionLogStatisticsModel(): ConditionLogStatisticsModel  = ConditionLogStatisticsModel(
+fun ConditionLogStatisticsDto.asConditionLogStatisticsModel(): ConditionLogStatisticsModel = ConditionLogStatisticsModel(
     feelings = HashMap(feelings),
     foodTriggers = HashMap(foodTriggers),
     weatherTriggers = HashMap(weatherTriggers),

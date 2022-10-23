@@ -42,6 +42,7 @@
             <option value="$PROJECT_DIR$/feature/statistics" />
             <option value="$PROJECT_DIR$/feature/statistics/statistics_data" />
             <option value="$PROJECT_DIR$/feature/statistics/statistics_domain" />
+            <option value="$PROJECT_DIR$/feature/statistics/statistics_ui" />
             <option value="$PROJECT_DIR$/feature/survey" />
             <option value="$PROJECT_DIR$/feature/survey/survey_data" />
             <option value="$PROJECT_DIR$/feature/survey/survey_domain" />

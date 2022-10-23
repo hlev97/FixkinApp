@@ -8,7 +8,7 @@ import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ViewModelScoped
 import hu.bme.aut.statistics_data.repository.StatisticsRepository
-import hu.bme.aut.statistics_domain.usecases.LoadConditionLogsUseCase
+import hu.bme.aut.statistics_domain.usecases.LoadConditionLogStatisticsUseCase
 import hu.bme.aut.statistics_domain.usecases.LoadSurveyLogsUseCase
 
 @Module
@@ -17,10 +17,10 @@ object StatisticsDomainModule {
 
     @Provides
     @ViewModelScoped
-    fun provideLoadConditionLogsUseCase(
+    fun provideLoadConditionLogStatisticsUseCase(
         repository: StatisticsRepository,
         @ApplicationContext context: Context
-    ): LoadConditionLogsUseCase = LoadConditionLogsUseCase(repository, context)
+    ): LoadConditionLogStatisticsUseCase = LoadConditionLogStatisticsUseCase(repository, context)
 
     @Provides
     @ViewModelScoped
