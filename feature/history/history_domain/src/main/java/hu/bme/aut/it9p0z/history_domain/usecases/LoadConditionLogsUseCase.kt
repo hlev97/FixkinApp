@@ -8,7 +8,6 @@ import hu.bme.aut.it9p0z.history_data.repository.HistoryRepository
 import hu.bme.aut.it9p0z.model.conditionlog.ConditionLogModel
 import hu.bme.aut.it9p0z.network.dtos.asConditionLogModel
 import hu.bme.aut.it9p0z.network.util.NetworkState.isOnline
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 

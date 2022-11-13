@@ -44,4 +44,5 @@ object NetworkModule {
     fun provideFixkinApi(
         retrofit: Retrofit
     ): FixkinApi = retrofit.create(FixkinApi::class.java)
+
 }

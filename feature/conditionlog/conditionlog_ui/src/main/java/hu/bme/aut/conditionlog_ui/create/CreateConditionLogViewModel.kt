@@ -14,10 +14,8 @@ import hu.bme.aut.it9p0z.ui.data.UiTrigger.Companion.foodTriggerChips
 import hu.bme.aut.it9p0z.ui.data.UiTrigger.Companion.mentalTriggerChips
 import hu.bme.aut.it9p0z.ui.data.UiTrigger.Companion.otherTriggerChips
 import hu.bme.aut.it9p0z.ui.data.UiTrigger.Companion.weatherTriggerChips
-import hu.bme.aut.it9p0z.ui.model.UiEvent
+import hu.bme.aut.it9p0z.ui.model.UiChip
 import hu.bme.aut.it9p0z.ui.model.toHashMap
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import javax.inject.Inject
@@ -40,8 +38,12 @@ class CreateConditionLogViewModel @Inject constructor(
     val mentalTriggerUiChips = mentalTriggerChips
     val otherTriggerUiChips = otherTriggerChips
 
-    private val _uiEvent = Channel<UiEvent>()
-    val uiEvent = _uiEvent.receiveAsFlow()
+    init {
+        foodTriggerUiChips.forEach { it.state = UiChip.UiChipState.UNSELECTED }
+        weatherTriggerUiChips.forEach { it.state = UiChip.UiChipState.UNSELECTED }
+        mentalTriggerUiChips.forEach { it.state = UiChip.UiChipState.UNSELECTED }
+        otherTriggerUiChips.forEach { it.state = UiChip.UiChipState.UNSELECTED }
+    }
 
     fun saveClick() {
         viewModelScope.launch {

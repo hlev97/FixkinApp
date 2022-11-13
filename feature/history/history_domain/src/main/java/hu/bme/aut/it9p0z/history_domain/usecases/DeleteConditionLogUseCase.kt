@@ -17,11 +17,11 @@ class DeleteConditionLogUseCase @Inject constructor(
     private val context = app.baseContext
 
     suspend operator fun invoke(id: Int) {
-        repository.deleteLogById(id)
         if (isOnline(context)) {
             repository.deleteLogFromRemoteDatabase(id)
+            repository.deleteLogById(id)
         } else {
-            // TODO: work manager
+            repository.deleteLogById(id)
         }
     }
 

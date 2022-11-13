@@ -1,7 +1,6 @@
 package hu.bme.aut.it9p0z.history_ui
 
 import android.app.Application
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -11,7 +10,6 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import hu.bme.aut.it9p0z.history_domain.usecases.DeleteConditionLogUseCase
 import hu.bme.aut.it9p0z.history_domain.usecases.LoadConditionLogsUseCase
-import hu.bme.aut.it9p0z.model.conditionlog.ConditionLogModel
 import hu.bme.aut.it9p0z.ui.data.*
 import hu.bme.aut.it9p0z.ui.model.ConditionLogListItemModel
 import hu.bme.aut.it9p0z.ui.model.UiChip
@@ -20,7 +18,6 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject
-import kotlin.coroutines.coroutineContext
 
 @HiltViewModel
 class HistoryViewModel @Inject constructor(
@@ -39,7 +36,7 @@ class HistoryViewModel @Inject constructor(
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            load(delayed = false)
+            load()
         }
     }
 
@@ -51,7 +48,7 @@ class HistoryViewModel @Inject constructor(
         isRefreshing = false
     }
 
-    private suspend fun load(delayed: Boolean) {
+    private suspend fun load(delayed: Boolean = false, fromDatabase: Boolean = false) {
         _state.value = Loading
         _state.value = try {
             val formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd")
@@ -93,7 +90,7 @@ class HistoryViewModel @Inject constructor(
     fun deleteLog(id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             deleteConditionLog(id)
-            load(delayed = false)
+            load()
         }
     }
 }
