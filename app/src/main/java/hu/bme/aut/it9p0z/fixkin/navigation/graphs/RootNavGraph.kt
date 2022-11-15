@@ -8,16 +8,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
 import com.google.accompanist.pager.ExperimentalPagerApi
-import hu.bme.aut.conditionlog_ui.create.CreateConditionLogScreen
-import hu.bme.aut.conditionlog_ui.edit.EditConditionLogScreen
 import hu.bme.aut.it9p0z.fixkin.screen.MainScreen
-import hu.bme.aut.survey_ui.screen.SurveyScreen
 
 @ExperimentalPagerApi
 @ExperimentalAnimationApi
@@ -28,6 +23,7 @@ import hu.bme.aut.survey_ui.screen.SurveyScreen
 fun RootNavGraph(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
+    startDestination: String,
     snackbarHostState: SnackbarHostState,
 ) {
     var isHidden by remember { mutableStateOf(false) }
@@ -36,16 +32,16 @@ fun RootNavGraph(
     NavHost(
         navController = navController,
         route = Graph.ROOT,
-        startDestination = Graph.AUTH
+        startDestination = startDestination
     ) {
         authNavGraph(navController,snackbarHostState)
         composable(Graph.HOME) {
             MainScreen(
-                modifier = Modifier,
+                modifier = modifier,
                 isHidden = isHidden,
                 state = state,
                 stateChanged = { state = !state },
-                visibilityChanged = { isHidden = it }
+                visibilityChanged = { isHidden = it },
             )
         }
     }

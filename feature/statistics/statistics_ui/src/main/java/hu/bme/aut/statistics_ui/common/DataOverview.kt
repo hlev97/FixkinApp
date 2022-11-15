@@ -19,7 +19,7 @@ import hu.bme.aut.it9p0z.ui.theme.dp_l
 
 @Composable
 fun DataOverview(
-    dataMap: HashMap<String, Float>,
+    dataMap: Map<String, Float>,
     colors: List<Color>,
     title: UiText
 ) {

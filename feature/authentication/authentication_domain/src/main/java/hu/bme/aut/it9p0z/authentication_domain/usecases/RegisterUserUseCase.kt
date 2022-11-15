@@ -1,6 +1,5 @@
 package hu.bme.aut.it9p0z.authentication_domain.usecases
 
-import android.util.Log
 import hu.bme.aut.it9p0z.authentication_data.repository.AuthenticationRepository
 import hu.bme.aut.it9p0z.model.userinfo.UserInfoModel
 import hu.bme.aut.it9p0z.network.dtos.asUserDto
@@ -17,6 +16,8 @@ class RegisterUserUseCase @Inject constructor(
         val data = response.data
 
         if (data != null) {
+            authRepository.hideAuthGraph()
+            authRepository.deleteUserInfo()
             return data.asUserInfoModel()
         } else throw Exception(response.message)
     }

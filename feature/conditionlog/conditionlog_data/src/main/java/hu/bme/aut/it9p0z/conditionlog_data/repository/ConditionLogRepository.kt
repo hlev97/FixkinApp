@@ -8,6 +8,7 @@ import hu.bme.aut.it9p0z.network.dtos.wrapper.ResponseWrapper
 import hu.bme.aut.it9p0z.preferences.PreferencesDatasource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
+import java.time.LocalDate
 import javax.inject.Inject
 
 class ConditionLogRepository @Inject constructor(
@@ -42,9 +43,8 @@ class ConditionLogRepository @Inject constructor(
         return networkDatasource.updateConditionLog(userInfo.userName,userInfo.password,id,log)
     }
 
-    suspend fun deleteConditionLogFromRemoteDatabase(id: Int): ResponseWrapper<ConditionLogDto> {
-        val userInfo = preferencesDatasource.loadUserInfo().first()
-        return networkDatasource.deleteConditionLog(userInfo.userName,userInfo.password,id)
+    suspend fun saveLastConditionLogDate(date: LocalDate) {
+        preferencesDatasource.saveLastConditionLogDate(date)
     }
 
 }

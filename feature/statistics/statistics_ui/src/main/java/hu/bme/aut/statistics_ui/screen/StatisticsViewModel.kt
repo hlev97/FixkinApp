@@ -62,7 +62,7 @@ class StatisticsViewModel @Inject constructor(
                 if (conditionLogStats.foodTriggers.values.any { it == 0f }) throw Exception("You haven't added enough logs for statistics.")
 
                 val surveyLogs = loadSurveyLogs()
-                if (surveyLogs.isEmpty()) throw Exception("You haven't added enough logs for statistics.")
+                if (surveyLogs.size < 4) throw Exception("You haven't added enough logs for statistics.")
                 DataReady(
                     feelings = conditionLogStats.feelings,
                     foodTriggers = conditionLogStats.foodTriggers,

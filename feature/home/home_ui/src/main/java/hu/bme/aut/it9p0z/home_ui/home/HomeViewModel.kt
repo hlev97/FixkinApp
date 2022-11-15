@@ -42,8 +42,6 @@ class HomeViewModel @Inject constructor(
                 val dates = loadLogs().map { it.creationDate }
                 val statistics = loadStatistics()
 
-                if (statistics.foodTriggers.values.any { it == 0f }) throw Exception("You haven't added enough logs for statistics.")
-
                 foodTriggerUiChips.addAll(getChips(statistics.foodTriggers, foodTriggerChips))
                 weatherTriggerUiChips.addAll(getChips(statistics.weatherTriggers, weatherTriggerChips))
                 mentalTriggerUiChips.addAll(getChips(statistics.mentalHealthTriggers, mentalTriggerChips))
@@ -58,12 +56,19 @@ class HomeViewModel @Inject constructor(
                 )
 
             } catch (e: Exception) {
-                HomeState.Error(UiText.DynamicString("You haven't added enough logs for statistics."))
+                HomeState.Error(UiText.DynamicString(e.message ?: e.stackTraceToString()))
             }
         }
     }
 
     private fun getChips(triggers: HashMap<String,Float>, chips: List<UiChip>): List<UiChip> {
-        return chips.filter { triggers.containsKey(it.label.asString(app.baseContext)) }
+        val triggerChips = chips
+            .filter {
+                triggers.filter { trigger ->
+                    trigger.value != 0f
+                }.containsKey(it.label.asString(app.baseContext))
+            }
+        triggerChips.onEach { it.state = UiChip.UiChipState.SELECTED }
+        return triggerChips
     }
 }

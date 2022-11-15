@@ -27,7 +27,9 @@ import hu.bme.aut.survey_ui.screen.SurveyScreen
 @Composable
 fun MainNavGraph(
     visibilityChanged: (Boolean) -> Unit,
+    onSave: () -> Unit,
     navController: NavHostController,
+    onBack: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     NavHost(
@@ -36,16 +38,19 @@ fun MainNavGraph(
         startDestination = Screen.Home.route
     ) {
         composable(Screen.Home.route) {
-            HomeScreen(
-                modifier = modifier
-            )
+            HomeScreen(modifier = modifier)
         }
         composable(Screen.History.route) {
             HistoryScreen(
                 modifier = modifier,
                 onEdit = {
                     visibilityChanged(true)
+                    onBack(Screen.Home.route)
                     navController.navigate(Screen.EditLog.passId(it))
+                },
+                onBack = {
+                    navController.popBackStack(route = Screen.Home.route, inclusive = false)
+                    onBack(Screen.Home.route)
                 }
             )
         }
@@ -59,6 +64,10 @@ fun MainNavGraph(
                 modifier = modifier,
                 onTabItemClick = {
                     navController.navigate(Screen.Statistics.passGraphType(it))
+                },
+                onBack = {
+                    navController.popBackStack(route = Screen.Home.route, inclusive = false)
+                    onBack(Screen.Home.route)
                 }
             )
         }
@@ -68,10 +77,13 @@ fun MainNavGraph(
             CreateConditionLogScreen(
                 onFabClick = {
                     visibilityChanged(false)
+                    onBack(Screen.Home.route)
+                    onSave()
                     navController.popBackStack(route = Screen.Home.route, inclusive = false)
                 },
                 onBack = {
                     visibilityChanged(false)
+                    onBack(Screen.Home.route)
                     navController.popBackStack(route = Screen.Home.route, inclusive = false)
                 }
             )
@@ -83,10 +95,12 @@ fun MainNavGraph(
             EditConditionLogScreen(
                 onFabClick = {
                     visibilityChanged(false)
+                    onBack(Screen.Home.route)
                     navController.popBackStack(route = Screen.Home.route, inclusive = false)
                 },
                 onBack = {
                     visibilityChanged(false)
+                    onBack(Screen.Home.route)
                     navController.popBackStack(route = Screen.Home.route, inclusive = false)
                 }
             )
@@ -95,10 +109,13 @@ fun MainNavGraph(
             SurveyScreen(
                 onOkButtonClick = {
                     visibilityChanged(false)
+                    onBack(Screen.Home.route)
+                    onSave()
                     navController.popBackStack(route = Screen.Home.route, inclusive = false)
                 },
                 onBack = {
                     visibilityChanged(false)
+                    onBack(Screen.Home.route)
                     navController.popBackStack(route = Screen.Home.route, inclusive = false)
                 }
             )

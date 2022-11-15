@@ -57,9 +57,12 @@ dependencies {
     implementation(Compose.uiToolingPreview)
     implementation(Compose.material3)
     implementation(Compose.navigation)
+    implementation(Compose.hiltNavigation)
 
     implementation(Accompanist.pager)
     implementation(Accompanist.flowLayout)
+
+    implementation(Core.splash)
 
     implementation(Joda.joda)
 

@@ -1,5 +1,6 @@
 package hu.bme.aut.it9p0z.history_ui
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,12 +27,15 @@ import hu.bme.aut.it9p0z.ui.components.conditionloglistitem.ConditionLogListItem
 @Composable
 fun HistoryScreen(
     modifier: Modifier = Modifier,
+    onBack: () -> Unit,
     viewModel: HistoryViewModel = hiltViewModel(),
     onEdit: (Int) -> Unit
 ) {
 
     val state by viewModel.state.collectAsState()
     val data by viewModel.result.observeAsState()
+
+    BackHandler(onBack = onBack)
 
     val context = LocalContext.current
 

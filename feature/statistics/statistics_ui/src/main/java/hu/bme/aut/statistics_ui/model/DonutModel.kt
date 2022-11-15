@@ -1,12 +1,11 @@
 package hu.bme.aut.statistics_ui.model
 
 import androidx.compose.ui.graphics.Color
-import app.futured.donut.compose.data.DonutConfig
 import app.futured.donut.compose.data.DonutModel
 import app.futured.donut.compose.data.DonutSection
 import kotlin.random.Random
 
-fun HashMap<String,Float>.asDonutModel(
+fun Map<String,Float>.asDonutModel(
     cap: Float = this.values.sum(),
     masterProgress: Float = 1f,
     gapWidthDegrees: Float = 120f,
@@ -29,7 +28,7 @@ fun DonutModel.getColors(): List<Color> {
     return this.sections.map { it.color }
 }
 
-private fun HashMap<String,Float>.asDonutSection(): List<DonutSection> {
+private fun Map<String,Float>.asDonutSection(): List<DonutSection> {
     val colors = mutableListOf(
         Color(0xFFD1A623),
         Color(0xFF6F54A0),

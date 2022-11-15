@@ -8,13 +8,17 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.google.accompanist.pager.ExperimentalPagerApi
 import dagger.hilt.android.AndroidEntryPoint
 import hu.bme.aut.it9p0z.fixkin.navigation.graphs.RootNavGraph
+import hu.bme.aut.it9p0z.fixkin.splash.SplashViewModel
+import hu.bme.aut.it9p0z.preferences.PreferencesDatasource
 import hu.bme.aut.it9p0z.ui.theme.FixkinTheme
+import javax.inject.Inject
 
 @ExperimentalAnimationApi
 @ExperimentalMaterial3Api
@@ -23,11 +27,20 @@ import hu.bme.aut.it9p0z.ui.theme.FixkinTheme
 @ExperimentalPagerApi
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    @Inject
+    lateinit var splashViewModel: SplashViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        installSplashScreen().setKeepOnScreenCondition {
+            splashViewModel.isLoading.value
+        }
+
         setContent {
             FixkinTheme {
                 val snackbarHostState = remember { SnackbarHostState() }
+
+                val startDestination by splashViewModel.startDestination
                 
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
@@ -35,7 +48,8 @@ class MainActivity : ComponentActivity() {
                 ) {
                     RootNavGraph(
                         snackbarHostState = snackbarHostState,
-                        modifier = Modifier.padding(it)
+                        startDestination = startDestination,
+                        modifier = Modifier.padding(it),
                     )
                 }
             }

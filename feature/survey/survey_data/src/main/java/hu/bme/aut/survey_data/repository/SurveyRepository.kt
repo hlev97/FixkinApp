@@ -56,4 +56,8 @@ class SurveyRepository @Inject constructor(
     suspend fun resetSurvey() {
         preferencesDatasource.resetSurvey()
     }
+
+    suspend fun saveLastSurveyLogDate(date: LocalDate) {
+        preferencesDatasource.saveLastSurveyLogDate(date)
+    }
 }

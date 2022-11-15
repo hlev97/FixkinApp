@@ -29,8 +29,10 @@ class LoadSurveyLogsUseCase @Inject constructor(
             repository.saveSurveyLogsToLocalDatabase(logs)
             repository.loadSurveyLogsFromLocalDatabase().first().map { it.asSurveyLogModel() }
                 .asSurveyLogsDataMap()
-        } else repository.loadSurveyLogsFromLocalDatabase().first().map { it.asSurveyLogModel() }
-            .asSurveyLogsDataMap()
+        } else {
+            repository.loadSurveyLogsFromLocalDatabase().first().map { it.asSurveyLogModel() }
+                .asSurveyLogsDataMap()
+        }
     }
 }
 

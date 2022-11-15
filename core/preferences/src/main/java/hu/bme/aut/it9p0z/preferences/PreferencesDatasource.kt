@@ -1,23 +1,28 @@
 package hu.bme.aut.it9p0z.preferences
 
 import android.content.Context
-import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
+import dagger.hilt.android.qualifiers.ApplicationContext
 import hu.bme.aut.it9p0z.preferences.domain.UserInfo
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 import java.io.IOException
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
+import java.util.Base64
 import javax.inject.Inject
 
-val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "default_preferences")
+val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
+    name = "default_preferences"
+)
 
 class PreferencesDatasource @Inject constructor(
-    private val context: Context
+    @ApplicationContext private val context: Context
 ) {
     private val dataStore = context.dataStore
+    private val formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd")
 
     companion object {
         val userNamePrefKey = stringPreferencesKey(name = "username")
@@ -30,21 +35,24 @@ class PreferencesDatasource @Inject constructor(
         val passwordPrefKey = stringPreferencesKey(name = "password")
 
         val showAuthPrefKey = booleanPreferencesKey(name = "show_auth")
-        val showOnboardingPrefKey = booleanPreferencesKey(name = "show_onboarding")
 
         val lastAnswerPrefKey = intPreferencesKey(name = "survey_last_answer")
         val surveyResultPrefKey = intPreferencesKey(name = "survey_result")
+
+        val lastConditionLogDatePrefKey = stringPreferencesKey(name = "last_condition_log_date")
+        val lastSurveyLogDatePrefKey = stringPreferencesKey(name = "last_survey_log_date")
     }
 
     suspend fun saveUsername(userName: String) {
         dataStore.edit { preferences ->
-            preferences[userNamePrefKey] = userName
+
+            preferences[userNamePrefKey] = encode(userName)
         }
     }
 
     suspend fun saveFullName(fullName: String) {
         dataStore.edit { preferences ->
-            preferences[fullNamePrefKey] = fullName
+            preferences[fullNamePrefKey] = encode(fullName)
         }
     }
 
@@ -80,7 +88,7 @@ class PreferencesDatasource @Inject constructor(
 
     suspend fun savePassword(password: String) {
         dataStore.edit { preferences ->
-            preferences[passwordPrefKey] = password
+            preferences[passwordPrefKey] = encode(password)
         }
     }
 
@@ -95,15 +103,15 @@ class PreferencesDatasource @Inject constructor(
             }
             .map { preferences ->
                 UserInfo(
-                    userName = preferences[userNamePrefKey] ?: "",
-                    fullName = preferences[fullNamePrefKey] ?: "",
+                    userName = decode(preferences[userNamePrefKey]?: ""),
+                    fullName = decode(preferences[fullNamePrefKey] ?: ""),
                     height = preferences[heightPrefKey] ?: 0.0,
                     weight = preferences[weightPrefKey] ?: 0.0,
                     diseases = preferences[diseasesPrefKey]?.toList() ?: emptyList(),
                     medicines = preferences[medicinesPrefKey]?.toList() ?: emptyList(),
                     averageLifeQualityIndex = preferences[averageLifeQualityIndexPrefKey]
                         ?: 0.0,
-                    password = preferences[passwordPrefKey] ?: ""
+                    password = decode(preferences[passwordPrefKey] ?: "")
                 )
             }
     }
@@ -124,27 +132,7 @@ class PreferencesDatasource @Inject constructor(
                 }
             }
             .map { preferences ->
-                preferences[showAuthPrefKey] ?: false
-            }
-    }
-
-    suspend fun saveShowOnboarding(showOnboarding: Boolean) {
-        dataStore.edit { preferences ->
-            preferences[showOnboardingPrefKey] = showOnboarding
-        }
-    }
-
-    fun loadShowOnboarding(): Flow<Boolean> {
-        return dataStore.data
-            .catch { exception ->
-                if (exception is IOException) {
-                    emit(emptyPreferences())
-                } else {
-                    throw exception
-                }
-            }
-            .map { preferences ->
-                preferences[showOnboardingPrefKey] ?: false
+                preferences[showAuthPrefKey] ?: true
             }
     }
 
@@ -195,5 +183,57 @@ class PreferencesDatasource @Inject constructor(
             preferences[surveyResultPrefKey] = 0
         }
     }
+
+    suspend fun deleteUserInfo() {
+        dataStore.edit { preferences ->
+            preferences.remove(fullNamePrefKey)
+            preferences.remove(weightPrefKey)
+            preferences.remove(heightPrefKey)
+            preferences.remove(medicinesPrefKey)
+            preferences.remove(diseasesPrefKey)
+            preferences.remove(averageLifeQualityIndexPrefKey)
+        }
+    }
+
+    suspend fun saveLastConditionLogDate(date: LocalDate) {
+        dataStore.edit { preferences ->
+            preferences[lastConditionLogDatePrefKey] = date.format(formatter)
+        }
+    }
+
+    fun loadLastConditionLogDate(): Flow<String> {
+        return dataStore.data.catch { exception ->
+            if (exception is IOException) {
+                emit(emptyPreferences())
+            } else {
+                throw exception
+            }
+        }.map { preferences ->
+            preferences[lastConditionLogDatePrefKey] ?: ""
+        }
+    }
+
+    suspend fun saveLastSurveyLogDate(date: LocalDate) {
+        dataStore.edit { preferences ->
+            preferences[lastSurveyLogDatePrefKey] = date.format(formatter)
+        }
+    }
+
+    fun loadLastSurveyLogDate(): Flow<String> {
+        return dataStore.data.catch { exception ->
+            if (exception is IOException) {
+                emit(emptyPreferences())
+            } else {
+                throw exception
+            }
+        }.map { preferences ->
+            preferences[lastSurveyLogDatePrefKey] ?: ""
+        }
+    }
+
+
+    private fun encode(value: String) = Base64.getEncoder().encodeToString(value.toByteArray())
+
+    private fun decode(value: String): String = String(Base64.getDecoder().decode(value))
 
 }

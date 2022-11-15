@@ -1,5 +1,6 @@
 package hu.bme.aut.statistics_ui.screen
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -27,6 +28,7 @@ import hu.bme.aut.statistics_ui.common.DataOverview
 @Composable
 fun StatisticsScreen(
     modifier: Modifier = Modifier,
+    onBack: () -> Unit,
     viewModel: StatisticsViewModel = hiltViewModel(),
     onTabItemClick: (String) -> Unit
 ) {
@@ -35,11 +37,13 @@ fun StatisticsScreen(
 
     val context = LocalContext.current
 
+    BackHandler(onBack = onBack)
+
     Scaffold(
         topBar = {
             val selectedItem = viewModel.selectedItem
-            TabRow(
-                selectedTabIndex = viewModel.tabs.indexOf(selectedItem),
+            ScrollableTabRow(
+                selectedTabIndex = viewModel.tabs.indexOf(selectedItem)
             ) {
                 viewModel.tabs.forEachIndexed { index, item ->
                     Tab(
@@ -52,7 +56,8 @@ fun StatisticsScreen(
                             Text(
                                 text = item.title.asString(context),
                             )
-                        }
+                        },
+                        modifier = Modifier.width(IntrinsicSize.Max)
                     )
                 }
             }
@@ -104,26 +109,38 @@ fun DataReadyScreen(
     when (graphType) {
         "food_triggers" -> {
             DonutGraph(
-                dataMap = data.foodTriggers,
-                title = UiText.StringResource(R.string.statistics_title_foodtriggers)
+                dataMap = data.foodTriggers.filter { it.value != 0f },
+                title = UiText.StringResource(
+                    R.string.statistics_title_foodtriggers,
+                    listOf(data.foodTriggers.filter { it.value != 0f }.size.toString())
+                )
             )
         }
         "weather_triggers" -> {
             DonutGraph(
-                dataMap = data.weatherTriggers,
-                title = UiText.StringResource(R.string.statistics_title_weathertrigger)
+                dataMap = data.weatherTriggers.filter { it.value != 0f },
+                title = UiText.StringResource(
+                    R.string.statistics_title_weathertrigger,
+                    listOf(data.weatherTriggers.filter { it.value != 0f }.size.toString())
+                )
             )
         }
         "mental_triggers" -> {
             DonutGraph(
-                dataMap = data.mentalHealthTriggers,
-                title = UiText.StringResource(R.string.statistics_title_mentaltriggers)
+                dataMap = data.mentalHealthTriggers.filter { it.value != 0f },
+                title = UiText.StringResource(
+                    R.string.statistics_title_mentaltriggers,
+                    listOf(data.mentalHealthTriggers.filter { it.value != 0f }.size.toString())
+                )
             )
         }
         "other_triggers" -> {
             DonutGraph(
-                dataMap = data.otherTriggers,
-                title = UiText.StringResource(R.string.statistics_title_othertriggers)
+                dataMap = data.otherTriggers.filter { it.value != 0f },
+                title = UiText.StringResource(
+                    R.string.statistics_title_othertriggers,
+                    listOf(data.otherTriggers.filter { it.value != 0f }.size.toString())
+                )
             )
         }
         "survey_results" -> {
@@ -137,13 +154,12 @@ fun DataReadyScreen(
 
 @Composable
 fun DonutGraph(
-    dataMap: HashMap<String, Float>,
+    dataMap: Map<String, Float>,
     title: UiText,
 ) {
 
     val model = dataMap.asDonutModel()
     val colors = model.getColors()
-    val numOfSections = colors.size
 
     Box(
         modifier = Modifier

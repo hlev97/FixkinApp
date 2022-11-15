@@ -10,6 +10,10 @@ class LoginUserUseCase @Inject constructor(
     suspend operator fun invoke(userName: String, password: String): Boolean {
         authRepository.saveUsername(userName)
         authRepository.savePassword(password)
-        return authRepository.getUser(userName,password).data?.asUserInfoModel() != null
+        return if(authRepository.getUser(userName,password).data?.asUserInfoModel() != null) {
+            authRepository.hideAuthGraph()
+            authRepository.deleteUserInfo()
+            true
+        } else false
     }
 }

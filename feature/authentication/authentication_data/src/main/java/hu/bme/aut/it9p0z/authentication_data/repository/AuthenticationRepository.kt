@@ -59,4 +59,12 @@ class AuthenticationRepository @Inject constructor(
     suspend fun getUsernames(): ResponseWrapper<List<String>> {
         return networkDatasource.getUsernames()
     }
+
+    suspend fun hideAuthGraph() {
+        preferencesDatasource.saveShowAuthentication(false)
+    }
+
+    suspend fun deleteUserInfo() {
+        preferencesDatasource.deleteUserInfo()
+    }
 }
