@@ -28,7 +28,8 @@ class IdentityViewModel @Inject constructor(
         private set
 
     fun onUsernameChanged(value: String) {
-        username = value
+        if (usernameError) usernameError = !usernameError
+        username = value.trim()
     }
 
     var usernameError by mutableStateOf(false)
@@ -42,7 +43,8 @@ class IdentityViewModel @Inject constructor(
         private set
 
     fun onFullNameChanged(value: String) {
-        fullName = value
+        if (fullNameError) fullNameError = !fullNameError
+        fullName = value.trim()
     }
 
     var fullNameError by mutableStateOf(false)
@@ -62,7 +64,8 @@ class IdentityViewModel @Inject constructor(
         private set
 
     fun onPasswordChanged(value: String) {
-        password = value
+        if (passwordError) passwordError = !passwordError
+        password = value.trim()
         with(passwordRequirements) {
             isLowerCaseSatisfied = hasLowerCaseLetter(password)
             isUpperCaseSatisfied = hasUpperCaseLetter(password)
@@ -90,7 +93,8 @@ class IdentityViewModel @Inject constructor(
         private set
 
     fun onConfirmPasswordChanged(value: String) {
-        confirmPassword = value
+        if (confirmPasswordError) confirmPasswordError = !confirmPasswordError
+        confirmPassword = value.trim()
     }
 
     fun onConfirmPasswordErrorStateChanged() {

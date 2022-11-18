@@ -52,15 +52,15 @@ fun MedicinesScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         ChipGroup(
-            label = UiText.StringResource(R.string.chip_group_label_topical),
+            label = UiText.StringResource(id = R.string.chip_group_label_topical),
             chips = viewModel.topicalUiChips
         )
         ChipGroup(
-            label = UiText.StringResource(R.string.chip_group_label_oral_or_injected),
+            label = UiText.StringResource(id = R.string.chip_group_label_oral_or_injected),
             chips = viewModel.oralOrInjectedUiChips
         )
         ChipGroup(
-            label = UiText.StringResource(R.string.chip_group_label_other_treatments),
+            label = UiText.StringResource(id = R.string.chip_group_label_other_treatments),
             chips = viewModel.otherUiChips
         )
         TextButton(

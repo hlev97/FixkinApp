@@ -22,7 +22,7 @@ class DiseasesViewModel @Inject constructor(
     val psoriasisUiChips = Disease.psoriasisDiseaseUiChips
     val eczemaUiChips = Disease.eczemaDiseaseUiChips
 
-    val selectedUiChips = mutableStateListOf<UiChip>()
+    private val selectedUiChips = mutableStateListOf<UiChip>()
 
     private val _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()

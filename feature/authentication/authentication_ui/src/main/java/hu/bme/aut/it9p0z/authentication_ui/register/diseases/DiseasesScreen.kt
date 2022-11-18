@@ -42,11 +42,11 @@ fun DiseasesScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         ChipGroup(
-            label = UiText.StringResource(R.string.chip_group_label_psoriasis),
+            label = UiText.StringResource(id = R.string.chip_group_label_psoriasis),
             chips = viewModel.psoriasisUiChips
         )
         ChipGroup(
-            label = UiText.StringResource(R.string.chip_group_label_eczema),
+            label = UiText.StringResource(id = R.string.chip_group_label_eczema),
             chips = viewModel.eczemaUiChips
         )
         TextButton(

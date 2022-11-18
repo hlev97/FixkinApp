@@ -27,7 +27,7 @@ class LoginViewModel @Inject constructor(
 
     fun onUsernameChanged(value: String) {
         if (usernameError) usernameError = !usernameError
-        username = value
+        username = value.trim()
     }
 
     var usernameError by mutableStateOf(false)
@@ -48,7 +48,7 @@ class LoginViewModel @Inject constructor(
 
     fun onPasswordChanged(value: String) {
         if (passwordError) passwordError = !passwordError
-        password = value
+        password = value.trim()
     }
 
     fun onPasswordErrorStateChanged() {

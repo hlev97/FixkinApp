@@ -1,6 +1,5 @@
 package hu.bme.aut.it9p0z.authentication_ui.register.weightandheight
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -27,7 +26,8 @@ class WeightAndHeightViewModel @Inject constructor(
         private set
 
     fun onWeightChanged(value: String) {
-        weight = value
+        if (weightError) weightError = !weightError
+        weight = value.trim()
     }
 
     var weightError by mutableStateOf(false)
@@ -41,7 +41,8 @@ class WeightAndHeightViewModel @Inject constructor(
         private set
 
     fun onHeightChanged(value: String) {
-        height = value
+        if (heightError) heightError = !heightError
+        height = value.trim()
     }
 
     var heightError by mutableStateOf(false)
@@ -59,7 +60,6 @@ class WeightAndHeightViewModel @Inject constructor(
             if (weight.isNotEmpty() && height.isNotEmpty()) {
                 saveWeight(weight.toDouble())
                 saveHeight(height.toDouble())
-                Log.i("weight and height", "${weight.toDouble()} and ${height.toDouble()}")
                 _uiEvent.send(UiEvent.Success)
             } else _uiEvent.send(UiEvent.ShowSnackbar(UiText.StringResource(R.string.error_empty_fields)))
         }

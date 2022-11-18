@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material.icons.rounded.SupervisedUserCircle
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SnackbarHostState
@@ -78,7 +79,7 @@ fun LoginScreen(
                 value = viewModel.username,
                 label = UiText.StringResource(id = R.string.label_username),
                 onValueChange = { viewModel.onUsernameChanged(it) },
-                leadingIcon = UiIcon.Image(Icons.Rounded.SupervisedUserCircle),
+                leadingIcon = UiIcon.Image(Icons.Rounded.Person),
                 onTrailingIconClick = { },
                 trailingIcon = null,
                 isError = viewModel.usernameError,
@@ -92,7 +93,6 @@ fun LoginScreen(
                 value = viewModel.password,
                 label = UiText.StringResource(id = R.string.label_password),
                 onValueChange = { viewModel.onPasswordChanged(it) },
-                trailingIcon = null,
                 isError = viewModel.passwordError,
                 onErrorStateChange = { viewModel.onPasswordErrorStateChanged() },
                 onDone = {

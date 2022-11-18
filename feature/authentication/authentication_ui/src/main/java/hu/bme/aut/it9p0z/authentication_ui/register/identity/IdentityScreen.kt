@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Check
+import androidx.compose.material.icons.rounded.Person2
 import androidx.compose.material.icons.rounded.SupervisedUserCircle
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -89,7 +90,7 @@ fun IdentityScreen(
                 value = viewModel.fullName,
                 label = UiText.StringResource(id = R.string.label_fullName),
                 onValueChange = { viewModel.onFullNameChanged(it) },
-                leadingIcon = null,
+                leadingIcon = UiIcon.Image(Icons.Rounded.Person2),
                 onTrailingIconClick = { },
                 trailingIcon = null,
                 isError = viewModel.fullNameError,
@@ -103,7 +104,6 @@ fun IdentityScreen(
                 value = viewModel.password,
                 label = UiText.StringResource(id = R.string.label_password),
                 onValueChange = { viewModel.onPasswordChanged(it) },
-                trailingIcon = null,
                 isError = viewModel.passwordError,
                 onErrorStateChange = { viewModel.onPasswordErrorStateChanged() },
                 onDone = {
@@ -117,7 +117,6 @@ fun IdentityScreen(
                 value = viewModel.confirmPassword,
                 label = UiText.StringResource(id = R.string.label_confirm_password),
                 onValueChange = { viewModel.onConfirmPasswordChanged(it) },
-                trailingIcon = null,
                 isError = viewModel.confirmPasswordError,
                 onErrorStateChange = { viewModel.onConfirmPasswordErrorStateChanged() },
                 onDone = {
