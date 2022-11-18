@@ -1,14 +1,13 @@
 package hu.bme.aut.it9p0z.home_ui.home
 
-import android.app.Application
-import android.util.Log
+import android.content.Context
 import androidx.compose.runtime.mutableStateListOf
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import hu.bme.aut.it9p0z.home_domain.usecases.LoadConditionLogStatisticsUseCase
 import hu.bme.aut.it9p0z.home_domain.usecases.LoadConditionLogsUseCase
-import hu.bme.aut.it9p0z.home_ui.R
 import hu.bme.aut.it9p0z.ui.data.UiTrigger.Companion.foodTriggerChips
 import hu.bme.aut.it9p0z.ui.data.UiTrigger.Companion.mentalTriggerChips
 import hu.bme.aut.it9p0z.ui.data.UiTrigger.Companion.otherTriggerChips
@@ -24,8 +23,8 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val loadStatistics: LoadConditionLogStatisticsUseCase,
     private val loadLogs: LoadConditionLogsUseCase,
-    private val app: Application
-) : AndroidViewModel(app) {
+    @ApplicationContext private val context: Context
+) : ViewModel() {
 
     private val _state: MutableStateFlow<HomeState> = MutableStateFlow(HomeState.Loading)
     val state: StateFlow<HomeState?> = _state
@@ -66,7 +65,7 @@ class HomeViewModel @Inject constructor(
             .filter {
                 triggers.filter { trigger ->
                     trigger.value != 0f
-                }.containsKey(it.label.asString(app.baseContext))
+                }.containsKey(it.label.asString(context))
             }
         triggerChips.onEach { it.state = UiChip.UiChipState.SELECTED }
         return triggerChips

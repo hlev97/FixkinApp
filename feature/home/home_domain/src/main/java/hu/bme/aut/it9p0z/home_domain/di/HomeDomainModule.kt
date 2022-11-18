@@ -1,10 +1,11 @@
 package hu.bme.aut.it9p0z.home_domain.di
 
-import android.app.Application
+import android.content.Context
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ViewModelScoped
 import hu.bme.aut.it9p0z.home_data.repository.HomeRepository
 import hu.bme.aut.it9p0z.home_domain.usecases.LoadConditionLogStatisticsUseCase
@@ -18,14 +19,14 @@ object HomeDomainModule {
     @ViewModelScoped
     fun provideLoadConditionLogsUseCase(
         repository: HomeRepository,
-        app: Application
-    ): LoadConditionLogsUseCase = LoadConditionLogsUseCase(repository,app)
+        @ApplicationContext context: Context
+    ): LoadConditionLogsUseCase = LoadConditionLogsUseCase(repository,context)
 
     @Provides
     @ViewModelScoped
     fun provideLoadConditionLogStatisticsUseCase(
         repository: HomeRepository,
-        app: Application
-    ): LoadConditionLogStatisticsUseCase = LoadConditionLogStatisticsUseCase(repository,app)
+        @ApplicationContext context: Context
+    ): LoadConditionLogStatisticsUseCase = LoadConditionLogStatisticsUseCase(repository,context)
 
 }

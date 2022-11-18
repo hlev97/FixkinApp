@@ -16,7 +16,6 @@ import hu.bme.aut.it9p0z.ui.model.UiChip
 import hu.bme.aut.it9p0z.ui.model.UiText
 import hu.bme.aut.it9p0z.ui.theme.corner_radius_m
 import hu.bme.aut.it9p0z.ui.theme.dp_m
-import hu.bme.aut.it9p0z.ui.theme.dp_s
 import hu.bme.aut.it9p0z.ui.theme.dp_xs
 
 @ExperimentalMaterial3Api
