@@ -16,7 +16,6 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import dagger.hilt.android.AndroidEntryPoint
 import hu.bme.aut.it9p0z.fixkin.navigation.graphs.RootNavGraph
 import hu.bme.aut.it9p0z.fixkin.splash.SplashViewModel
-import hu.bme.aut.it9p0z.preferences.PreferencesDatasource
 import hu.bme.aut.it9p0z.ui.theme.FixkinTheme
 import javax.inject.Inject
 

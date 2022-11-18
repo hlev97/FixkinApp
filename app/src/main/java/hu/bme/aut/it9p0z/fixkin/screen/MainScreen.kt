@@ -8,7 +8,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Notifications
+import androidx.compose.material.icons.rounded.Note
+import androidx.compose.material.icons.rounded.Psychology
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -92,7 +93,7 @@ fun MainScreen(
                             title = UiText.StringResource(
                                 R.string.fab_menu_item_label_create_condition_log
                             ).asString(context),
-                            icon = Icons.Rounded.Notifications,
+                            icon = Icons.Rounded.Note,
                             route = Screen.CreateLog.route,
                             enabled = createConditionLogEnabled
                         ),
@@ -100,7 +101,7 @@ fun MainScreen(
                             title = UiText.StringResource(
                                 R.string.fab_menu_item_label_fill_out_survey
                             ).asString(context),
-                            icon = Icons.Rounded.Notifications,
+                            icon = Icons.Rounded.Psychology,
                             route = Screen.Survey.route,
                             enabled = createSurveyLogEnabled
                         ),

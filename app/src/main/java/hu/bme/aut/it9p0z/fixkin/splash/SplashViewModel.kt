@@ -5,13 +5,11 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dagger.hilt.android.lifecycle.HiltViewModel
 import hu.bme.aut.it9p0z.fixkin.navigation.graphs.Graph
 import hu.bme.aut.it9p0z.preferences.PreferencesDatasource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import java.time.LocalDate
 import javax.inject.Inject
 
 class SplashViewModel @Inject constructor(

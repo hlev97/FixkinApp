@@ -56,6 +56,7 @@ dependencies {
     implementation(Compose.ui)
     implementation(Compose.uiToolingPreview)
     implementation(Compose.material3)
+    implementation(Compose.materialIconsExt)
     implementation(Compose.navigation)
     implementation(Compose.hiltNavigation)
 
