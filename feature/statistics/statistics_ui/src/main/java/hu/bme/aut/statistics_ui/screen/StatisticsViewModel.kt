@@ -1,7 +1,5 @@
 package hu.bme.aut.statistics_ui.screen
 
-import android.app.Application
-import android.content.Context
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -9,11 +7,8 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
-import hu.bme.aut.it9p0z.model.statistics.ConditionLogStatisticsModel
 import hu.bme.aut.statistics_domain.usecases.LoadConditionLogStatisticsUseCase
 import hu.bme.aut.statistics_domain.usecases.LoadSurveyLogsUseCase
-import hu.bme.aut.statistics_ui.R
 import hu.bme.aut.statistics_ui.model.TabItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -27,7 +22,6 @@ class StatisticsViewModel @Inject constructor(
     private val loadSurveyLogs: LoadSurveyLogsUseCase,
     private val loadConditionLogs: LoadConditionLogStatisticsUseCase,
     private val savedStateHandle: SavedStateHandle,
-    private val app: Application
 ) : ViewModel() {
 
     val graphType = checkNotNull(savedStateHandle.get<String>("graphType"))

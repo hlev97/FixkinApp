@@ -26,6 +26,8 @@ class SurveyViewModel @Inject constructor(
     var currentQuestion by mutableStateOf(questions[currentQuestionId])
         private set
 
+    fun isFirstQuestion(): Boolean = currentQuestionId == 0
+
     private val _state: MutableStateFlow<SurveyState> = MutableStateFlow(Answering)
     val state: StateFlow<SurveyState> = _state.asStateFlow()
 

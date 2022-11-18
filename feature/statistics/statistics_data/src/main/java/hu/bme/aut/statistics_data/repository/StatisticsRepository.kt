@@ -1,10 +1,8 @@
 package hu.bme.aut.statistics_data.repository
 
 import hu.bme.aut.it9p0z.database.datasource.DatabaseDatasource
-import hu.bme.aut.it9p0z.database.entities.ConditionLogEntity
 import hu.bme.aut.it9p0z.database.entities.SurveyLogEntity
 import hu.bme.aut.it9p0z.network.datasource.NetworkDatasource
-import hu.bme.aut.it9p0z.network.dtos.ConditionLogDto
 import hu.bme.aut.it9p0z.network.dtos.ConditionLogStatisticsDto
 import hu.bme.aut.it9p0z.network.dtos.SurveyLogDto
 import hu.bme.aut.it9p0z.network.dtos.wrapper.ResponseWrapper

@@ -13,14 +13,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import hu.bme.aut.it9p0z.ui.components.buttons.BottomTextButton
 import hu.bme.aut.it9p0z.ui.components.buttons.TextButton
 import hu.bme.aut.it9p0z.ui.model.UiText
 import hu.bme.aut.it9p0z.ui.theme.corner_radius_s
 import hu.bme.aut.it9p0z.ui.theme.dp_l
 import hu.bme.aut.it9p0z.ui.theme.dp_m
-import hu.bme.aut.survey_domain.model.NoEffect
 import hu.bme.aut.survey_ui.components.surveyanswerradiogroup.SurveyAnswerRadioGroup
 import hu.bme.aut.survey_ui.R
 import hu.bme.aut.survey_ui.model.*
@@ -72,15 +71,19 @@ fun SurveyScreen(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceAround
                 ) {
-                    TextButton(
-                        uiText = UiText.StringResource(R.string.button_prev),
-                        shape = RoundedCornerShape(corner_radius_s),
-                        onClick = viewModel::onPreviousClick
-                    )
+                    if (!viewModel.isFirstQuestion()) {
+                        TextButton(
+                            uiText = UiText.StringResource(R.string.button_prev),
+                            shape = RoundedCornerShape(corner_radius_s),
+                            onClick = viewModel::onPreviousClick,
+                            modifier = Modifier.weight(1f).padding(horizontal = 5.dp)
+                        )
+                    }
                     TextButton(
                         uiText = UiText.StringResource(R.string.button_next),
                         shape = RoundedCornerShape(corner_radius_s),
-                        onClick = { viewModel.onNextClick(selectedAnswer) }
+                        onClick = { viewModel.onNextClick(selectedAnswer) },
+                        modifier = Modifier.weight(1f).padding(horizontal = 5.dp)
                     )
                 }
             }
