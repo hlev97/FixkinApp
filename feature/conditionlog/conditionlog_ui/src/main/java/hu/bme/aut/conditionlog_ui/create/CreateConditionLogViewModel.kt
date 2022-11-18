@@ -1,12 +1,13 @@
 package hu.bme.aut.conditionlog_ui.create
 
-import android.app.Application
+import android.content.Context
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import hu.bme.aut.conditionlog_domain.usecases.SaveConditionLogUseCase
 import hu.bme.aut.it9p0z.model.conditionlog.ConditionLogModel
 import hu.bme.aut.it9p0z.model.feeling.Feeling.Companion.asFeeling
@@ -22,9 +23,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CreateConditionLogViewModel @Inject constructor(
-    private val app: Application,
-    private val saveConditionLog: SaveConditionLogUseCase
-) : AndroidViewModel(app) {
+    private val saveConditionLog: SaveConditionLogUseCase,
+    @ApplicationContext private val context: Context
+) : ViewModel() {
 
     var sliderValue by mutableStateOf(0f)
         private set
@@ -50,10 +51,10 @@ class CreateConditionLogViewModel @Inject constructor(
             val log = ConditionLogModel(
                 creationDate = LocalDate.now(),
                 feeling = sliderValue.asFeeling(),
-                foodTriggers = foodTriggerUiChips.toHashMap(app.baseContext),
-                weatherTriggers = weatherTriggerUiChips.toHashMap(app.baseContext),
-                mentalHealthTriggers = mentalTriggerUiChips.toHashMap(app.baseContext),
-                otherTriggers = otherTriggerUiChips.toHashMap(app.baseContext)
+                foodTriggers = foodTriggerUiChips.toHashMap(context),
+                weatherTriggers = weatherTriggerUiChips.toHashMap(context),
+                mentalHealthTriggers = mentalTriggerUiChips.toHashMap(context),
+                otherTriggers = otherTriggerUiChips.toHashMap(context)
             )
             saveConditionLog(log)
         }

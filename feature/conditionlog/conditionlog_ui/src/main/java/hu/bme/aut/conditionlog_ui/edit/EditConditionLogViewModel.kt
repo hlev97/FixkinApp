@@ -1,11 +1,12 @@
 package hu.bme.aut.conditionlog_ui.edit
 
-import android.app.Application
+import android.content.Context
 import androidx.compose.runtime.*
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import hu.bme.aut.conditionlog_domain.usecases.LoadConditionLogUseCase
 import hu.bme.aut.conditionlog_domain.usecases.UpdateConditionLogUseCase
 import hu.bme.aut.it9p0z.model.conditionlog.ConditionLogModel
@@ -16,14 +17,11 @@ import hu.bme.aut.it9p0z.ui.data.getMentalHealthTriggerUiChips
 import hu.bme.aut.it9p0z.ui.data.getOtherTriggerUiChips
 import hu.bme.aut.it9p0z.ui.data.getWeatherTriggerUiChips
 import hu.bme.aut.it9p0z.ui.model.UiChip
-import hu.bme.aut.it9p0z.ui.model.UiEvent
 import hu.bme.aut.it9p0z.ui.model.UiText
 import hu.bme.aut.it9p0z.ui.model.toHashMap
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -32,13 +30,13 @@ class EditConditionLogViewModel @Inject constructor(
     private val loadConditionLog: LoadConditionLogUseCase,
     private val updateConditionLog: UpdateConditionLogUseCase,
     private val savedStateHandle: SavedStateHandle,
-    private val app: Application
-) : AndroidViewModel(app) {
+    @ApplicationContext private val context: Context
+) : ViewModel() {
 
     private val _state: MutableStateFlow<EditConditionLogState> = MutableStateFlow(EditConditionLogState.Loading)
     val state: StateFlow<EditConditionLogState?> = _state
 
-    val id = checkNotNull(savedStateHandle.get<Int>("id"))
+    private val id = checkNotNull(savedStateHandle.get<Int>("id"))
 
     var sliderValue by mutableStateOf(0f)
         private set
@@ -52,19 +50,16 @@ class EditConditionLogViewModel @Inject constructor(
     var mentalTriggerUiChips = mutableStateListOf<UiChip>()
     var otherTriggerUiChips = mutableStateListOf<UiChip>()
 
-    private val _uiEvent = Channel<UiEvent>()
-    val uiEvent = _uiEvent.receiveAsFlow()
-
     init {
         viewModelScope.launch {
             _state.value = EditConditionLogState.Loading
             _state.value = try {
                 val log = loadConditionLog(id)
 
-                foodTriggerUiChips.addAll(log.getFoodTriggerUiChips(app.baseContext))
-                weatherTriggerUiChips.addAll(log.getWeatherTriggerUiChips(app.baseContext))
-                mentalTriggerUiChips.addAll(log.getMentalHealthTriggerUiChips(app.baseContext))
-                otherTriggerUiChips.addAll(log.getOtherTriggerUiChips(app.baseContext))
+                foodTriggerUiChips.addAll(log.getFoodTriggerUiChips(context))
+                weatherTriggerUiChips.addAll(log.getWeatherTriggerUiChips(context))
+                mentalTriggerUiChips.addAll(log.getMentalHealthTriggerUiChips(context))
+                otherTriggerUiChips.addAll(log.getOtherTriggerUiChips(context))
 
                 sliderValue = log.feeling.asFloat()
                 delay(2000)
@@ -92,10 +87,10 @@ class EditConditionLogViewModel @Inject constructor(
                     id = state.id,
                     creationDate = state.creationDate,
                     feeling = sliderValue.asFeeling(),
-                    foodTriggers = foodTriggerUiChips.toHashMap(app.baseContext),
-                    weatherTriggers = weatherTriggerUiChips.toHashMap(app.baseContext),
-                    mentalHealthTriggers = mentalTriggerUiChips.toHashMap(app.baseContext),
-                    otherTriggers = otherTriggerUiChips.toHashMap(app.baseContext)
+                    foodTriggers = foodTriggerUiChips.toHashMap(context),
+                    weatherTriggers = weatherTriggerUiChips.toHashMap(context),
+                    mentalHealthTriggers = mentalTriggerUiChips.toHashMap(context),
+                    otherTriggers = otherTriggerUiChips.toHashMap(context)
                 )
                 updateConditionLog(id = state.id, log = log)
             }

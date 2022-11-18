@@ -1,10 +1,11 @@
 package hu.bme.aut.conditionlog_domain.di
 
-import android.app.Application
+import android.content.Context
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ViewModelScoped
 import hu.bme.aut.conditionlog_domain.usecases.LoadConditionLogUseCase
 import hu.bme.aut.conditionlog_domain.usecases.SaveConditionLogUseCase
@@ -19,8 +20,8 @@ object ConditionLogDomainModule {
     @ViewModelScoped
     fun provideSaveConditionLogUseCase(
         repository: ConditionLogRepository,
-        app: Application
-    ): SaveConditionLogUseCase = SaveConditionLogUseCase(repository,app)
+        @ApplicationContext context: Context
+    ): SaveConditionLogUseCase = SaveConditionLogUseCase(repository,context)
 
     @Provides
     @ViewModelScoped
@@ -32,6 +33,6 @@ object ConditionLogDomainModule {
     @ViewModelScoped
     fun provideUpdateConditionLogUseCase(
         repository: ConditionLogRepository,
-        app: Application
-    ): UpdateConditionLogUseCase = UpdateConditionLogUseCase(repository,app)
+        @ApplicationContext context: Context
+    ): UpdateConditionLogUseCase = UpdateConditionLogUseCase(repository,context)
 }

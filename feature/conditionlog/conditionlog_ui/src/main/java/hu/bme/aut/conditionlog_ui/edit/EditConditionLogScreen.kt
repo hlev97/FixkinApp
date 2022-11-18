@@ -9,7 +9,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import hu.bme.aut.conditionlog_ui.R
 import hu.bme.aut.conditionlog_ui.components.ConditionLogEditor
@@ -66,10 +65,7 @@ fun EditConditionLogScreen(
                     .fillMaxSize(),
                     contentAlignment = Alignment.Center
                 ) {
-                    Icon(
-                        painter = painterResource(id = hu.bme.aut.it9p0z.ui.R.drawable.ic_empty_24),
-                        contentDescription = null
-                    )
+                    CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
                 }
             }
             is EditConditionLogState.DataReady -> {

@@ -1,6 +1,6 @@
 package hu.bme.aut.conditionlog_domain.usecases
 
-import android.app.Application
+import android.content.Context
 import hu.bme.aut.it9p0z.conditionlog_data.repository.ConditionLogRepository
 import hu.bme.aut.it9p0z.database.entities.asConditionLogEntity
 import hu.bme.aut.it9p0z.model.conditionlog.ConditionLogModel
@@ -10,9 +10,8 @@ import javax.inject.Inject
 
 class UpdateConditionLogUseCase @Inject constructor(
     private val repository: ConditionLogRepository,
-    private val app: Application
+    private val context: Context
 ) {
-    private val context = app.baseContext
     suspend operator fun invoke(log: ConditionLogModel, id: Int) {
         if (NetworkState.isOnline(context)) {
             repository.updateLogInRemoteDatabase(log.asConditionLogDto(),id)

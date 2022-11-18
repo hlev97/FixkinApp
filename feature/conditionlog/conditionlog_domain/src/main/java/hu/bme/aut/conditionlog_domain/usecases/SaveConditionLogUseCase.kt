@@ -1,7 +1,6 @@
 package hu.bme.aut.conditionlog_domain.usecases
 
 import android.content.Context
-import dagger.hilt.android.qualifiers.ApplicationContext
 import hu.bme.aut.it9p0z.conditionlog_data.repository.ConditionLogRepository
 import hu.bme.aut.it9p0z.database.entities.asConditionLogEntity
 import hu.bme.aut.it9p0z.model.conditionlog.ConditionLogModel
@@ -12,7 +11,7 @@ import javax.inject.Inject
 
 class SaveConditionLogUseCase @Inject constructor(
    private val repository: ConditionLogRepository,
-   @ApplicationContext private val context: Context
+   private val context: Context
 ) {
     suspend operator fun invoke(log: ConditionLogModel) {
         repository.saveLastConditionLogDate(LocalDate.now())
