@@ -30,7 +30,6 @@ fun PasswordTextField(
     modifier: Modifier = Modifier,
     onValueChange: (String) -> Unit,
     leadingIcon: UiIcon? = UiIcon.Image(Icons.Rounded.Key),
-    trailingIcon: UiIcon?,
     enabled: Boolean = true,
     readOnly: Boolean = false,
     isError: Boolean = false,
@@ -93,7 +92,6 @@ fun PasswordTextField_Preview() {
         label = UiText.DynamicString("password"),
         onValueChange = { newValue -> value = newValue },
         onVisibilityChanged = { /*TODO*/ },
-        trailingIcon = UiIcon.Image(Icons.Rounded.Close),
         onErrorStateChange = { /*TODO*/ },
         onDone = {
             keyboardController?.hide()
@@ -113,7 +111,6 @@ fun PasswordTextFieldInvisible_Preview() {
         label = UiText.DynamicString("password"),
         onValueChange = { newValue -> value = newValue },
         onVisibilityChanged = { /*TODO*/ },
-        trailingIcon = UiIcon.Image(Icons.Rounded.Close),
         onErrorStateChange = { /*TODO*/ },
         onDone = {
             keyboardController?.hide()

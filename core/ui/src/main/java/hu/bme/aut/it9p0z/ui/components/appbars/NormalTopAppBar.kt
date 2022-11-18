@@ -14,11 +14,11 @@ import hu.bme.aut.it9p0z.ui.model.UiText
 @ExperimentalMaterial3Api
 @Composable
 fun NormalTopAppBar(
+    onNavigation: () -> Unit,
+    modifier: Modifier = Modifier,
     title: UiText? = null,
     navigationIcon: UiIcon = UiIcon.Image(Icons.Outlined.ArrowBack),
-    onNavigation: () -> Unit,
     actions: @Composable RowScope.() -> Unit = { },
-    modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
     TopAppBar(

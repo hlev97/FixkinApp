@@ -84,7 +84,7 @@ fun NormalTextField_Preview() {
     NormalTextField(
         value = value,
         label = UiText.DynamicString("label"),
-        onValueChange = { newValue -> value = newValue },
+        onValueChange = { newValue -> value = newValue.trim() },
         leadingIcon = null,
         onTrailingIconClick = { /*TODO*/ },
         trailingIcon = UiIcon.Image(Icons.Rounded.Close),

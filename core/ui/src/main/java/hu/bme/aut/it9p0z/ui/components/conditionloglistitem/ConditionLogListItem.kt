@@ -2,7 +2,6 @@ package hu.bme.aut.it9p0z.ui.components.conditionloglistitem
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.animation.*
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -12,15 +11,12 @@ import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.MoreHoriz
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.constraintlayout.compose.ExperimentalMotionApi
 import hu.bme.aut.it9p0z.ui.data.FeelingUi
 import hu.bme.aut.it9p0z.ui.data.UiTrigger.Companion.foodTriggerChips
 import hu.bme.aut.it9p0z.ui.data.UiTrigger.Companion.mentalTriggerChips
@@ -32,7 +28,6 @@ import hu.bme.aut.it9p0z.ui.model.UiText
 import hu.bme.aut.it9p0z.ui.theme.*
 import me.saket.swipe.SwipeAction
 import me.saket.swipe.SwipeableActionsBox
-import me.saket.swipe.SwipeableActionsState
 import me.saket.swipe.rememberSwipeableActionsState
 
 @ExperimentalAnimationApi
@@ -104,14 +99,9 @@ fun ConditionLogListItem(
                     Icon(imageVector = Icons.Outlined.MoreHoriz, contentDescription = null)
                 }
             },
-            leadingContent = if (listItem.feeling.icon != null) {
-                {
-                    Column {
-                        listItem.feeling.icon.AsImage(modifier = Modifier.padding(bottom = dp_s))
-                        Text(text = listItem.feeling.name.asString(context))
-                    }
-                }
-            } else null
+            leadingContent = {
+                listItem.feeling.icon.AsImage()
+            }
         )
         if (!lastItem) {
             Divider()

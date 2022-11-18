@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.*
 import java.io.IOException
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.time.temporal.ChronoUnit
 import java.util.Base64
 import javax.inject.Inject
 
@@ -230,7 +229,6 @@ class PreferencesDatasource @Inject constructor(
             preferences[lastSurveyLogDatePrefKey] ?: ""
         }
     }
-
 
     private fun encode(value: String) = Base64.getEncoder().encodeToString(value.toByteArray())
 

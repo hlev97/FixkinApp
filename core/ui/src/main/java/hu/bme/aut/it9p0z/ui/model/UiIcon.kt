@@ -8,7 +8,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 
-
 sealed class UiIcon {
     data class Image(val image: ImageVector) : UiIcon()
     data class ImageResource(val id: Int) : UiIcon()
