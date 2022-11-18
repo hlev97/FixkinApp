@@ -1,6 +1,5 @@
 package hu.bme.aut.it9p0z.history_domain.di
 
-import android.app.Application
 import android.content.Context
 import dagger.Module
 import dagger.Provides
@@ -27,7 +26,7 @@ object HistoryDomainModule {
     @ViewModelScoped
     fun provideDeleteConditionLogUseCase(
         repository: HistoryRepository,
-        app: Application
-    ): DeleteConditionLogUseCase = DeleteConditionLogUseCase(repository, app)
+        @ApplicationContext context: Context
+    ): DeleteConditionLogUseCase = DeleteConditionLogUseCase(repository, context)
 
 }

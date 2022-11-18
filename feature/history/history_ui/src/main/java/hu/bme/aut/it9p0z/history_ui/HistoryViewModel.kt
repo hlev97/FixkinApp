@@ -1,13 +1,14 @@
 package hu.bme.aut.it9p0z.history_ui
 
-import android.app.Application
+import android.content.Context
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import hu.bme.aut.it9p0z.history_domain.usecases.DeleteConditionLogUseCase
 import hu.bme.aut.it9p0z.history_domain.usecases.LoadConditionLogsUseCase
 import hu.bme.aut.it9p0z.ui.data.*
@@ -23,8 +24,8 @@ import javax.inject.Inject
 class HistoryViewModel @Inject constructor(
     private val loadConditionLogs: LoadConditionLogsUseCase,
     private val deleteConditionLog: DeleteConditionLogUseCase,
-    private val app: Application
-) : AndroidViewModel(app) {
+    @ApplicationContext private val context: Context
+) : ViewModel() {
 
     private val _state: MutableStateFlow<HistoryState> = MutableStateFlow(Loading)
     val state: StateFlow<HistoryState> = _state.asStateFlow()
@@ -53,15 +54,15 @@ class HistoryViewModel @Inject constructor(
         _state.value = try {
             val formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd")
             val logs = loadConditionLogs().map { log ->
-                val foodTriggers = log.getFoodTriggerUiChips(app.baseContext)
+                val foodTriggers = log.getFoodTriggerUiChips(context)
                     .filter { it.state == UiChip.UiChipState.SELECTED }
-                val weatherTriggers = log.getWeatherTriggerUiChips(app.baseContext)
-                    .filter { it.state == UiChip.UiChipState.SELECTED }
-
-                val mentalTriggers = log.getMentalHealthTriggerUiChips(app.baseContext)
+                val weatherTriggers = log.getWeatherTriggerUiChips(context)
                     .filter { it.state == UiChip.UiChipState.SELECTED }
 
-                val otherTriggers = log.getOtherTriggerUiChips(app.baseContext)
+                val mentalTriggers = log.getMentalHealthTriggerUiChips(context)
+                    .filter { it.state == UiChip.UiChipState.SELECTED }
+
+                val otherTriggers = log.getOtherTriggerUiChips(context)
                     .filter { it.state == UiChip.UiChipState.SELECTED }
 
                 val triggers = mutableListOf<UiChip>()

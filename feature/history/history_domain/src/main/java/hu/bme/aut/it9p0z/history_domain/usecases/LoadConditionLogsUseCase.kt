@@ -1,7 +1,6 @@
 package hu.bme.aut.it9p0z.history_domain.usecases
 
 import android.content.Context
-import dagger.hilt.android.qualifiers.ApplicationContext
 import hu.bme.aut.it9p0z.database.entities.asConditionLogEntity
 import hu.bme.aut.it9p0z.database.entities.asConditionLogModel
 import hu.bme.aut.it9p0z.history_data.repository.HistoryRepository
@@ -13,7 +12,7 @@ import javax.inject.Inject
 
 class LoadConditionLogsUseCase @Inject constructor(
     private val repository: HistoryRepository,
-    @ApplicationContext private val context: Context
+    private val context: Context
 ) {
 
     suspend operator fun invoke(): List<ConditionLogModel> {
