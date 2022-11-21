@@ -15,9 +15,7 @@ class UpdateConditionLogUseCase @Inject constructor(
     suspend operator fun invoke(log: ConditionLogModel, id: Int) {
         if (NetworkState.isOnline(context)) {
             repository.updateLogInRemoteDatabase(log.asConditionLogDto(),id)
-            repository.deleteLogFromLocalDatabase(log.asConditionLogEntity())
-        } else {
-            repository.updateLogInLocalDatabase(log.asConditionLogEntity())
         }
+        repository.updateLogInLocalDatabase(log.asConditionLogEntity())
     }
 }

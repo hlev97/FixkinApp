@@ -17,6 +17,8 @@ import hu.bme.aut.it9p0z.ui.data.UiTrigger.Companion.otherTriggerChips
 import hu.bme.aut.it9p0z.ui.data.UiTrigger.Companion.weatherTriggerChips
 import hu.bme.aut.it9p0z.ui.model.UiChip
 import hu.bme.aut.it9p0z.ui.model.toHashMap
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import javax.inject.Inject
@@ -47,7 +49,7 @@ class CreateConditionLogViewModel @Inject constructor(
     }
 
     fun saveClick() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             val log = ConditionLogModel(
                 creationDate = LocalDate.now(),
                 feeling = sliderValue.asFeeling(),

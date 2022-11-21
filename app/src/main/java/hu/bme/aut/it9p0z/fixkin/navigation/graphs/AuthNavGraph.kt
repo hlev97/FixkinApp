@@ -12,6 +12,7 @@ import hu.bme.aut.it9p0z.authentication_ui.register.diseases.DiseasesScreen
 import hu.bme.aut.it9p0z.authentication_ui.register.identity.IdentityScreen
 import hu.bme.aut.it9p0z.authentication_ui.register.medicines.MedicinesScreen
 import hu.bme.aut.it9p0z.authentication_ui.register.weightandheight.WeightAndHeightScreen
+import hu.bme.aut.it9p0z.fixkin.navigation.screens.*
 
 @ExperimentalComposeUiApi
 @ExperimentalMaterial3Api
@@ -21,37 +22,37 @@ fun NavGraphBuilder.authNavGraph(
 ) {
     navigation(
         route = Graph.AUTH,
-        startDestination = AuthScreen.Login.route
+        startDestination = Screen.Login.route
     ) {
-        composable(route = AuthScreen.Login.route) {
+        composable(route = Screen.Login.route) {
             LoginScreen(
                 snackbarHostState = snackbarHostState,
                 onLoginClick = {
                     navController.popBackStack()
                     navController.navigate(Graph.HOME)
                 },
-                onRegisterClick = { navController.navigate(AuthScreen.RegisterIdentity.route) }
+                onRegisterClick = { navController.navigate(Screen.RegisterIdentity.route) }
             )
         }
-        composable(route = AuthScreen.RegisterIdentity.route) {
+        composable(route = Screen.RegisterIdentity.route) {
             IdentityScreen(
                 snackbarHostState = snackbarHostState,
                 onLoginClick = {
                     navController.popBackStack()
-                    navController.navigate(AuthScreen.Login.route)
+                    navController.navigate(Screen.Login.route)
                 },
-                onNextClick = { navController.navigate(AuthScreen.RegisterWeightAndHeight.route) })
+                onNextClick = { navController.navigate(Screen.RegisterWeightAndHeight.route) })
         }
-        composable(route = AuthScreen.RegisterWeightAndHeight.route) {
+        composable(route = Screen.RegisterWeightAndHeight.route) {
             WeightAndHeightScreen(
                 snackbarHostState = snackbarHostState,
-                onNextClick = { navController.navigate(AuthScreen.RegisterDiseases.route) }
+                onNextClick = { navController.navigate(Screen.RegisterDiseases.route) }
             )
         }
-        composable(route = AuthScreen.RegisterDiseases.route) {
-            DiseasesScreen(onNextClick = { navController.navigate(AuthScreen.RegisterMedicines.route) })
+        composable(route = Screen.RegisterDiseases.route) {
+            DiseasesScreen(onNextClick = { navController.navigate(Screen.RegisterMedicines.route) })
         }
-        composable(route = AuthScreen.RegisterMedicines.route) {
+        composable(route = Screen.RegisterMedicines.route) {
             MedicinesScreen(
                 snackbarHostState = snackbarHostState,
                 onNextClick = {
@@ -61,12 +62,4 @@ fun NavGraphBuilder.authNavGraph(
             )
         }
     }
-}
-
-sealed class AuthScreen(val route: String) {
-    object Login : AuthScreen(route = "login")
-    object RegisterIdentity : AuthScreen(route = "register/identity")
-    object RegisterWeightAndHeight : AuthScreen(route = "register/weight_and_height")
-    object RegisterDiseases : AuthScreen(route = "register/diseases")
-    object RegisterMedicines : AuthScreen(route = "register/medicines")
 }

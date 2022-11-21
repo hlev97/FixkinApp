@@ -23,8 +23,8 @@ import hu.bme.aut.it9p0z.fixkin.R
 import hu.bme.aut.it9p0z.fixkin.navigation.graphs.MainNavGraph
 import hu.bme.aut.it9p0z.fixkin.screen.model.BottomNavItem
 import hu.bme.aut.it9p0z.ui.model.UiText
-import hu.bme.aut.it9p0z.fixkin.navigation.graphs.Screen
 import androidx.hilt.navigation.compose.hiltViewModel
+import hu.bme.aut.it9p0z.fixkin.navigation.screens.*
 
 @ExperimentalFoundationApi
 @ExperimentalPagerApi

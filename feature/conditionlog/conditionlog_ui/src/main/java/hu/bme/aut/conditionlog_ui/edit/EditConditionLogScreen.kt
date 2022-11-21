@@ -24,7 +24,6 @@ fun EditConditionLogScreen(
     viewModel: EditConditionLogViewModel = hiltViewModel()
 ) {
     BackHandler(onBack = onBack)
-    val snackbarHostState = remember { SnackbarHostState() }
     val state by viewModel.state.collectAsState()
 
     val context = LocalContext.current
@@ -41,7 +40,6 @@ fun EditConditionLogScreen(
             }
 
         },
-        snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
         floatingActionButton = {
             if (state !is EditConditionLogState.Loading) {
                 LargeFloatingActionButton(onClick = {
@@ -76,10 +74,8 @@ fun EditConditionLogScreen(
                     mentalTriggerChips = data.mentalTriggerUiChips,
                     otherTriggerChips = data.otherTriggerUiChips,
                     modifier = Modifier.padding(it),
-                    sliderValue = data.sliderValue,
-                    onSliderValueChange = { newValue ->
-                        viewModel.onSliderValueChanged(newValue)
-                    },
+                    sliderValue = viewModel.sliderValue,
+                    onSliderValueChange = viewModel::onSliderValueChanged,
                 )
             }
             is EditConditionLogState.Error -> {

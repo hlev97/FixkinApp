@@ -26,6 +26,7 @@ import javax.inject.Inject
 @ExperimentalPagerApi
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
     @Inject
     lateinit var splashViewModel: SplashViewModel
 

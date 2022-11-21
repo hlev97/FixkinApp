@@ -29,13 +29,13 @@ class ConditionLogRepository @Inject constructor(
         databaseDatasource.updateConditionLog(log)
     }
 
-    suspend fun deleteLogFromLocalDatabase(log: ConditionLogEntity) {
-        databaseDatasource.deleteConditionLog(log)
-    }
-
     suspend fun saveLogToRemoteDatabase(log: ConditionLogDto): ResponseWrapper<ConditionLogDto> {
         val userInfo = preferencesDatasource.loadUserInfo().first()
-        return networkDatasource.createConditionLog(userInfo.userName,userInfo.password, log)
+        return networkDatasource.createConditionLog(
+            userName = userInfo.userName,
+            password = userInfo.password,
+            log = log
+        )
     }
 
     suspend fun updateLogInRemoteDatabase(log: ConditionLogDto, id: Int): ResponseWrapper<ConditionLogDto> {

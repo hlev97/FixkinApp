@@ -93,7 +93,8 @@ fun ConditionLogListItem(
                         .height(IntrinsicSize.Min),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    listItem.triggers.subList(0,3).forEach { trigger ->
+                    val lastIndex = if (listItem.triggers.size > 3) 3 else listItem.triggers.size
+                    listItem.triggers.subList(0,lastIndex).forEach { trigger ->
                         TriggerUiChip(trigger = trigger)
                     }
                     Icon(imageVector = Icons.Outlined.MoreHoriz, contentDescription = null)

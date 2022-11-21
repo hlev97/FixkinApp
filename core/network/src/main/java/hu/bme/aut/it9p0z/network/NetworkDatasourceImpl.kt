@@ -1,7 +1,7 @@
 package hu.bme.aut.it9p0z.network
 
 import android.util.Log
-import hu.bme.aut.it9p0z.network.api.FixkinApi
+import hu.bme.aut.it9p0z.network.api.FixkinApiClient
 import hu.bme.aut.it9p0z.network.datasource.NetworkDatasource
 import hu.bme.aut.it9p0z.network.dtos.ConditionLogDto
 import hu.bme.aut.it9p0z.network.dtos.ConditionLogStatisticsDto
@@ -12,7 +12,7 @@ import okhttp3.Credentials
 import javax.inject.Inject
 
 class NetworkDatasourceImpl @Inject constructor(
-    private val api: FixkinApi
+    private val api: FixkinApiClient
 ) : NetworkDatasource {
 
     override suspend fun createUser(user: UserDto): ResponseWrapper<UserDto> {

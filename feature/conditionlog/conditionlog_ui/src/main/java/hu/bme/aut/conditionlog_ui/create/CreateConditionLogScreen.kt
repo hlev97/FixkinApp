@@ -52,9 +52,7 @@ fun CreateConditionLogScreen(
             otherTriggerChips = viewModel.otherTriggerUiChips,
             modifier = Modifier.padding(it),
             sliderValue = viewModel.sliderValue,
-            onSliderValueChange = { newValue ->
-                viewModel.onSliderValueChanged(newValue)
-            },
+            onSliderValueChange = viewModel::onSliderValueChanged,
         )
     }
 }
