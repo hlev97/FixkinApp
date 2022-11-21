@@ -17,7 +17,7 @@ android {
         versionCode = ProjectConfig.versionCode
         versionName = ProjectConfig.versionName
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "hu.bme.aut.it9p0z.fixkin.di.HiltTestRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -44,6 +44,11 @@ android {
     packagingOptions {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
         }
     }
 }
@@ -124,4 +129,28 @@ dependencies {
     implementation(project((Modules.customUiFabMenu)))
     implementation(project((Modules.customUiCheckLogCalendar)))
 
+    testImplementation(Testing.jUnit)
+    testImplementation(Testing.jUnitExt)
+    testImplementation(Testing.truth)
+    testImplementation(Testing.coroutines)
+    testImplementation(Testing.turbine)
+    testImplementation(Testing.composeUiTest)
+    testImplementation(Testing.mockk)
+    testImplementation(Testing.mockWebServer)
+
+    androidTestImplementation(Testing.jUnit)
+    androidTestImplementation(Testing.jUnitExt)
+    androidTestImplementation(Testing.truth)
+    androidTestImplementation(Testing.coroutines)
+    androidTestImplementation(Testing.turbine)
+    androidTestImplementation(Testing.composeUiTest)
+    androidTestImplementation(Testing.mockkAndroid)
+    androidTestImplementation(Testing.mockWebServer)
+    androidTestImplementation(Testing.hiltTesting)
+    kaptAndroidTest(DaggerHilt.hiltCompiler)
+    androidTestImplementation(Testing.testRunner)
+
+    androidTestImplementation("io.mockk:mockk-android:1.10.0")
+    androidTestImplementation("com.linkedin.dexmaker:dexmaker-mockito:2.28.3")
+    androidTestImplementation(Testing.androidXTestCore)
 }

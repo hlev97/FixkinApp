@@ -21,7 +21,7 @@ class LoadConditionLogsUseCase @Inject constructor(
             if (size > 0) {
                 repository.deleteAllLogsFromLocalDatabase()
             }
-            val logsInResponse = repository.getLogsFromRemoteDatabase().data ?: emptyList()
+            val logsInResponse = repository.getLogsFromRemoteDatabase().getOrNull() ?: emptyList()
             repository.saveLogsToLocalDatabase(logsInResponse.map {
                 it.asConditionLogModel().asConditionLogEntity()
             })

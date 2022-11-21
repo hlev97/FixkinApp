@@ -19,9 +19,11 @@ import hu.bme.aut.it9p0z.ui.data.getWeatherTriggerUiChips
 import hu.bme.aut.it9p0z.ui.model.UiChip
 import hu.bme.aut.it9p0z.ui.model.UiText
 import hu.bme.aut.it9p0z.ui.model.toHashMap
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -34,7 +36,7 @@ class EditConditionLogViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _state: MutableStateFlow<EditConditionLogState> = MutableStateFlow(EditConditionLogState.Loading)
-    val state: StateFlow<EditConditionLogState?> = _state
+    val state: StateFlow<EditConditionLogState?> = _state.asStateFlow()
 
     private val id = checkNotNull(savedStateHandle.get<Int>("id"))
 
@@ -51,7 +53,7 @@ class EditConditionLogViewModel @Inject constructor(
     var otherTriggerUiChips = mutableStateListOf<UiChip>()
 
     init {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             _state.value = EditConditionLogState.Loading
             _state.value = try {
                 val log = loadConditionLog(id)
@@ -62,7 +64,7 @@ class EditConditionLogViewModel @Inject constructor(
                 otherTriggerUiChips.addAll(log.getOtherTriggerUiChips(context))
 
                 sliderValue = log.feeling.asFloat()
-                delay(2000)
+                delay(1000)
                 EditConditionLogState.DataReady(
                     id = log.id!!,
                     creationDate = log.creationDate,

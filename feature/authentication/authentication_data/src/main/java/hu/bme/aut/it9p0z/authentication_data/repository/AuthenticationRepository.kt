@@ -2,8 +2,7 @@ package hu.bme.aut.it9p0z.authentication_data.repository
 
 import hu.bme.aut.it9p0z.network.datasource.NetworkDatasource
 import hu.bme.aut.it9p0z.network.dtos.UserDto
-import hu.bme.aut.it9p0z.network.dtos.wrapper.ResponseWrapper
-import hu.bme.aut.it9p0z.preferences.PreferencesDatasource
+import hu.bme.aut.it9p0z.preferences.datasource.PreferencesDatasource
 import hu.bme.aut.it9p0z.preferences.domain.UserInfo
 import kotlinx.coroutines.flow.first
 import javax.inject.Inject
@@ -48,15 +47,15 @@ class AuthenticationRepository @Inject constructor(
         return preferencesDatasource.loadUserInfo().first()
     }
 
-    suspend fun registerUser(user: UserDto): ResponseWrapper<UserDto> {
+    suspend fun registerUser(user: UserDto): Result<UserDto?> {
         return networkDatasource.createUser(user)
     }
 
-    suspend fun getUser(userName: String, password: String): ResponseWrapper<UserDto> {
+    suspend fun getUser(userName: String, password: String): Result<UserDto?> {
         return networkDatasource.getUser(userName, password)
     }
 
-    suspend fun getUsernames(): ResponseWrapper<List<String>> {
+    suspend fun getUsernames(): Result<List<String>?> {
         return networkDatasource.getUsernames()
     }
 

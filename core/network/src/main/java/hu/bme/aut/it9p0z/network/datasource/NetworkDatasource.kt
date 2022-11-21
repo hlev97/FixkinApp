@@ -4,53 +4,52 @@ import hu.bme.aut.it9p0z.network.dtos.ConditionLogDto
 import hu.bme.aut.it9p0z.network.dtos.ConditionLogStatisticsDto
 import hu.bme.aut.it9p0z.network.dtos.SurveyLogDto
 import hu.bme.aut.it9p0z.network.dtos.UserDto
-import hu.bme.aut.it9p0z.network.dtos.wrapper.ResponseWrapper
 
 interface NetworkDatasource {
 
-    suspend fun createUser(user: UserDto): ResponseWrapper<UserDto>
+    suspend fun createUser(user: UserDto): Result<UserDto?>
 
-    suspend fun getUsernames(): ResponseWrapper<List<String>>
+    suspend fun getUsernames(): Result<List<String>?>
 
-    suspend fun getUser(userName: String, password: String): ResponseWrapper<UserDto>
+    suspend fun getUser(userName: String, password: String): Result<UserDto?>
 
     suspend fun createConditionLog(
         userName: String,
         password: String,
         log: ConditionLogDto
-    ): ResponseWrapper<ConditionLogDto>
+    ): Result<ConditionLogDto?>
 
     suspend fun updateConditionLog(
         userName: String,
         password: String,
         scLogId: Int,
         log: ConditionLogDto
-    ): ResponseWrapper<ConditionLogDto>
+    ): Result<ConditionLogDto?>
 
     suspend fun getAllConditionLogs(
         userName: String,
         password: String
-    ): ResponseWrapper<List<ConditionLogDto>>
+    ): Result<List<ConditionLogDto>?>
 
     suspend fun deleteConditionLog(
         userName: String,
         password: String,
         scLogId: Int,
-    ): ResponseWrapper<ConditionLogDto>
+    ): Result<ConditionLogDto?>
 
     suspend fun getConditionLogStatistics(
         userName: String,
         password: String,
-    ): ResponseWrapper<ConditionLogStatisticsDto>
+    ): Result<ConditionLogStatisticsDto?>
 
     suspend fun createSurveyLog(
         userName: String,
         password: String,
         log: SurveyLogDto
-    ): ResponseWrapper<SurveyLogDto>
+    ): Result<SurveyLogDto?>
 
     suspend fun getAllSurveyLogs(
         userName: String,
         password: String,
-    ): ResponseWrapper<List<SurveyLogDto>>
+    ): Result<List<SurveyLogDto>?>
 }

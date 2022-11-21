@@ -14,8 +14,11 @@ class LoadConditionLogStatisticsUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(): ConditionLogStatisticsModel {
         return if (isOnline(context)) {
-            val stats = repository.getStatistics()
-            stats.data?.asConditionLogStatisticsModel() ?: throw Exception(stats.message)
+            val response = repository.getStatistics()
+            if (response.isSuccess) {
+                val stats = response.getOrNull()!!
+                stats.asConditionLogStatisticsModel()
+            } else throw response.exceptionOrNull()!!
         } else throw Exception()
     }
 }

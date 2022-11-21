@@ -12,6 +12,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.pager.ExperimentalPagerApi
+import hu.bme.aut.it9p0z.fixkin.navigation.graphs.Graph.AUTH
+import hu.bme.aut.it9p0z.fixkin.navigation.screens.Screen
 import hu.bme.aut.it9p0z.fixkin.screen.MainScreen
 
 @ExperimentalPagerApi
@@ -42,6 +44,9 @@ fun RootNavGraph(
                 state = state,
                 stateChanged = { state = !state },
                 visibilityChanged = { isHidden = it },
+                onLogOut = {
+                    navController.popBackStack(route = AUTH, inclusive = false)
+                }
             )
         }
     }

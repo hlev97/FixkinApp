@@ -76,38 +76,6 @@ class AuthenticationDomainModule {
 
     @Provides
     @ViewModelScoped
-    fun provideCheckPasswordHasLowerCaseLetterUseCase(
-        authRepository: AuthenticationRepository
-    ): CheckPasswordHasLowerCaseLetterUseCase =
-        CheckPasswordHasLowerCaseLetterUseCase(authRepository)
-
-    @Provides
-    @ViewModelScoped
-    fun provideCheckPasswordHasUpperCaseLetterUseCase(
-        authRepository: AuthenticationRepository
-    ): CheckPasswordHasUpperCaseLetterUseCase =
-        CheckPasswordHasUpperCaseLetterUseCase(authRepository)
-
-    @Provides
-    @ViewModelScoped
-    fun provideCheckPasswordHasDigitUseCase(
-        authRepository: AuthenticationRepository
-    ): CheckPasswordHasDigitUseCase = CheckPasswordHasDigitUseCase(authRepository)
-
-    @Provides
-    @ViewModelScoped
-    fun provideCheckPasswordHasSpecialCharUseCase(
-        authRepository: AuthenticationRepository
-    ): CheckPasswordHasSpecialCharUseCase = CheckPasswordHasSpecialCharUseCase(authRepository)
-
-    @Provides
-    @ViewModelScoped
-    fun provideCheckPasswordHasCorrectLengthUseCase(
-        authRepository: AuthenticationRepository
-    ): CheckPasswordHasCorrectLengthUseCase = CheckPasswordHasCorrectLengthUseCase(authRepository)
-
-    @Provides
-    @ViewModelScoped
     fun provideCheckPasswordRequirementsUseCase(
         hasLowerCaseLetter: CheckPasswordHasLowerCaseLetterUseCase,
         hasUpperCaseLetter: CheckPasswordHasUpperCaseLetterUseCase,

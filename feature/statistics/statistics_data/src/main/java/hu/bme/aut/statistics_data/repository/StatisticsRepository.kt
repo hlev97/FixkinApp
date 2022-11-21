@@ -5,8 +5,7 @@ import hu.bme.aut.it9p0z.database.entities.SurveyLogEntity
 import hu.bme.aut.it9p0z.network.datasource.NetworkDatasource
 import hu.bme.aut.it9p0z.network.dtos.ConditionLogStatisticsDto
 import hu.bme.aut.it9p0z.network.dtos.SurveyLogDto
-import hu.bme.aut.it9p0z.network.dtos.wrapper.ResponseWrapper
-import hu.bme.aut.it9p0z.preferences.PreferencesDatasource
+import hu.bme.aut.it9p0z.preferences.datasource.PreferencesDatasource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import javax.inject.Inject
@@ -17,7 +16,7 @@ class StatisticsRepository @Inject constructor(
     private val databaseDatasource: DatabaseDatasource
 ) {
 
-    suspend fun getSurveyLogsFromRemoteDatabase(): ResponseWrapper<List<SurveyLogDto>> {
+    suspend fun getSurveyLogsFromRemoteDatabase(): Result<List<SurveyLogDto>?> {
         val userInfo = preferencesDatasource.loadUserInfo().first()
         return networkDatasource.getAllSurveyLogs(userInfo.userName,userInfo.password)
     }
@@ -38,7 +37,7 @@ class StatisticsRepository @Inject constructor(
         databaseDatasource.deleteAllSurveyLogs()
     }
 
-    suspend fun getStatistics(): ResponseWrapper<ConditionLogStatisticsDto> {
+    suspend fun getStatistics(): Result<ConditionLogStatisticsDto?> {
         val userInfo = preferencesDatasource.loadUserInfo().first()
         return networkDatasource.getConditionLogStatistics(userInfo.userName,userInfo.password)
     }

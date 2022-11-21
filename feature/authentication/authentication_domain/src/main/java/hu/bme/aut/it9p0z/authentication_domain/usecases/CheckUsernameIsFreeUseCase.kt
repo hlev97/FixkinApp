@@ -8,10 +8,10 @@ class CheckUsernameIsFreeUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(userName: String): Boolean {
         val response = authRepository.getUsernames()
-        val userNames = response.data
+        val userNames = response.getOrNull()
 
         if (userNames != null) {
             return !userNames.contains(userName)
-        } else throw Exception(response.message)
+        } else throw response.exceptionOrNull()!!
     }
 }

@@ -8,6 +8,7 @@ import androidx.compose.material.icons.rounded.CircleNotifications
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import hu.bme.aut.it9p0z.fabmenu.model.FabMenuItemModel
@@ -16,7 +17,8 @@ import hu.bme.aut.it9p0z.fabmenu.model.FabMenuItemModel
 @Composable
 fun FabMenuItem(
     menuItem: FabMenuItemModel,
-    onClick: (String) -> Unit
+    onClick: (String) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     PressIconButton(
         enabled = menuItem.enabled,
@@ -29,7 +31,8 @@ fun FabMenuItem(
         },
         text = {
             Text(text = menuItem.title)
-        }
+        },
+        modifier = modifier.testTag(menuItem.title)
     )
 }
 

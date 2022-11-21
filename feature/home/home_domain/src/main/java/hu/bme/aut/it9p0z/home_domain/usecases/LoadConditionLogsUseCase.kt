@@ -16,15 +16,14 @@ class LoadConditionLogsUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(): List<ConditionLogModel> {
         return if (NetworkState.isOnline(context)) {
-            val logsInLocalDatabase = repository.getLogsFromLocalDatabase().first()
-            if (logsInLocalDatabase.isNotEmpty()) {
-                logsInLocalDatabase.forEach {
-                    repository.deleteLogFromLocalDatabase(it)
-                }
+            val size = repository.getNumberOfConditionLogsInDatabase()
+            if (size > 0) {
+                repository.deleteAllLogsFromLocalDatabase()
             }
-            val response = repository.getLogsFromRemoteDatabase()
-            val logs = response.data!!.map { it.asConditionLogModel() }
-            repository.saveLogsToLocalDatabase(logs.map { it.asConditionLogEntity() })
+            val logsInResponse = repository.getLogsFromRemoteDatabase().getOrNull() ?: emptyList()
+            repository.saveLogsToLocalDatabase(logsInResponse.map {
+                it.asConditionLogModel().asConditionLogEntity()
+            })
             repository.getLogsFromLocalDatabase().first().map { it.asConditionLogModel() }
         } else {
             repository.getLogsFromLocalDatabase().first().map { it.asConditionLogModel() }

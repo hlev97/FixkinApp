@@ -4,8 +4,7 @@ import hu.bme.aut.it9p0z.database.datasource.DatabaseDatasource
 import hu.bme.aut.it9p0z.database.entities.SurveyLogEntity
 import hu.bme.aut.it9p0z.network.datasource.NetworkDatasource
 import hu.bme.aut.it9p0z.network.dtos.SurveyLogDto
-import hu.bme.aut.it9p0z.network.dtos.wrapper.ResponseWrapper
-import hu.bme.aut.it9p0z.preferences.PreferencesDatasource
+import hu.bme.aut.it9p0z.preferences.datasource.PreferencesDatasource
 import kotlinx.coroutines.flow.first
 import java.time.LocalDate
 import javax.inject.Inject
@@ -41,7 +40,7 @@ class SurveyRepository @Inject constructor(
         databaseDatasource.insertSurveyLog(log)
     }
 
-    suspend fun saveSurveyResultToRemoteDatabase(): ResponseWrapper<SurveyLogDto> {
+    suspend fun saveSurveyResultToRemoteDatabase(): Result<SurveyLogDto?> {
         val userInfo = preferencesDatasource.loadUserInfo().first()
         val log = SurveyLogDto(
             surveyLogId = null,

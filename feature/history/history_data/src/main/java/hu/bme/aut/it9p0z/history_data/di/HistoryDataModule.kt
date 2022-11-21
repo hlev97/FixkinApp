@@ -7,7 +7,7 @@ import dagger.hilt.components.SingletonComponent
 import hu.bme.aut.it9p0z.database.datasource.DatabaseDatasource
 import hu.bme.aut.it9p0z.history_data.repository.HistoryRepository
 import hu.bme.aut.it9p0z.network.datasource.NetworkDatasource
-import hu.bme.aut.it9p0z.preferences.PreferencesDatasource
+import hu.bme.aut.it9p0z.preferences.datasource.PreferencesDatasource
 import javax.inject.Singleton
 
 @Module

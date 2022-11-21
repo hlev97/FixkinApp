@@ -26,6 +26,7 @@ data class UiChip(
         } else UiChipState.SELECTED
 
         fun UiChipState.toBoolean(): Boolean = this == UiChipState.SELECTED
+
     }
 }
 

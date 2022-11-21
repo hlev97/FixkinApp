@@ -9,6 +9,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -48,7 +49,7 @@ fun ChipGroup(
         mainAxisAlignment = FlowMainAxisAlignment.SpaceBetween,
         lastLineMainAxisAlignment = FlowMainAxisAlignment.Start
     ) {
-       chips.forEach { chip ->
+       chips.forEachIndexed { i, chip ->
            var selected by remember { mutableStateOf(chip.state.toBoolean()) }
            ElevatedFilterChip(
                selected = selected,
@@ -73,7 +74,7 @@ fun ChipGroup(
                        )
                    }
                },
-               modifier = Modifier.padding(dp_s)
+               modifier = Modifier.padding(dp_s).testTag(chip.label.asString(context))
            )
        }
     }

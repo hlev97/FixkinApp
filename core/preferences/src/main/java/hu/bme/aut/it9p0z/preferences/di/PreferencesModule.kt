@@ -1,22 +1,21 @@
 package hu.bme.aut.it9p0z.preferences.di
 
-import android.content.Context
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import hu.bme.aut.it9p0z.preferences.PreferencesDatasource
+import hu.bme.aut.it9p0z.preferences.PreferencesDatasourceImpl
+import hu.bme.aut.it9p0z.preferences.datasource.PreferencesDatasource
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object PreferencesModule {
+abstract class PreferencesModule {
 
-    @Provides
+    @Binds
     @Singleton
-    fun bindPreferencesDatasource(
-        @ApplicationContext context: Context
-    ): PreferencesDatasource = PreferencesDatasource(context)
+    abstract fun bindPreferencesDatasource(
+        preferencesDatasource: PreferencesDatasourceImpl
+    ): PreferencesDatasource
 
 }
