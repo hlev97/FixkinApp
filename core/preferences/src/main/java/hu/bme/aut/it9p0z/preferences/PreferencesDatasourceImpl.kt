@@ -5,6 +5,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
 import dagger.hilt.android.qualifiers.ApplicationContext
+import hu.bme.aut.it9p0z.preferences.datasource.PreferencesDatasource
 import hu.bme.aut.it9p0z.preferences.domain.UserInfo
 import kotlinx.coroutines.flow.*
 import java.io.IOException
@@ -17,9 +18,9 @@ val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
     name = "default_preferences"
 )
 
-class PreferencesDatasource @Inject constructor(
+class PreferencesDatasourceImpl @Inject constructor(
     @ApplicationContext private val context: Context
-) {
+): PreferencesDatasource {
     private val dataStore = context.dataStore
     private val formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd")
 
@@ -42,56 +43,56 @@ class PreferencesDatasource @Inject constructor(
         val lastSurveyLogDatePrefKey = stringPreferencesKey(name = "last_survey_log_date")
     }
 
-    suspend fun saveUsername(userName: String) {
+    override suspend fun saveUsername(userName: String) {
         dataStore.edit { preferences ->
 
             preferences[userNamePrefKey] = encode(userName)
         }
     }
 
-    suspend fun saveFullName(fullName: String) {
+    override suspend fun saveFullName(fullName: String) {
         dataStore.edit { preferences ->
             preferences[fullNamePrefKey] = encode(fullName)
         }
     }
 
-    suspend fun saveHeight(height: Double) {
+    override suspend fun saveHeight(height: Double) {
         dataStore.edit { preferences ->
             preferences[heightPrefKey] = height
         }
     }
 
-    suspend fun saveWeight(weight: Double) {
+    override suspend fun saveWeight(weight: Double) {
         dataStore.edit { preferences ->
             preferences[weightPrefKey] = weight
         }
     }
 
-    suspend fun saveDiseases(diseases: List<String>) {
+    override suspend fun saveDiseases(diseases: List<String>) {
         dataStore.edit { preferences ->
             preferences[diseasesPrefKey] = diseases.toSet()
         }
     }
 
-    suspend fun saveMedicines(medicines: List<String>) {
+    override suspend fun saveMedicines(medicines: List<String>) {
         dataStore.edit { preferences ->
             preferences[medicinesPrefKey] = medicines.toSet()
         }
     }
 
-    suspend fun saveAverageLifeQualityIndex(index: Double) {
+    override suspend fun saveAverageLifeQualityIndex(index: Double) {
         dataStore.edit { preferences ->
             preferences[averageLifeQualityIndexPrefKey] = index
         }
     }
 
-    suspend fun savePassword(password: String) {
+    override suspend fun savePassword(password: String) {
         dataStore.edit { preferences ->
             preferences[passwordPrefKey] = encode(password)
         }
     }
 
-    fun loadUserInfo(): Flow<UserInfo> {
+    override fun loadUserInfo(): Flow<UserInfo> {
         return dataStore.data
             .catch { exception ->
                 if (exception is IOException) {
@@ -115,13 +116,13 @@ class PreferencesDatasource @Inject constructor(
             }
     }
 
-    suspend fun saveShowAuthentication(showAuthentication: Boolean) {
+    override suspend fun saveShowAuthentication(showAuthentication: Boolean) {
         dataStore.edit { preferences ->
             preferences[showAuthPrefKey] = showAuthentication
         }
     }
 
-    fun loadShowAuthentication(): Flow<Boolean> {
+    override fun loadShowAuthentication(): Flow<Boolean> {
         return dataStore.data
             .catch { exception ->
                 if (exception is IOException) {
@@ -136,13 +137,13 @@ class PreferencesDatasource @Inject constructor(
     }
 
 
-    suspend fun saveLastAnswer(value: Int) {
+    override suspend fun saveLastAnswer(value: Int) {
         dataStore.edit { preferences ->
             preferences[lastAnswerPrefKey] = value
         }
     }
 
-    fun loadLastAnswer(): Flow<Int> {
+    override fun loadLastAnswer(): Flow<Int> {
         return dataStore.data
             .catch { exception ->
                 if (exception is IOException) {
@@ -156,13 +157,13 @@ class PreferencesDatasource @Inject constructor(
             }
     }
 
-    suspend fun addPointToSurveyResult(value: Int) {
+    override suspend fun addPointToSurveyResult(value: Int) {
         dataStore.edit { preferences ->
             preferences[surveyResultPrefKey] = (preferences[surveyResultPrefKey] ?: 0) + value
         }
     }
 
-    fun loadSurveyResult(): Flow<Int> {
+    override fun loadSurveyResult(): Flow<Int> {
         return dataStore.data
             .catch { exception ->
                 if (exception is IOException) {
@@ -176,14 +177,14 @@ class PreferencesDatasource @Inject constructor(
             }
     }
 
-    suspend fun resetSurvey() {
+    override suspend fun resetSurvey() {
         dataStore.edit { preferences ->
             preferences[lastAnswerPrefKey] = 0
             preferences[surveyResultPrefKey] = 0
         }
     }
 
-    suspend fun deleteUserInfo() {
+    override suspend fun deleteUserInfo() {
         dataStore.edit { preferences ->
             preferences.remove(fullNamePrefKey)
             preferences.remove(weightPrefKey)
@@ -194,13 +195,13 @@ class PreferencesDatasource @Inject constructor(
         }
     }
 
-    suspend fun saveLastConditionLogDate(date: LocalDate) {
+    override suspend fun saveLastConditionLogDate(date: LocalDate) {
         dataStore.edit { preferences ->
             preferences[lastConditionLogDatePrefKey] = date.format(formatter)
         }
     }
 
-    fun loadLastConditionLogDate(): Flow<String> {
+    override fun loadLastConditionLogDate(): Flow<String> {
         return dataStore.data.catch { exception ->
             if (exception is IOException) {
                 emit(emptyPreferences())
@@ -212,13 +213,13 @@ class PreferencesDatasource @Inject constructor(
         }
     }
 
-    suspend fun saveLastSurveyLogDate(date: LocalDate) {
+    override suspend fun saveLastSurveyLogDate(date: LocalDate) {
         dataStore.edit { preferences ->
             preferences[lastSurveyLogDatePrefKey] = date.format(formatter)
         }
     }
 
-    fun loadLastSurveyLogDate(): Flow<String> {
+    override fun loadLastSurveyLogDate(): Flow<String> {
         return dataStore.data.catch { exception ->
             if (exception is IOException) {
                 emit(emptyPreferences())
@@ -233,5 +234,12 @@ class PreferencesDatasource @Inject constructor(
     private fun encode(value: String) = Base64.getEncoder().encodeToString(value.toByteArray())
 
     private fun decode(value: String): String = String(Base64.getDecoder().decode(value))
+
+    override suspend fun resetDates() {
+        dataStore.edit { preferences ->
+            preferences[lastConditionLogDatePrefKey] = ""
+            preferences[lastSurveyLogDatePrefKey] = ""
+        }
+    }
 
 }

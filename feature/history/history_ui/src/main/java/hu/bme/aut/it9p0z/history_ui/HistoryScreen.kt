@@ -16,6 +16,8 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
@@ -53,13 +55,25 @@ fun HistoryScreen(
                 }
             }
             is DataReady -> {
-                LazyColumn(modifier = Modifier.fillMaxSize()) {
-                    items(data ?: emptyList()) { log ->
-                        ConditionLogListItem(
-                            listItem = log,
-                            onDelete = { viewModel.deleteLog(log.id) },
-                            onEdit = { onEdit(log.id) }
-                        )
+                if (data.isNullOrEmpty()) {
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                       Text(
+                           text = stringResource(id = R.string.no_logs_yet),
+                           textAlign = TextAlign.Center
+                       )
+                    }
+                } else {
+                    LazyColumn(modifier = Modifier.fillMaxSize()) {
+                        items(data ?: emptyList()) { log ->
+                            ConditionLogListItem(
+                                listItem = log,
+                                onDelete = { viewModel.deleteLog(log.id) },
+                                onEdit = { onEdit(log.id) }
+                            )
+                        }
                     }
                 }
             }

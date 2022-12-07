@@ -21,7 +21,7 @@ import javax.inject.Inject
 class StatisticsViewModel @Inject constructor(
     private val loadSurveyLogs: LoadSurveyLogsUseCase,
     private val loadConditionLogs: LoadConditionLogStatisticsUseCase,
-    private val savedStateHandle: SavedStateHandle,
+    savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
     val graphType = checkNotNull(savedStateHandle.get<String>("graphType"))
@@ -66,7 +66,7 @@ class StatisticsViewModel @Inject constructor(
                     surveyLogs = surveyLogs
                 )
             } catch (e: Exception) {
-                Error(e.message!!)
+                Error(e.message ?: "No internet connection")
             }
         }
     }

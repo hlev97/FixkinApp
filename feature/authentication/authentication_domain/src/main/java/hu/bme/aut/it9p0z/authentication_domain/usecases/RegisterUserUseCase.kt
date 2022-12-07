@@ -13,12 +13,12 @@ class RegisterUserUseCase @Inject constructor(
     suspend operator fun invoke(): UserInfoModel {
         val user = authRepository.loadUserInfo().asUserInfoModel().asUserDto()
         val response = authRepository.registerUser(user)
-        val data = response.data
+        val data = response.getOrThrow()
 
-        if (data != null) {
+        return if (data != null) {
             authRepository.hideAuthGraph()
             authRepository.deleteUserInfo()
-            return data.asUserInfoModel()
-        } else throw Exception(response.message)
+            data.asUserInfoModel()
+        } else throw response.exceptionOrNull()!!
     }
 }

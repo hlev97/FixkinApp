@@ -56,7 +56,7 @@ class MedicinesViewModel @Inject constructor(
                 registerUser()
                 _uiEvent.send(UiEvent.Success)
             } catch (e: Exception) {
-                _uiEvent.send(UiEvent.ShowSnackbar(UiText.DynamicString(e.message ?: "Reqest error")))
+                _uiEvent.send(UiEvent.ShowSnackbar(UiText.DynamicString(e.message ?: "Request error")))
             }
         }
     }

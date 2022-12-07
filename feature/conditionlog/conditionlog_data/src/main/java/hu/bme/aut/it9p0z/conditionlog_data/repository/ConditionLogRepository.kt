@@ -4,8 +4,7 @@ import hu.bme.aut.it9p0z.database.datasource.DatabaseDatasource
 import hu.bme.aut.it9p0z.database.entities.ConditionLogEntity
 import hu.bme.aut.it9p0z.network.datasource.NetworkDatasource
 import hu.bme.aut.it9p0z.network.dtos.ConditionLogDto
-import hu.bme.aut.it9p0z.network.dtos.wrapper.ResponseWrapper
-import hu.bme.aut.it9p0z.preferences.PreferencesDatasource
+import hu.bme.aut.it9p0z.preferences.datasource.PreferencesDatasource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import java.time.LocalDate
@@ -29,7 +28,7 @@ class ConditionLogRepository @Inject constructor(
         databaseDatasource.updateConditionLog(log)
     }
 
-    suspend fun saveLogToRemoteDatabase(log: ConditionLogDto): ResponseWrapper<ConditionLogDto> {
+    suspend fun saveLogToRemoteDatabase(log: ConditionLogDto): Result<ConditionLogDto?> {
         val userInfo = preferencesDatasource.loadUserInfo().first()
         return networkDatasource.createConditionLog(
             userName = userInfo.userName,
@@ -38,7 +37,7 @@ class ConditionLogRepository @Inject constructor(
         )
     }
 
-    suspend fun updateLogInRemoteDatabase(log: ConditionLogDto, id: Int): ResponseWrapper<ConditionLogDto> {
+    suspend fun updateLogInRemoteDatabase(log: ConditionLogDto, id: Int): Result<ConditionLogDto?> {
         val userInfo = preferencesDatasource.loadUserInfo().first()
         return networkDatasource.updateConditionLog(userInfo.userName,userInfo.password,id,log)
     }

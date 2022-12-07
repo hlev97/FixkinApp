@@ -7,6 +7,7 @@ import androidx.compose.material.icons.outlined.Save
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.hilt.navigation.compose.hiltViewModel
 import hu.bme.aut.conditionlog_ui.R
 import hu.bme.aut.conditionlog_ui.components.ConditionLogEditor
@@ -32,10 +33,13 @@ fun CreateConditionLogScreen(
         },
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
         floatingActionButton = {
-            LargeFloatingActionButton(onClick = {
-                viewModel.saveClick()
-                onFabClick()
-            }) {
+            LargeFloatingActionButton(
+                onClick = {
+                    viewModel.saveClick()
+                    onFabClick()
+                },
+                modifier = Modifier.testTag("saveFab")
+            ) {
                 Icon(
                     imageVector = Icons.Outlined.Save,
                     contentDescription = null,

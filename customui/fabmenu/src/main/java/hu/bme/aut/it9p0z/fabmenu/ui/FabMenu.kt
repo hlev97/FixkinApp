@@ -30,12 +30,13 @@ fun FabMenu(
     state: Boolean,
     onClick: (Boolean) -> Unit,
     onItemClick: (String) -> Unit,
-    menuItems: List<FabMenuItemModel>
+    menuItems: List<FabMenuItemModel>,
+    modifier: Modifier = Modifier
 ) {
     val shape = RoundedCornerShape(if (state) 10.dp else 5.dp)
 
     Surface(
-        modifier = Modifier
+        modifier = modifier
             .wrapContentSize()
             .clip(shape)
             .clickable(

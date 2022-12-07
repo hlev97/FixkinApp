@@ -22,13 +22,16 @@ class LoadSurveyLogsUseCase @Inject constructor(
             if (size > 0) {
                 repository.deleteAllSurveyLogs()
             }
-            val logs = repository.getSurveyLogsFromRemoteDatabase().data?.map {
-                it.asSurveyLogModel().asSurveyLogEntity()
-            } ?: emptyList()
+            val response = repository.getSurveyLogsFromRemoteDatabase()
+            if (response.isSuccess) {
+                val logs = response.getOrNull()?.map {
+                    it.asSurveyLogModel().asSurveyLogEntity()
+                } ?: emptyList()
 
-            repository.saveSurveyLogsToLocalDatabase(logs)
-            repository.loadSurveyLogsFromLocalDatabase().first().map { it.asSurveyLogModel() }
-                .asSurveyLogsDataMap()
+                repository.saveSurveyLogsToLocalDatabase(logs)
+                repository.loadSurveyLogsFromLocalDatabase().first().map { it.asSurveyLogModel() }
+                    .asSurveyLogsDataMap()
+            } else throw response.exceptionOrNull()!!
         } else {
             repository.loadSurveyLogsFromLocalDatabase().first().map { it.asSurveyLogModel() }
                 .asSurveyLogsDataMap()

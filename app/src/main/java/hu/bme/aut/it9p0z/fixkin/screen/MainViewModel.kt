@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import hu.bme.aut.it9p0z.fixkin.DateUtil
-import hu.bme.aut.it9p0z.preferences.PreferencesDatasource
+import hu.bme.aut.it9p0z.preferences.datasource.PreferencesDatasource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
@@ -50,6 +50,14 @@ class MainViewModel @Inject constructor(
             _createSurveyLogEnabled.emit(if (lastSurveyLogDate == "") {
                 true
             } else DateUtil.aDayPassed(LocalDate.parse(lastSurveyLogDate, DateUtil.formatter)))
+        }
+    }
+
+    fun logOut() {
+        viewModelScope.launch {
+            preferencesDatasource.savePassword("")
+            preferencesDatasource.saveUsername("")
+            preferencesDatasource.saveShowAuthentication(true)
         }
     }
 

@@ -7,5 +7,4 @@ dependencies {
     "implementation"(project(Modules.coreNetwork))
     "implementation"(project(Modules.corePreferences))
     "implementation"(project(Modules.featureAuthenticationData))
-
 }

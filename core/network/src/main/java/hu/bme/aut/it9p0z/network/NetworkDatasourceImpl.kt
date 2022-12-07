@@ -1,13 +1,11 @@
 package hu.bme.aut.it9p0z.network
 
-import android.util.Log
 import hu.bme.aut.it9p0z.network.api.FixkinApiClient
 import hu.bme.aut.it9p0z.network.datasource.NetworkDatasource
 import hu.bme.aut.it9p0z.network.dtos.ConditionLogDto
 import hu.bme.aut.it9p0z.network.dtos.ConditionLogStatisticsDto
 import hu.bme.aut.it9p0z.network.dtos.SurveyLogDto
 import hu.bme.aut.it9p0z.network.dtos.UserDto
-import hu.bme.aut.it9p0z.network.dtos.wrapper.ResponseWrapper
 import okhttp3.Credentials
 import javax.inject.Inject
 
@@ -15,50 +13,37 @@ class NetworkDatasourceImpl @Inject constructor(
     private val api: FixkinApiClient
 ) : NetworkDatasource {
 
-    override suspend fun createUser(user: UserDto): ResponseWrapper<UserDto> {
+    override suspend fun createUser(user: UserDto): Result<UserDto?> {
         return try {
             val response = api.createUser(user)
             val body = response.body()
 
             if (response.isSuccessful) {
                 if (response.body() != null) {
-                    ResponseWrapper(
-                        data = body,
-                        message = "Successful request"
-                    )
+                    Result.success(body)
                 } else throw Exception("Empty body")
             } else throw Exception(response.errorBody()?.string())
         } catch (e: Exception) {
-            Log.e("error",e.message!!)
-            ResponseWrapper(
-                data = null,
-                message = "Unsuccessful request"
-            )
+            Result.failure(e)
         }
     }
 
-    override suspend fun getUsernames(): ResponseWrapper<List<String>> {
+    override suspend fun getUsernames(): Result<List<String>?> {
         return try {
             val response = api.getAllUsernames()
             val body = response.body()
 
             if (response.isSuccessful) {
                 if (response.body() != null) {
-                    ResponseWrapper(
-                        data = body,
-                        message = "Successful request"
-                    )
+                    Result.success(body)
                 } else throw Exception("Empty body")
             } else throw Exception(response.errorBody()?.string())
         } catch (e: Exception) {
-            ResponseWrapper(
-                data = null,
-                message = "Unsuccessful request"
-            )
+            Result.failure(e)
         }
     }
 
-    override suspend fun getUser(userName: String, password: String): ResponseWrapper<UserDto> {
+    override suspend fun getUser(userName: String, password: String): Result<UserDto?> {
         return try {
             val credentials = Credentials.basic(userName, password)
             val response = api.getUser(credentials)
@@ -66,17 +51,11 @@ class NetworkDatasourceImpl @Inject constructor(
 
             if (response.isSuccessful) {
                 if (response.body() != null) {
-                    ResponseWrapper(
-                        data = body,
-                        message = "Successful request"
-                    )
+                    Result.success(body)
                 } else throw Exception("Empty body")
             } else throw Exception(response.errorBody()?.string())
         } catch (e: Exception) {
-            ResponseWrapper(
-                data = null,
-                message = "Unsuccessful request"
-            )
+            Result.failure(e)
         }
     }
 
@@ -84,7 +63,7 @@ class NetworkDatasourceImpl @Inject constructor(
         userName: String,
         password: String,
         log: ConditionLogDto
-    ): ResponseWrapper<ConditionLogDto> {
+    ): Result<ConditionLogDto?> {
         return try {
             val credentials = Credentials.basic(userName, password)
             val response = api.createConditionLog(credentials,log)
@@ -92,17 +71,11 @@ class NetworkDatasourceImpl @Inject constructor(
 
             if (response.isSuccessful) {
                 if (response.body() != null) {
-                    ResponseWrapper(
-                        data = body,
-                        message = "Successful request"
-                    )
+                    Result.success(body)
                 } else throw Exception("Empty body")
             } else throw Exception(response.errorBody()?.string())
         } catch (e: Exception) {
-            ResponseWrapper(
-                data = null,
-                message = "Unsuccessful request"
-            )
+            Result.failure(e)
         }
     }
 
@@ -111,7 +84,7 @@ class NetworkDatasourceImpl @Inject constructor(
         password: String,
         scLogId: Int,
         log: ConditionLogDto
-    ): ResponseWrapper<ConditionLogDto> {
+    ): Result<ConditionLogDto?> {
         return try {
             val credentials = Credentials.basic(userName, password)
             val response = api.updateConditionLog(credentials, scLogId, log)
@@ -119,24 +92,18 @@ class NetworkDatasourceImpl @Inject constructor(
 
             if (response.isSuccessful) {
                 if (response.body() != null) {
-                    ResponseWrapper(
-                        data = body,
-                        message = "Successful request"
-                    )
+                    Result.success(body)
                 } else throw Exception("Empty body")
             } else throw Exception(response.errorBody()?.string())
         } catch (e: Exception) {
-            ResponseWrapper(
-                data = null,
-                message = "Unsuccessful request"
-            )
+            Result.failure(e)
         }
     }
 
     override suspend fun getAllConditionLogs(
         userName: String,
         password: String
-    ): ResponseWrapper<List<ConditionLogDto>> {
+    ): Result<List<ConditionLogDto>?> {
         return try {
             val credentials = Credentials.basic(userName, password)
             val response = api.getAllConditionLogs(credentials)
@@ -144,18 +111,11 @@ class NetworkDatasourceImpl @Inject constructor(
 
             if (response.isSuccessful) {
                 if (response.body() != null) {
-                    ResponseWrapper(
-                        data = body,
-                        message = "Successful request"
-                    )
+                    Result.success(body)
                 } else throw Exception("Empty body")
             } else throw Exception(response.errorBody()?.string())
         } catch (e: Exception) {
-            Log.i("request", e.message!!)
-            ResponseWrapper(
-                data = null,
-                message = "Unsuccessful request"
-            )
+            Result.failure(e)
         }
     }
 
@@ -163,27 +123,20 @@ class NetworkDatasourceImpl @Inject constructor(
         userName: String,
         password: String,
         scLogId: Int
-    ): ResponseWrapper<ConditionLogDto> {
+    ): Result<ConditionLogDto?> {
         return try {
             val credentials = Credentials.basic(userName, password)
             api.deleteConditionLog(credentials, scLogId)
-            ResponseWrapper(
-                data = null,
-                message = "Successful request"
-            )
+            Result.success(null)
         } catch (e: Exception) {
-            Log.e("error", e.message!!)
-            ResponseWrapper(
-                data = null,
-                message = "Unsuccessful request"
-            )
+            Result.failure(e)
         }
     }
 
     override suspend fun getConditionLogStatistics(
         userName: String,
         password: String
-    ): ResponseWrapper<ConditionLogStatisticsDto> {
+    ): Result<ConditionLogStatisticsDto?> {
         return try {
             val credentials = Credentials.basic(userName, password)
             val response = api.getStatistics(credentials)
@@ -191,18 +144,11 @@ class NetworkDatasourceImpl @Inject constructor(
 
             if (response.isSuccessful) {
                 if (response.body() != null) {
-                    ResponseWrapper(
-                        data = body,
-                        message = "Successful request"
-                    )
+                    Result.success(body)
                 } else throw Exception("Empty body")
             } else throw Exception(response.errorBody()?.string())
         } catch (e: Exception) {
-            Log.i("request", e.message!!)
-            ResponseWrapper(
-                data = null,
-                message = "Unsuccessful request"
-            )
+            Result.failure(e)
         }
     }
 
@@ -210,7 +156,7 @@ class NetworkDatasourceImpl @Inject constructor(
         userName: String,
         password: String,
         log: SurveyLogDto
-    ): ResponseWrapper<SurveyLogDto> {
+    ): Result<SurveyLogDto?> {
         return try {
             val credentials = Credentials.basic(userName, password)
             val response = api.createSurveyLog(credentials,log)
@@ -218,24 +164,18 @@ class NetworkDatasourceImpl @Inject constructor(
 
             if (response.isSuccessful) {
                 if (response.body() != null) {
-                    ResponseWrapper(
-                        data = body,
-                        message = "Successful request"
-                    )
+                    Result.success(body)
                 } else throw Exception("Empty body")
             } else throw Exception(response.errorBody()?.string())
         } catch (e: Exception) {
-            ResponseWrapper(
-                data = null,
-                message = "Unsuccessful request"
-            )
+            Result.failure(e)
         }
     }
 
     override suspend fun getAllSurveyLogs(
         userName: String,
         password: String
-    ): ResponseWrapper<List<SurveyLogDto>> {
+    ): Result<List<SurveyLogDto>?> {
         return try {
             val credentials = Credentials.basic(userName, password)
             val response = api.getAllSurveyLogs(credentials)
@@ -243,18 +183,11 @@ class NetworkDatasourceImpl @Inject constructor(
 
             if (response.isSuccessful) {
                 if (response.body() != null) {
-                    ResponseWrapper(
-                        data = body,
-                        message = "Successful request"
-                    )
+                    Result.success(body)
                 } else throw Exception("Empty body")
             } else throw Exception(response.errorBody()?.string())
         } catch (e: Exception) {
-            Log.i("request", e.message!!)
-            ResponseWrapper(
-                data = null,
-                message = "Unsuccessful request"
-            )
+            Result.failure(e)
         }
     }
 }
