@@ -66,4 +66,25 @@ class AuthenticationRepository @Inject constructor(
     suspend fun deleteUserInfo() {
         preferencesDatasource.deleteUserInfo()
     }
+
+    suspend fun initLastDatesInPreferences() {
+        val userInfo = preferencesDatasource.loadUserInfo().first()
+        val lastConditionLogResult = networkDatasource
+            .getLastConditionLog(userInfo.userName,userInfo.password)
+
+        val lastSurveyLogResult = networkDatasource
+            .getLastSurveyLog(userInfo.userName,userInfo.password)
+
+        if (lastConditionLogResult.isSuccess) {
+            lastConditionLogResult.getOrNull()?.let {
+                preferencesDatasource.saveLastConditionLogDate(it.creationDate)
+            }
+        }
+
+        if (lastSurveyLogResult.isSuccess) {
+            lastSurveyLogResult.getOrNull()?.let {
+                preferencesDatasource.saveLastSurveyLogDate(it.creationDate)
+            }
+        }
+    }
 }

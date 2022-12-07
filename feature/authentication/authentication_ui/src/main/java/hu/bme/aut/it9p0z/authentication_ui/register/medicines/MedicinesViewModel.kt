@@ -5,9 +5,9 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import hu.bme.aut.it9p0z.authentication_domain.usecases.LoginUserUseCase
 import hu.bme.aut.it9p0z.authentication_domain.usecases.RegisterUserUseCase
 import hu.bme.aut.it9p0z.authentication_domain.usecases.SaveMedicinesUseCase
+import hu.bme.aut.it9p0z.authentication_ui.R
 import hu.bme.aut.it9p0z.ui.data.Medicines
 import hu.bme.aut.it9p0z.ui.model.UiChip
 import hu.bme.aut.it9p0z.ui.model.UiEvent
@@ -56,7 +56,8 @@ class MedicinesViewModel @Inject constructor(
                 registerUser()
                 _uiEvent.send(UiEvent.Success)
             } catch (e: Exception) {
-                _uiEvent.send(UiEvent.ShowSnackbar(UiText.DynamicString(e.message ?: "Request error")))
+                _uiEvent.send(UiEvent.ShowSnackbar(e.message?.let { UiText.DynamicString(it) }
+                    ?: UiText.StringResource(R.string.some_error)))
             }
         }
     }

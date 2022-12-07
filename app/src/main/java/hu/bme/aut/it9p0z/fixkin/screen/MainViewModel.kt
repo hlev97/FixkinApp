@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import hu.bme.aut.it9p0z.database.datasource.DatabaseDatasource
 import hu.bme.aut.it9p0z.fixkin.DateUtil
 import hu.bme.aut.it9p0z.preferences.datasource.PreferencesDatasource
 import kotlinx.coroutines.Dispatchers
@@ -15,7 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val preferencesDatasource: PreferencesDatasource
+    private val preferencesDatasource: PreferencesDatasource,
+    private val databaseDatasource: DatabaseDatasource
 ): ViewModel() {
 
     private val _createConditionLogEnabled: MutableStateFlow<Boolean> = MutableStateFlow(true)
@@ -57,6 +59,9 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             preferencesDatasource.savePassword("")
             preferencesDatasource.saveUsername("")
+            preferencesDatasource.resetDates()
+            databaseDatasource.deleteAllConditionLogs()
+            databaseDatasource.deleteAllSurveyLogs()
             preferencesDatasource.saveShowAuthentication(true)
         }
     }

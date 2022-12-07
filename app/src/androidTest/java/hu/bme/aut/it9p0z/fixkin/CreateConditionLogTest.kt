@@ -56,7 +56,7 @@ class CreateConditionLogTest {
 
     private lateinit var context: Context
 
-    lateinit var saveConditionLogUseCase: SaveConditionLogUseCase
+    private lateinit var saveConditionLogUseCase: SaveConditionLogUseCase
 
     private lateinit var viewModel: CreateConditionLogViewModel
 

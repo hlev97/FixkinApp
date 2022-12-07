@@ -68,4 +68,14 @@ interface FixkinApiClient {
         @Header("Authorization") credentials: String,
     ): Response<List<SurveyLogDto>>
 
+    @GET("skin_condition_logs/last/me")
+    suspend fun getLastConditionLog(
+        @Header("Authorization") credentials: String,
+    ): Response<ConditionLogDto>
+
+    @GET("survey_logs/last/me")
+    suspend fun getLastSurveyLog(
+        @Header("Authorization") credentials: String,
+    ): Response<SurveyLogDto>
+
 }

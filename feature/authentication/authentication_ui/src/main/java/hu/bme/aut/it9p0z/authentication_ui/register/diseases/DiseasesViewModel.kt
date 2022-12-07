@@ -43,7 +43,6 @@ class DiseasesViewModel @Inject constructor(
             saveDiseasesUseCase(diseases)
 
             _uiEvent.send(UiEvent.Success)
-
         }
     }
 }

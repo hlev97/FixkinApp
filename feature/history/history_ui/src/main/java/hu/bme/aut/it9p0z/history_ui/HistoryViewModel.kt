@@ -49,9 +49,9 @@ class HistoryViewModel @Inject constructor(
         isRefreshing = false
     }
 
-    private suspend fun load(delayed: Boolean = false, fromDatabase: Boolean = false) {
-        _state.value = Loading
-        _state.value = try {
+    private suspend fun load(delayed: Boolean = false) {
+        _state.emit(Loading)
+        _state.emit(try {
             val formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd")
             val logs = loadConditionLogs().map { log ->
                 val foodTriggers = log.getFoodTriggerUiChips(context)
@@ -84,8 +84,8 @@ class HistoryViewModel @Inject constructor(
             result.postValue(logs)
             DataReady
         } catch (e: Exception) {
-            Error(message = UiText.DynamicString(e.message!!))
-        }
+            Error(message = e.message?.let {  UiText.DynamicString(it) } ?: UiText.StringResource(R.string.some_error))
+        })
     }
 
     fun deleteLog(id: Int) {

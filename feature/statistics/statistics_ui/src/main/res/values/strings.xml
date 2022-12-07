@@ -13,4 +13,5 @@
     <string name="tab_label_other_trigger">other triggers</string>
     <string name="tab_label_survey_results">survey results</string>
     <string name="too_few_data">You haven\'t added enough logs for statistics</string>
+    <string name="some_error">An error occurred.</string>
 </resources>

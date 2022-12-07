@@ -26,16 +26,18 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import hu.bme.aut.conditionlog_ui.R
 
 @HiltViewModel
 class EditConditionLogViewModel @Inject constructor(
     private val loadConditionLog: LoadConditionLogUseCase,
     private val updateConditionLog: UpdateConditionLogUseCase,
-    private val savedStateHandle: SavedStateHandle,
-    @ApplicationContext private val context: Context
+    @ApplicationContext private val context: Context,
+    savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
-    private val _state: MutableStateFlow<EditConditionLogState> = MutableStateFlow(EditConditionLogState.Loading)
+    private val _state: MutableStateFlow<EditConditionLogState> =
+        MutableStateFlow(EditConditionLogState.Loading)
     val state: StateFlow<EditConditionLogState?> = _state.asStateFlow()
 
     private val id = checkNotNull(savedStateHandle.get<Int>("id"))
@@ -47,15 +49,15 @@ class EditConditionLogViewModel @Inject constructor(
         sliderValue = value
     }
 
-    var foodTriggerUiChips = mutableStateListOf<UiChip>()
-    var weatherTriggerUiChips = mutableStateListOf<UiChip>()
-    var mentalTriggerUiChips = mutableStateListOf<UiChip>()
-    var otherTriggerUiChips = mutableStateListOf<UiChip>()
+    private var foodTriggerUiChips = mutableStateListOf<UiChip>()
+    private var weatherTriggerUiChips = mutableStateListOf<UiChip>()
+    private var mentalTriggerUiChips = mutableStateListOf<UiChip>()
+    private var otherTriggerUiChips = mutableStateListOf<UiChip>()
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            _state.value = EditConditionLogState.Loading
-            _state.value = try {
+            _state.emit(EditConditionLogState.Loading)
+            _state.emit(try {
                 val log = loadConditionLog(id)
 
                 foodTriggerUiChips.addAll(log.getFoodTriggerUiChips(context))
@@ -76,9 +78,10 @@ class EditConditionLogViewModel @Inject constructor(
                 )
             } catch (e: Exception) {
                 EditConditionLogState.Error(
-                    message = UiText.DynamicString(e.localizedMessage ?: "")
+                    message = e.message?.let { UiText.DynamicString(it) }
+                        ?: UiText.StringResource(R.string.some_error)
                 )
-            }
+            })
         }
     }
 

@@ -1,5 +1,6 @@
 import dependencies.Compose
 import dependencies.DaggerHilt
+import dependencies.Lifecycle
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
@@ -55,6 +56,8 @@ dependencies {
     implementation Compose.composeConstraintLayout
     implementation Compose.runtimeLiveData
     debugImplementation Compose.uiTooling
+
+    implementation Lifecycle.runtimeCompose
 
     kapt DaggerHilt.hiltCompiler
     implementation DaggerHilt.hiltAndroid

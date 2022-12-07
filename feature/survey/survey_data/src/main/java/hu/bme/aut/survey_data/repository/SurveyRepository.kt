@@ -43,6 +43,7 @@ class SurveyRepository @Inject constructor(
     suspend fun saveSurveyResultToRemoteDatabase(): Result<SurveyLogDto?> {
         val userInfo = preferencesDatasource.loadUserInfo().first()
         val log = SurveyLogDto(
+            id = null,
             surveyLogId = null,
             userName = null,
             creationDate = LocalDate.now(),

@@ -16,6 +16,7 @@ class RegisterUserUseCase @Inject constructor(
         val data = response.getOrThrow()
 
         return if (data != null) {
+            authRepository.initLastDatesInPreferences()
             authRepository.hideAuthGraph()
             authRepository.deleteUserInfo()
             data.asUserInfoModel()

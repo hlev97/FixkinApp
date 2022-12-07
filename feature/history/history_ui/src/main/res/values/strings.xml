@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="no_logs_yet">You haven\'t added any logs yet.</string>
+    <string name="some_error">An error occurred.</string>
 </resources>

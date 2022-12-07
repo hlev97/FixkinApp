@@ -10,11 +10,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import hu.bme.aut.conditionlog_ui.R
 import hu.bme.aut.conditionlog_ui.components.ConditionLogEditor
 import hu.bme.aut.it9p0z.ui.components.appbars.NormalTopAppBar
 import hu.bme.aut.it9p0z.ui.model.UiText
 
+@OptIn(ExperimentalLifecycleComposeApi::class)
 @ExperimentalMaterial3Api
 @Composable
 fun EditConditionLogScreen(
@@ -24,7 +27,7 @@ fun EditConditionLogScreen(
     viewModel: EditConditionLogViewModel = hiltViewModel()
 ) {
     BackHandler(onBack = onBack)
-    val state by viewModel.state.collectAsState()
+    val state by viewModel.state.collectAsStateWithLifecycle()
 
     val context = LocalContext.current
     Scaffold(

@@ -27,10 +27,13 @@ import hu.bme.aut.it9p0z.fixkin.navigation.graphs.MainNavGraph
 import hu.bme.aut.it9p0z.fixkin.screen.model.BottomNavItem
 import hu.bme.aut.it9p0z.ui.model.UiText
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import hu.bme.aut.it9p0z.fixkin.navigation.screens.*
 import hu.bme.aut.it9p0z.ui.model.UiIcon
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalLifecycleComposeApi::class)
 @ExperimentalFoundationApi
 @ExperimentalPagerApi
 @ExperimentalAnimationApi
@@ -47,9 +50,7 @@ fun MainScreen(
 ) {
     val navController = rememberNavController()
 
-    BackHandler {
-
-    }
+    BackHandler {}
 
     var selectedItemIndex by remember { mutableStateOf(0) }
     val items = listOf(
@@ -61,8 +62,8 @@ fun MainScreen(
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
 
-    val createConditionLogEnabled by viewModel.createConditionLogEnabled.collectAsState()
-    val createSurveyLogEnabled by viewModel.createSurveyLogEnabled.collectAsState()
+    val createConditionLogEnabled by viewModel.createConditionLogEnabled.collectAsStateWithLifecycle()
+    val createSurveyLogEnabled by viewModel.createSurveyLogEnabled.collectAsStateWithLifecycle()
 
     val context = LocalContext.current
     ModalNavigationDrawer(

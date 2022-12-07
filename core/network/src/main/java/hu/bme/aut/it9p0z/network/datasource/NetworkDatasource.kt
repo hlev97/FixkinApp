@@ -52,4 +52,14 @@ interface NetworkDatasource {
         userName: String,
         password: String,
     ): Result<List<SurveyLogDto>?>
+
+    suspend fun getLastConditionLog(
+        userName: String,
+        password: String,
+    ): Result<ConditionLogDto?>
+
+    suspend fun getLastSurveyLog(
+        userName: String,
+        password: String,
+    ): Result<SurveyLogDto?>
 }

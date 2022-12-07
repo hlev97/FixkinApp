@@ -106,7 +106,7 @@ fun FabMenu(
 @Preview(showBackground = true)
 @Composable
 fun FabMenu_Preview() {
-    var state by remember { mutableStateOf(false) }
+    val state by remember { mutableStateOf(false) }
     FabMenu(
         state = state,
         onClick = { },

@@ -83,7 +83,10 @@ dependencies {
     debugImplementation(Compose.uiTooling)
     debugImplementation(Compose.uiTestManifest)
 
-    implementation(Retrofit.retrofit)
+    implementation(Lifecycle.runtimeCompose)
+
+
+            implementation(Retrofit.retrofit)
     implementation(Retrofit.moshiConverter)
     implementation(Retrofit.moshiKotlin)
     implementation(Retrofit.okHttp)

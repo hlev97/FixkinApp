@@ -7,8 +7,10 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import hu.bme.aut.it9p0z.ui.model.UiText
 import hu.bme.aut.statistics_domain.usecases.LoadConditionLogStatisticsUseCase
 import hu.bme.aut.statistics_domain.usecases.LoadSurveyLogsUseCase
+import hu.bme.aut.statistics_ui.R
 import hu.bme.aut.statistics_ui.model.TabItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -50,8 +52,8 @@ class StatisticsViewModel @Inject constructor(
 
     private fun loadData() {
         viewModelScope.launch(Dispatchers.IO) {
-            _state.value = Loading
-            _state.value = try {
+            _state.emit(Loading)
+            _state.emit(try {
                 val conditionLogStats = loadConditionLogs()
                 if (conditionLogStats.foodTriggers.values.any { it == 0f }) throw Exception("You haven't added enough logs for statistics.")
 
@@ -66,8 +68,8 @@ class StatisticsViewModel @Inject constructor(
                     surveyLogs = surveyLogs
                 )
             } catch (e: Exception) {
-                Error(e.message ?: "No internet connection")
-            }
+                Error(e.message?.let { UiText.DynamicString(it) } ?: UiText.StringResource(R.string.some_error))
+            })
         }
     }
 }
@@ -82,4 +84,4 @@ data class DataReady(
     val otherTriggers: HashMap<String,Float>,
     val surveyLogs: HashMap<String,Double>
 ): StatisticsState
-data class Error(val message: String): StatisticsState
+data class Error(val message: UiText): StatisticsState

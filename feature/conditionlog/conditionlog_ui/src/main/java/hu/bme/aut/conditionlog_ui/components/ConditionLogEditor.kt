@@ -5,12 +5,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.key
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.semantics.clearAndSetSemantics
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.semantics
 import hu.bme.aut.conditionlog_ui.R
 import hu.bme.aut.it9p0z.ui.components.chipgroup.ChipGroup
 import hu.bme.aut.it9p0z.ui.components.feelingslider.FeelingSlider

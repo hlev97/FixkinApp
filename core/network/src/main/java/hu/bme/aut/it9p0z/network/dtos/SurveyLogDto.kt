@@ -6,6 +6,7 @@ import java.time.LocalDate
 
 @JsonClass(generateAdapter = true)
 data class SurveyLogDto(
+    val id: Int?,
     val surveyLogId: Int?,
     val userName: String?,
     val creationDate: LocalDate,
@@ -13,6 +14,7 @@ data class SurveyLogDto(
 )
 
 fun SurveyLogModel.asSurveyLogDto(): SurveyLogDto = SurveyLogDto(
+    id = id,
     surveyLogId = id,
     userName = null,
     creationDate = creationDate,

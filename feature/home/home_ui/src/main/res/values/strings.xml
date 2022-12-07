@@ -6,4 +6,9 @@
     <string name="text_daily_log_not_added">You have not added a daily log yet</string>
     <string name="too_few_data">You haven\'t added enough data for statistics</string>
     <string name="service_unavailable">The Fixkin service is currently unavailable. Check back later.</string>
+    <string name="some_error">An error occurred.</string>
+    <string name="most_common_food_triggers">"Most common food triggers: "</string>
+    <string name="most_common_weather_triggers">"Most common weather triggers: "</string>
+    <string name="most_common_mental_triggers">"Most common mental health triggers: "</string>
+    <string name="most_common_other_triggers">"Most common other triggers: "</string>
 </resources>

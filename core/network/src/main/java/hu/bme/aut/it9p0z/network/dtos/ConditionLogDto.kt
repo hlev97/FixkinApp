@@ -8,6 +8,7 @@ import java.time.LocalDate
 
 @JsonClass(generateAdapter = true)
 data class ConditionLogDto(
+    val id: Int?,
     val scLogId: Int?,
     val userName: String? = null,
     val creationDate: LocalDate,
@@ -29,6 +30,7 @@ fun ConditionLogDto.asConditionLogModel(): ConditionLogModel = ConditionLogModel
 )
 
 fun ConditionLogModel.asConditionLogDto(): ConditionLogDto = ConditionLogDto(
+    id = null,
     scLogId = id,
     creationDate = creationDate,
     feeling = feeling.asString(),

@@ -21,7 +21,7 @@ class SurveyViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val questions = SurveyQuestion.questions
-    var currentQuestionId by mutableStateOf(0)
+    private var currentQuestionId by mutableStateOf(0)
         private set
     var currentQuestion by mutableStateOf(questions[currentQuestionId])
         private set

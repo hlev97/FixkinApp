@@ -9,7 +9,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,6 +16,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.pager.ExperimentalPagerApi
 import hu.bme.aut.it9p0z.checkdailylogcalendar.ui.CheckDailyConditionWeeklyCalendar
 import hu.bme.aut.it9p0z.home_ui.components.MostCommonTriggers
@@ -26,6 +27,7 @@ import hu.bme.aut.it9p0z.ui.theme.dp_l
 import java.time.LocalDate
 import hu.bme.aut.it9p0z.home_ui.R
 
+@OptIn(ExperimentalLifecycleComposeApi::class)
 @ExperimentalMaterial3Api
 @ExperimentalFoundationApi
 @ExperimentalPagerApi
@@ -34,7 +36,7 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
-    val state by viewModel.state.collectAsState()
+    val state by viewModel.state.collectAsStateWithLifecycle()
     val context = LocalContext.current
 
     when(state) {
@@ -96,29 +98,29 @@ fun DataReadyContent(
         verticalArrangement = Arrangement.SpaceAround,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        CheckDailyConditionWeeklyCalendar(creationDates = dates,)
+        CheckDailyConditionWeeklyCalendar(creationDates = dates)
 
         Spacer(modifier = Modifier.height(dp_l))
 
         val triggerSizes = listOf(foodTriggers.size, weatherTriggers.size, mentalTriggers.size, otherTriggers.size)
         if (triggerSizes.all { it >= 2 }) {
             MostCommonTriggers(
-                title = UiText.DynamicString("Most common food triggers: "),
+                title = UiText.StringResource(R.string.most_common_food_triggers),
                 triggers = foodTriggers,
             )
 
             MostCommonTriggers(
-                title = UiText.DynamicString("Most common weather triggers: "),
+                title = UiText.StringResource(R.string.most_common_weather_triggers),
                 triggers = weatherTriggers,
             )
 
             MostCommonTriggers(
-                title = UiText.DynamicString("Most common mental health triggers: "),
+                title = UiText.StringResource(R.string.most_common_mental_triggers),
                 triggers = mentalTriggers,
             )
 
             MostCommonTriggers(
-                title = UiText.DynamicString("Most common other triggers: "),
+                title = UiText.StringResource(R.string.most_common_other_triggers),
                 triggers = otherTriggers,
             )
         } else {

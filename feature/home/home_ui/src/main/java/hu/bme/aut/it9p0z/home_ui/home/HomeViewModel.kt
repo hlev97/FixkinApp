@@ -1,7 +1,6 @@
 package hu.bme.aut.it9p0z.home_ui.home
 
 import android.content.Context
-import android.util.Log
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -32,15 +31,15 @@ class HomeViewModel @Inject constructor(
     private val _state: MutableStateFlow<HomeState> = MutableStateFlow(HomeState.Loading)
     val state: StateFlow<HomeState?> = _state
 
-    var foodTriggerUiChips = mutableStateListOf<UiChip>()
-    var weatherTriggerUiChips = mutableStateListOf<UiChip>()
-    var mentalTriggerUiChips = mutableStateListOf<UiChip>()
-    var otherTriggerUiChips = mutableStateListOf<UiChip>()
+    private var foodTriggerUiChips = mutableStateListOf<UiChip>()
+    private var weatherTriggerUiChips = mutableStateListOf<UiChip>()
+    private var mentalTriggerUiChips = mutableStateListOf<UiChip>()
+    private var otherTriggerUiChips = mutableStateListOf<UiChip>()
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            _state.value = HomeState.Loading
-            _state.value = try {
+            _state.emit(HomeState.Loading)
+            _state.emit(try {
                 val dates = loadLogs().map { it.creationDate }
                 val statistics = loadStatistics()
 
@@ -60,8 +59,8 @@ class HomeViewModel @Inject constructor(
             } catch (e: NullPointerException) {
                 HomeState.Error(UiText.StringResource(R.string.service_unavailable))
             } catch (e: Exception) {
-                HomeState.Error(UiText.DynamicString(e.message ?: e.stackTraceToString()))
-            }
+                HomeState.Error(e.message?.let { UiText.DynamicString(it) } ?: UiText.StringResource(R.string.some_error))
+            })
         }
     }
 

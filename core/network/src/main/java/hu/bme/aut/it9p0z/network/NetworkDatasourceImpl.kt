@@ -190,4 +190,42 @@ class NetworkDatasourceImpl @Inject constructor(
             Result.failure(e)
         }
     }
+
+    override suspend fun getLastConditionLog(
+        userName: String,
+        password: String
+    ): Result<ConditionLogDto?> {
+        return try {
+            val credentials = Credentials.basic(userName, password)
+            val response = api.getLastConditionLog(credentials)
+            val body = response.body()
+
+            if (response.isSuccessful) {
+                if (response.body() != null) {
+                    Result.success(body)
+                } else throw Exception("Empty body")
+            } else throw Exception(response.errorBody()?.string())
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    override suspend fun getLastSurveyLog(
+        userName: String,
+        password: String
+    ): Result<SurveyLogDto?> {
+        return try {
+            val credentials = Credentials.basic(userName, password)
+            val response = api.getLastSurveyLog(credentials)
+            val body = response.body()
+
+            if (response.isSuccessful) {
+                if (response.body() != null) {
+                    Result.success(body)
+                } else throw Exception("Empty body")
+            } else throw Exception(response.errorBody()?.string())
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
 }

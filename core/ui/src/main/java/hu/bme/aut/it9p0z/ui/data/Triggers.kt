@@ -158,7 +158,7 @@ sealed class UiTrigger(val name: UiText, val icon: UiIcon? = null) {
             )
         }
 
-        val otherTriggers = listOf(
+        private val otherTriggers = listOf(
             Medicine,
             Infection,
             Smoking,

@@ -27,4 +27,5 @@
     <string name="chip_group_label_oral_or_injected">Oral or injected treatments</string>
     <string name="chip_group_label_other_treatments">Other treatments</string>
     <string name="button_register">Register</string>
+    <string name="some_error">An error occurred.</string>
 </resources>

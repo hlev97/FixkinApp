@@ -5,4 +5,5 @@
     <string name="chip_group_label_mental_health_triggers">Mental health triggers</string>
     <string name="chip_group_label_other_triggers">Other triggers</string>
     <string name="app_bar_title_create_log">Create condition log</string>
+    <string name="some_error">An error occurred.</string>
 </resources>

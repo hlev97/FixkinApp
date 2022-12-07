@@ -12,6 +12,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import app.futured.donut.compose.DonutProgress
 import com.jaikeerthick.composable_graphs.color.LinearGraphColors
 import com.jaikeerthick.composable_graphs.composables.LineGraph
@@ -24,6 +26,7 @@ import hu.bme.aut.statistics_ui.model.getColors
 import hu.bme.aut.statistics_ui.R
 import hu.bme.aut.statistics_ui.common.DataOverview
 
+@OptIn(ExperimentalLifecycleComposeApi::class)
 @ExperimentalMaterial3Api
 @Composable
 fun StatisticsScreen(
@@ -33,7 +36,7 @@ fun StatisticsScreen(
     onTabItemClick: (String) -> Unit
 ) {
     val graphType = viewModel.graphType
-    val state by viewModel.state.collectAsState()
+    val state by viewModel.state.collectAsStateWithLifecycle()
 
     val context = LocalContext.current
 
@@ -91,7 +94,7 @@ fun StatisticsScreen(
                         modifier = Modifier.fillMaxSize(),
                         contentAlignment = Alignment.Center
                     ) {
-                        Text(text = (state as Error).message)
+                        Text(text = (state as Error).message.asString(context))
                     }
                 }
             }

@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Person
-import androidx.compose.material.icons.rounded.SupervisedUserCircle
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.TextFieldDefaults
@@ -29,7 +28,6 @@ import hu.bme.aut.it9p0z.ui.components.textfields.PasswordTextField
 import hu.bme.aut.it9p0z.ui.model.UiEvent
 import hu.bme.aut.it9p0z.ui.model.UiIcon
 import hu.bme.aut.it9p0z.ui.model.UiText
-import hu.bme.aut.it9p0z.ui.theme.corner_radius_m
 import hu.bme.aut.it9p0z.ui.theme.corner_radius_s
 import hu.bme.aut.it9p0z.ui.theme.dp_m
 

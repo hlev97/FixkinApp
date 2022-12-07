@@ -124,38 +124,47 @@ class IdentityViewModel @Inject constructor(
     val uiEvent = _uiEvent.receiveAsFlow()
 
     fun preformNextClick() {
+
         viewModelScope.launch {
-            if (
-                username.isNotEmpty() && fullName.isNotEmpty() &&
-                password.isNotEmpty() && confirmPassword.isNotEmpty()
-            ) {
-                if (usernameIsFree(username)) {
-                    if (
-                        isLowerCaseSatisfied && isUpperCaseSatisfied &&
-                        isDigitSatisfied && isSpecialCharSatisfied && isCorrectLengthSatisfied
-                    ) {
-                        if (passwordRequirements.isPasswordAndConfirmPasswordSame(password, confirmPassword)) {
-                            saveUsername(username)
-                            saveFullName(fullName)
-                            savePassword(password)
-                            _uiEvent.send(UiEvent.Success)
+            try {
+                if (
+                    username.isNotEmpty() && fullName.isNotEmpty() &&
+                    password.isNotEmpty() && confirmPassword.isNotEmpty()
+                ) {
+                    if (usernameIsFree(username)) {
+                        if (
+                            isLowerCaseSatisfied && isUpperCaseSatisfied &&
+                            isDigitSatisfied && isSpecialCharSatisfied && isCorrectLengthSatisfied
+                        ) {
+                            if (passwordRequirements.isPasswordAndConfirmPasswordSame(
+                                    password,
+                                    confirmPassword
+                                )
+                            ) {
+                                saveUsername(username)
+                                saveFullName(fullName)
+                                savePassword(password)
+                                _uiEvent.send(UiEvent.Success)
+                            } else {
+                                passwordError = true
+                                confirmPasswordError = true
+                                _uiEvent.send(UiEvent.ShowSnackbar(UiText.StringResource(R.string.error_password_does_not_match)))
+                            }
                         } else {
                             passwordError = true
-                            confirmPasswordError = true
-                            _uiEvent.send(UiEvent.ShowSnackbar(UiText.StringResource(R.string.error_password_does_not_match)))
+                            _uiEvent.send(UiEvent.ShowSnackbar(UiText.StringResource(R.string.error_password_requirements)))
                         }
                     } else {
-                        passwordError = true
-                        _uiEvent.send(UiEvent.ShowSnackbar(UiText.StringResource(R.string.error_password_requirements)))
+                        usernameError = true
+                        _uiEvent.send(UiEvent.ShowSnackbar(UiText.StringResource(R.string.error_username_is_already_in_use)))
                     }
                 } else {
-                    usernameError = true
-                    _uiEvent.send(UiEvent.ShowSnackbar(UiText.StringResource(R.string.error_username_is_already_in_use)))
+                    _uiEvent.send(UiEvent.ShowSnackbar(UiText.StringResource(R.string.error_empty_fields)))
                 }
-            } else {
-                _uiEvent.send(UiEvent.ShowSnackbar(UiText.StringResource(R.string.error_empty_fields)))
+            } catch (e: Exception) {
+                _uiEvent.send(UiEvent.ShowSnackbar(e.message?.let { UiText.DynamicString(it) }
+                    ?: UiText.StringResource(R.string.some_error)))
             }
-
         }
     }
 }

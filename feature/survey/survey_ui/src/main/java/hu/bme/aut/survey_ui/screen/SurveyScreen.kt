@@ -15,6 +15,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import hu.bme.aut.it9p0z.ui.components.buttons.TextButton
 import hu.bme.aut.it9p0z.ui.model.UiText
 import hu.bme.aut.it9p0z.ui.theme.corner_radius_s
@@ -24,6 +26,7 @@ import hu.bme.aut.survey_ui.components.surveyanswerradiogroup.SurveyAnswerRadioG
 import hu.bme.aut.survey_ui.R
 import hu.bme.aut.survey_ui.model.*
 
+@OptIn(ExperimentalLifecycleComposeApi::class)
 @ExperimentalMaterial3Api
 @Composable
 fun SurveyScreen(
@@ -34,7 +37,7 @@ fun SurveyScreen(
 ) {
     BackHandler(onBack = onBack)
 
-    val state by viewModel.state.collectAsState()
+    val state by viewModel.state.collectAsStateWithLifecycle()
 
     val context = LocalContext.current
 
